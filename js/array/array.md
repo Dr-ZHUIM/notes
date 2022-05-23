@@ -13,7 +13,8 @@
 <a href="#secondTitle_8">8.添加元素的方法</a>  
 <a href="#secondTitle_9">9.利用slice与splice进行增删改查</a>  
 <a href="#secondTitle_10">10.清空数组</a>  
-<a href="#secondTitle_11">11.数组的拆分与合并</a>
+<a href="#secondTitle_11">11.数组的拆分与合并</a>  
+<a href="#secondTitle_12">12.查找元素</a>
 <hr/>
 
 
@@ -563,7 +564,7 @@ console.log(arr2); //[]
 
 ---
 
-## <p id="secondTitle_10">11. 数组的拆分与合并</p>
+## <p id="secondTitle_11">11. 数组的拆分与合并</p>
 
 ### 1. `字符串`**拆分成**`数组` 与 `数组`**合并成**`字符串`
 
@@ -616,3 +617,58 @@ arr.copyWithin(3,1,3);
 console.log(arr)    // [1,2,3,2,3,6]
 ```
 
+## <p id="secondTitle_12">12. 查找元素</p>
+
+首先先设定一个数组 ： `let arr = [1,2,3,4,5,2]`  
+我们想检索到数组中的 2
+
+### 1.`indexOf` 与 `lastIndexOf` 检索索引值 (不能用于引用类型数据)
+ 
+`indexOf()`方法内填写一个值，以此匹配到 **第一个** 符合条件的元素，并返回 **索引值**   
+
+```
+let arr = [1,2,3,4,5,2];
+let indexOfFirstTwo = arr.indexOf(2);
+console.log(indexOfFirstTwo);   //1
+```
+
+`lastIndexOf()`方法内填写一个值，以此匹配到 **最后一个** 符合条件的元素，并返回 **索引值**  
+
+```
+let arr = [1,2,3,4,5,2];
+let indexOfLastTwo = arr.lastIndexOf(2);
+console.log(indexOfLastTwo);   //5
+```
+
+### 2.`includes` 检索是否拥有被检索的元素 (不能用于引用类型数据)
+`lastIndexOf()`方法内填写精确的元素值，遍历数组查询是否有匹配元素值的元素，并返回 **布尔值**
+
+```
+let arr = [1, 2, 3, 4, 5, 6];
+const result = arr.includes(2);
+console.log(result) //true
+```
+
+### 3. `find` 检索元素 
+
+`find()` 方法传入一个回调函数,遍历数组并执行回调函数，返回与回调函数返回值匹配的元素
+
+```
+let arr = [1,2,3,4,{a:1,b:2}];
+const result = arr.find(item=>{
+    return item.a == 1
+});
+console.log(result) //{a:1,b:2}
+```
+
+### 4. `findIndex` 检索索引值
+
+`findIndex()`方法传入一个回调函数,遍历数组并执行回调函数，返回与回调函数返回值匹配的元素索引值
+
+```
+let arr = [1,2,3,4,{a:1,b:2}];
+const result = arr.findIndex(item=>{
+    return item.a == 1
+});
+console.log(result) //4
+```

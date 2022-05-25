@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body{
+      margin: 0;
+      overflow: hidden;
+      font-size: 24px;
+    }
+    .container {
+      scroll-snap-type:y mandatory;
+      scrollbar-gutter: stable;
+      overflow-y: scroll;
+      height: 100vh;
+    }
+    section {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      scroll-snap-align: start;
+      height: 100vh;
+      width: 100%;
+    }
+    section:nth-child(1) {
+      background-color: purple;
+      color: aliceblue
+    }
+    section:nth-child(2) {
+      background-color: rgb(158, 122, 158);
+      color: aliceblue
+    }
+    section:nth-child(3) {
+      background-color: rgb(128, 0, 11);
+      color: aliceblue
+    }
+    section:nth-child(4) {
+      background-color: rgb(141, 81, 91);
+      color: aliceblue
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+    <section>
+      <h1>sction1</h1>
+    </section>
+    <section>
+      <h1>sction2</h1>
+    </section>
+    <section>
+      <h1>sction3</h1>
+    </section>
+    <section>
+      <h1>sction</h1>
+    </section>
+  </main>
+</body>
+
+</html>

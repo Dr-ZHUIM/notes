@@ -10,5 +10,3 @@
 
 ## scrollbar-gutter
 滚动条属性，用于控制浏览器是否预留滚动条的位置.
-
-value : stable || stable both ||

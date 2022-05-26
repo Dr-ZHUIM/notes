@@ -1,5 +1,18 @@
-let arr = [1,2,3,4,{a:1,b:2}];
-const result = arr.findIndex(item=>{
-    return item.a == 1
+let arr = [{
+        name: 'iphone',
+        price: 6000
+    },
+    {
+        name: 'ipad',
+        price: 4999
+    },
+    {
+        name: 'mac',
+        price: 16999
+    },
+];
+arr = arr.sort((prev, curr) => {
+    return curr.price - prev.price
 });
-console.log(result) //{a:1,b:2}
+console.log(arr)
+// [{ name: 'mac', price: 16999 },{ name: 'iphone', price: 6000 },{ name: 'ipad', price: 4999 }]

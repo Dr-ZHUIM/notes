@@ -771,3 +771,88 @@ console.log(arr)
 ---
 
 ## <p id="secondTitle_14">14.数组循环中利用引用类型数据来改变原数组</p>
+
+### 1.for循环
+
+以index驱动的for循环  
+我们可以通过获取数组长度来遍历数组
+```
+let arr = [{
+        title: 'aaa',
+        id: 1
+    },
+    {
+        title: 'bbb',
+        id: 2
+    },
+    {
+        title: 'ccc',
+        id: 3
+    }
+];
+for (let i = 0; i < arr.length; i++) {
+    arr[i].title = 'new ' + arr[i].title
+}
+
+console.log(arr);   
+/* [
+  { title: 'new aaa', id: 1 },
+  { title: 'new bbb', id: 2 },
+  { title: 'new ccc', id: 3 }
+] */
+```
+同时，我们也可以通过for in 的方法来获取每个元素的索引值
+```
+let arr = [{
+        title: 'aaa',
+        id: 1
+    },
+    {
+        title: 'bbb',
+        id: 2
+    },
+    {
+        title: 'ccc',
+        id: 3
+    }
+];
+for (const key in arr) {
+    arr[key].title = 'new ' + arr[key].title
+};
+console.log(arr);   
+/* [
+  { title: 'new aaa', id: 1 },
+  { title: 'new bbb', id: 2 },
+  { title: 'new ccc', id: 3 }
+] */
+```
+
+---
+以数组元素驱动的for循环
+```
+let arr = [{
+        title: 'aaa',
+        id: 1
+    },
+    {
+        title: 'bbb',
+        id: 2
+    },
+    {
+        title: 'ccc',
+        id: 3
+    }
+];
+for (const item of arr) {
+    item.title = 'new ' + item.title
+};
+console.log(arr);   
+/* [
+  { title: 'new aaa', id: 1 },
+  { title: 'new bbb', id: 2 },
+  { title: 'new ccc', id: 3 }
+] */
+```
+
+---
+### 2.forEach循环

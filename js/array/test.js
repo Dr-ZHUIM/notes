@@ -1,18 +1,17 @@
 let arr = [{
-        name: 'iphone',
-        price: 6000
+        title: 'aaa',
+        id: 1
     },
     {
-        name: 'ipad',
-        price: 4999
+        title: 'bbb',
+        id: 2
     },
     {
-        name: 'mac',
-        price: 16999
-    },
+        title: 'ccc',
+        id: 3
+    }
 ];
-arr = arr.sort((prev, curr) => {
-    return curr.price - prev.price
-});
-console.log(arr)
-// [{ name: 'mac', price: 16999 },{ name: 'iphone', price: 6000 },{ name: 'ipad', price: 4999 }]
+for (const key in arr) {
+    arr[key].title = 'new ' + arr[key].title
+};
+console.log(arr);

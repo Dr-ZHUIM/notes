@@ -18,6 +18,7 @@
 <a href="#secondTitle_12">12.查找元素</a>  
 <a href="#secondTitle_13">13.数组排序</a>  
 <a href="#secondTitle_14">14.数组循环中利用引用类型数据来改变原数组</a>
+<a href="#secondTitle_15">15.iterator迭代器操作数组</a>
 <hr/>
 
 ## <p id="secondTitle_1">1.数组引用类型分析</p>
@@ -855,4 +856,90 @@ console.log(arr);
 ```
 
 ---
-### 2.forEach循环
+### 2.forEach循环与map循环
+
+先看一下forEach以及map的语法：  
+`arr.forEach((item,index,arr)=>{},thisvalue)`    
+`arr.map((item,index,arr)=>{},thisvalue)`  
+我们能在 `forEach` 或者 `map` 方法的 `回调函数` 中接到三个参数：`当前遍历的元素` 、`索引` 、`原数组`。  
+ 同时还可以接到一个值来作为 `回调函数` 的 **`this`**
+
+
+来一起看看如何用 `forEach` 方法和 `map` 方法给数组中的每一个元素的title截取字符串
+
+forEach方法
+```
+let arr = [{
+        title: 'aaa',
+        id: 1
+    },
+    {
+        title: 'bbb',
+        id: 2
+    },
+    {
+        title: 'ccc',
+        id: 3
+    }
+];
+arr.forEach(item=>{
+    item.title = item.title.slice(0,2)
+});
+console.log(arr);
+```
+
+map方法
+```
+let arr = [{
+        title: 'aaa',
+        id: 1
+    },
+    {
+        title: 'bbb',
+        id: 2
+    },
+    {
+        title: 'ccc',
+        id: 3
+    }
+];
+const newArr = arr.map(item=>{
+    item.title = item.title.slice(0,2)
+});
+console.log(newArr);
+```
+
+从上面的两个例子可以直接看出 `forEach` 和 `map` 的区别了，`forEach` 直接修改原数组， `map `会返回一个新的数组。  
+
+如果对TS有一定了解的话，可以这样描述
+  
+`forEach():Void{}`  
+
+`map():Array{}`
+
+---
+
+## <p id="secondTitle_15">15.iterator迭代器操作数组</p> 
+
+`keys` 方法可以从数组创建一个包含 `数组索引值` 的可迭代对象，
+
+`values` 方法可以从数组创建一个包含 `数组值` 的可迭代对象
+
+`entries` 方法可以从数组创建一个包含 `由数组索引值和数组值组成的数组` 的可迭代对象
+
+```
+let arr = [1, 2, 3, 4];
+let keys = arr.keys();
+console.log(keys)   //Array Iterator {}
+```
+
+那么如何取得其中的索引值呢？
+
+使用 `next` 方法来迭代每一个元素
+
+```
+let arr = [1, 2, 3, 4];
+let keys = arr.keys();
+const {value,done} = keys.next;
+console.log(value,done)
+```

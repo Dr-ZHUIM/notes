@@ -1,4 +1,7 @@
-let arr = [1, 2, 3, 4];
-let keys = arr.keys();
-let {value,done} = keys.next();
-console.log(value, done)
+let a = ()=>{
+  console.log(11);
+};
+
+console.log(typeof a);
+console.log(a instanceof Function);
+console.log(Object.prototype.toString.call(a));

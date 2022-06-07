@@ -17,8 +17,12 @@
 <a href="#secondTitle_11">11.数组的拆分与合并</a>  
 <a href="#secondTitle_12">12.查找元素</a>  
 <a href="#secondTitle_13">13.数组排序</a>  
-<a href="#secondTitle_14">14.数组循环中利用引用类型数据来改变原数组</a>
-<a href="#secondTitle_15">15.iterator迭代器操作数组</a>
+<a href="#secondTitle_14">14.数组循环中利用引用类型数据来改变原数组</a>  
+<a href="#secondTitle_15">15.iterator迭代器操作数组</a>  
+<a href="#secondTitle_16">16.every与</a>  
+<a href="#secondTitle_17">17.</a>  
+<a href="#secondTitle_18">18.</a>  
+
 <hr/>
 
 ## <p id="secondTitle_1">1.数组引用类型分析</p>
@@ -374,7 +378,7 @@ HTML
 
 ### Array.from 方法:
 
-首先使用我们上文曾提到过的 Array.from 方法，将所有 div 节点转为数组，再通过 map 方法来添加内吕工。
+首先使用我们上文曾提到过的 Array.from 方法，将所有 div 节点转为数组，再通过 map 方法来添加内容。
 
 ```
 JS
@@ -904,7 +908,8 @@ let arr = [{
     }
 ];
 const newArr = arr.map(item=>{
-    item.title = item.title.slice(0,2)
+    item.title = item.title.slice(0,2);
+    return item;
 });
 console.log(newArr);
 ```
@@ -943,3 +948,8 @@ let keys = arr.keys();
 const {value,done} = keys.next;
 console.log(value,done)
 ```
+---
+
+## <p id="secondTitle_16">16.iterator迭代器操作数组</p> 
+
+

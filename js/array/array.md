@@ -17,9 +17,9 @@
 <a href="#secondTitle_11">11.数组的拆分与合并</a>  
 <a href="#secondTitle_12">12.查找元素</a>  
 <a href="#secondTitle_13">13.数组排序</a>  
-<a href="#secondTitle_14">14.数组循环中利用引用类型数据来改变原数组</a>  
-<a href="#secondTitle_15">15.iterator迭代器操作数组</a>  
-<a href="#secondTitle_16">16.every与</a>  
+<a href="#secondTitle_14">14.数组循环 : 利用引用类型数据来改变原数组</a>  
+<a href="#secondTitle_15">15.数组循环 : iterator迭代器操作数组</a>  
+<a href="#secondTitle_16">16.数组循环 : every与some方法来判断真假</a>  
 <a href="#secondTitle_17">17.</a>  
 <a href="#secondTitle_18">18.</a>  
 
@@ -950,6 +950,12 @@ console.log(value,done)
 ```
 ---
 
-## <p id="secondTitle_16">16.iterator迭代器操作数组</p> 
+## <p id="secondTitle_16">16. 数组循环 : every与some方法来判断真假</p>
 
-
+```
+let arr = ['Tom','Jim'];
+arr.every((value,index,arr)=>{
+    console.log(arr);
+    return true
+})
+```

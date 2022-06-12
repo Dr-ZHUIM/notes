@@ -1,1 +1,4 @@
-var a = 1000;
+var fun = function (a, b) {
+    var c = a + b;
+    console.log(c);
+};

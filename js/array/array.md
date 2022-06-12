@@ -8,7 +8,7 @@
 <a href="#secondTitle_2">2. 多维数组操作</a>  
 <a href="#secondTitle_3">3. Array.of 与数组创建细节</a>  
 <a href="#secondTitle_4">4.类型检测与转换</a>  
-<a href="#secondTitle_5">5.展开语法</a>  
+<a href="#secondTitle_5">5.展开语法 [...]</a>  
 <a href="#secondTitle_6">6.点语法操作 DOM 元素</a>  
 <a href="#secondTitle_7">7.数组解构赋值</a>  
 <a href="#secondTitle_8">8.添加元素的方法</a>  
@@ -16,12 +16,12 @@
 <a href="#secondTitle_10">10.清空数组</a>  
 <a href="#secondTitle_11">11.数组的拆分与合并</a>  
 <a href="#secondTitle_12">12.查找元素</a>  
-<a href="#secondTitle_13">13.数组排序</a>  
+<a href="#secondTitle_13">13.数组排序 : sort</a>  
 <a href="#secondTitle_14">14.数组循环 : 利用引用类型数据来改变原数组</a>  
-<a href="#secondTitle_15">15.数组循环 : iterator迭代器操作数组</a>  
-<a href="#secondTitle_16">16.数组循环 : every与some方法来判断真假</a>  
-<a href="#secondTitle_17">17.</a>  
-<a href="#secondTitle_18">18.</a>  
+<a href="#secondTitle_15">15.数组循环 : iterator 迭代器操作数组</a>  
+<a href="#secondTitle_16">16.数组循环 : every 与 some 方法来判断真假</a>  
+<a href="#secondTitle_17">17.数组过滤 : filter</a>  
+<a href="#secondTitle_18">18.数组递归.reduce</a>
 
 <hr/>
 
@@ -748,6 +748,7 @@ console.log(result) //4
 ### `sort` 方法实现排序
 
 对基本类型元素的数组进行排序
+
 ```
 let arr = [1,3,9,7,13,10];
 let arr2 = [1,3,9,7,13,10];
@@ -760,6 +761,7 @@ arr2.sort((prev,curr)=>{
 ```
 
 对引用类型元素的数组进行排序
+
 ```
 let arr = [
     {name : 'iphone', price : 6000},
@@ -777,10 +779,11 @@ console.log(arr)
 
 ## <p id="secondTitle_14">14.数组循环中利用引用类型数据来改变原数组</p>
 
-### 1.for循环
+### 1.for 循环
 
-以index驱动的for循环  
+以 index 驱动的 for 循环  
 我们可以通过获取数组长度来遍历数组
+
 ```
 let arr = [{
         title: 'aaa',
@@ -799,14 +802,16 @@ for (let i = 0; i < arr.length; i++) {
     arr[i].title = 'new ' + arr[i].title
 }
 
-console.log(arr);   
+console.log(arr);
 /* [
   { title: 'new aaa', id: 1 },
   { title: 'new bbb', id: 2 },
   { title: 'new ccc', id: 3 }
 ] */
 ```
-同时，我们也可以通过for in 的方法来获取每个元素的索引值
+
+同时，我们也可以通过 for in 的方法来获取每个元素的索引值
+
 ```
 let arr = [{
         title: 'aaa',
@@ -824,7 +829,7 @@ let arr = [{
 for (const key in arr) {
     arr[key].title = 'new ' + arr[key].title
 };
-console.log(arr);   
+console.log(arr);
 /* [
   { title: 'new aaa', id: 1 },
   { title: 'new bbb', id: 2 },
@@ -833,7 +838,9 @@ console.log(arr);
 ```
 
 ---
-以数组元素驱动的for循环
+
+以数组元素驱动的 for 循环
+
 ```
 let arr = [{
         title: 'aaa',
@@ -851,7 +858,7 @@ let arr = [{
 for (const item of arr) {
     item.title = 'new ' + item.title
 };
-console.log(arr);   
+console.log(arr);
 /* [
   { title: 'new aaa', id: 1 },
   { title: 'new bbb', id: 2 },
@@ -860,18 +867,19 @@ console.log(arr);
 ```
 
 ---
-### 2.forEach循环与map循环
 
-先看一下forEach以及map的语法：  
-`arr.forEach((item,index,arr)=>{},thisvalue)`    
+### 2.forEach 循环与 map 循环
+
+先看一下 forEach 以及 map 的语法：  
+`arr.forEach((item,index,arr)=>{},thisvalue)`  
 `arr.map((item,index,arr)=>{},thisvalue)`  
 我们能在 `forEach` 或者 `map` 方法的 `回调函数` 中接到三个参数：`当前遍历的元素` 、`索引` 、`原数组`。  
  同时还可以接到一个值来作为 `回调函数` 的 **`this`**
 
+来一起看看如何用 `forEach` 方法和 `map` 方法给数组中的每一个元素的 title 截取字符串
 
-来一起看看如何用 `forEach` 方法和 `map` 方法给数组中的每一个元素的title截取字符串
+forEach 方法
 
-forEach方法
 ```
 let arr = [{
         title: 'aaa',
@@ -892,7 +900,8 @@ arr.forEach(item=>{
 console.log(arr);
 ```
 
-map方法
+map 方法
+
 ```
 let arr = [{
         title: 'aaa',
@@ -914,17 +923,17 @@ const newArr = arr.map(item=>{
 console.log(newArr);
 ```
 
-从上面的两个例子可以直接看出 `forEach` 和 `map` 的区别了，`forEach` 直接修改原数组， `map `会返回一个新的数组。  
+从上面的两个例子可以直接看出 `forEach` 和 `map` 的区别了，`forEach` 直接修改原数组， `map `会返回一个新的数组。
 
-如果对TS有一定了解的话，可以这样描述
-  
-`forEach():Void{}`  
+如果对 TS 有一定了解的话，可以这样描述
+
+`forEach():Void{}`
 
 `map():Array{}`
 
 ---
 
-## <p id="secondTitle_15">15.iterator迭代器操作数组</p> 
+## <p id="secondTitle_15">15.iterator 迭代器操作数组</p>
 
 `keys` 方法可以从数组创建一个包含 `数组索引值` 的可迭代对象，
 
@@ -948,9 +957,20 @@ let keys = arr.keys();
 const {value,done} = keys.next;
 console.log(value,done)
 ```
+
 ---
 
-## <p id="secondTitle_16">16. 数组循环 : every与some方法来判断真假</p>
+## <p id="secondTitle_16">16. 数组循环 : every 与 some 方法来判断真假</p>
+
+先说明 `every` 和 `some` 方法的语法：  
+`arr.every((item,index,arr)=>{},thisvalue)`  
+`arr.some((item,index,arr)=>{},thisvalue)`
+
+`every` 方法用于判断数组中的每一项元素是否都满足条件
+
+`some`方法用于判断数组中是否存在满足条件的元素
+
+两个方法的返回值都是布尔值
 
 ```
 let arr = ['Tom','Jim'];
@@ -958,4 +978,106 @@ arr.every((value,index,arr)=>{
     console.log(arr);
     return true
 })
+```
+
+---
+
+## <p id="secondTitle_17">17. 数组过滤 : filter</p>
+
+先说明 `filter` 方法的语法：`arr.filter((item,index,arr)=>{},thisvalue)`
+
+`filter() `方法创建一个新的数组，新数组中的元素是通过检查指定数组中符合条件的所有元素。
+
+`filter()`不会改变原始数组。
+
+```
+const arr = [{title:'aaa',type:0},{title:'aaa2',type:0},{title:'aaa3',type:0},{title:'bbb',type:1},{title:'bbb2',type:1}];
+const newArr = arr.filter((item)=>{
+    return item.type === 0
+});
+console.log(newArr) // [{ title: 'aaa', type: 0 },{ title: 'aaa2', type: 0 },{ title: 'aaa3', type: 0 }]
+```
+
+---
+
+## <p id="secondTitle_18">17. 数组递归 : reduce</p>
+
+先说一下 `reduce` 方法的语法：`arr.reduce((total,curr,index,arr)=>{return next------------------------------pre},init)`
+
+**如果 `init` 不设定的话，`total` 将被设定为数组的一个值，`curr` 为第二个值**
+
+**如果 `init` 设定的话，`total` 将被设定为 `init` ，`curr` 为第一个值**
+
+reduce() 方法接收一个函数作为累加器，数组中的每个值都会执行一次回调函数，最终计算为一个值。
+
+### 数字累加器
+
+来实现一个数字统计器的功能：封装一个函数，用于统计数组中某个元素的数量。
+
+```
+    //设定一个数字数组
+    const arr = [1, 2, 3, 1, 2, 1, 4, 1];
+    //设定一个函数，传入数组与计算的元素值
+    const numCount = (arr, item) => {
+        //通过reduce函数递归数组,返回累加器的值
+        return arr.reduce((total, curr) => {
+            //当当前递归到的值与想要计算的元素值相同时，将total+1，返回累加器的值
+            return total += curr === item ? 1 : 0;
+        }, 0)
+    };
+    console.log(numCount(arr,1)); //4
+```
+
+### 获取最大值
+
+先做一个基本数据类型的比较方法
+
+```
+//设定一个数字数组
+const arr = [1,2,1,4,8,1,2,4,1];
+//设定一个函数，传入数组
+const numMax = (arr) => {
+    return arr.reduce((pre,curr)=>{
+        // 返回当前较大的值
+        return pre > curr ? pre : curr;
+    });
+};
+console.log(numMax(arr));   //8
+```
+
+在做一个引用数据类型的比较方法
+
+```
+const arr = [{
+    name : 'iphone' , price : 8000,
+},{
+    name : 'ipad' , price : 5999
+},{
+    name : 'mac' , price : 13999
+}];
+const goodPriceMax = (arr) => {
+    return arr.reduce((pre,curr)=>{
+        return pre.price > curr.price ? pre : curr
+    })
+};
+console.log(goodPriceMax(arr))
+```
+
+### 数组去重
+
+实现一个功能：将数组去重，并且从小到大排序
+
+```
+const arr = [1, 2, 3, 3, 1, 4, 5, 5, 8, 6, 2, 1];
+const riddingUnbalance = (arr) => {
+    let newArr = arr.reduce((pre, curr) => {
+        if (pre.includes(curr) === false) pre.push(curr);
+        return pre
+    }, []);
+    newArr.sort((pre, curr) => {
+        return pre - curr
+    });
+    return newArr
+};
+console.log(riddingUnbalance(arr))  //1,2,3,4,5,6,8
 ```

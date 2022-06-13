@@ -1,4 +1,1 @@
-const fun = (a: number, b: number): void => {
-    let c = a + b;
-    console.log(c)
-};
+const arr = ['12',12]

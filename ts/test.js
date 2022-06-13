@@ -1,4 +1,1 @@
-var fun = function (a, b) {
-    var c = a + b;
-    console.log(c);
-};
+var arr = ['12', 12];

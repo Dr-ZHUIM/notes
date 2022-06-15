@@ -89,14 +89,35 @@ const a = 1;    //隐式定义变量a为类型number
 ### 3) 数组的类型推断
 数组在定义时，传入的值的类型会隐式赋值给数组。
 
+ **`隐式定义`** 一个字符串型数组
+
+ 正常情况下：
 ```
 //定义了一个字符串型
 const arr = ['ad', 'bc'];
 //压入一个字符串
 arr.push('ss');
 //显示正常
-console.log(arr);
+console.log(arr);   //'ab','bc','ss'
 ```
+
+当添加非字符串类型数据时报错：
+```
+const arr = ['ab','bc'];
+arr.push(12);
+console.log(arr);   // Argument of type 'number' is not assignable to parameter of type 'string'
+```
+
+ **`隐式定义`** 一个字符串、数字混合数组
+
+正常情况下：
+```
+const arr = [1,2,'ab'];
+arr.push(12);
+arr.push('bc');
+console.log(arr);   // 1,2,'ab',12,'bc'
+```
+
 
 ---
 ### 4) 对象的类型推断

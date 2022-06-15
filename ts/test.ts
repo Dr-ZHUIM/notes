@@ -1,1 +1,3 @@
-const arr = ['12',12]
+const arr = ['ab','bc'];
+arr.push(12);
+console.log(arr);

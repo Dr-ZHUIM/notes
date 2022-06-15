@@ -1,1 +1,3 @@
-var arr = ['12', 12];
+var arr = ['ab', 'bc'];
+arr.push(12);
+console.log(arr);

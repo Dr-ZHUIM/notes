@@ -1,3 +1,1 @@
-var arr = ['ab', 'bc'];
-arr.push(12);
-console.log(arr);
+var arr = ['a', 2, false];

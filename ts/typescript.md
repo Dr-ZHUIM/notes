@@ -118,6 +118,20 @@ arr.push('bc');
 console.log(arr);   // 1,2,'ab',12,'bc'
 ```
 
+当添加非字符串、数字类型数据时报错：
+```
+const arr = [1,2,'ab'];
+arr.push({a:1});
+console.log(arr);   //Argument of type '{ a: number; }' is not assignable to parameter of type 'string | number'.
+```
+
+**`显式定义`** 一个由字符串，数字，布尔值混合数组
+
+语法: `const(或者var、let) arr:(type|type)[] = []`
+
+```
+const arr:(string|number|boolean)[] = ['a',2,false]
+```
 
 ---
 ### 4) 对象的类型推断

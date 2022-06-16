@@ -1,3 +1,1 @@
-const arr = ['ab','bc'];
-arr.push(12);
-console.log(arr);
+var arr:(boolean|string|number)[] = ['a',2,false]

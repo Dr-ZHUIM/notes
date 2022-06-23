@@ -134,4 +134,27 @@ const arr:(string|number|boolean)[] = ['a',2,false]
 ```
 
 ---
+
 ### 4) 对象的类型推断
+ **`隐式定义`** 对象的类型
+
+正常情况下：
+ ```
+ const obj = {name:'tom',age:20};   // 隐式定义了obj的name与age的类型
+ obj.name = 'Bom';
+ obj.age = 30;
+ console.log(obj)   //{name:'Bom',age:30}
+ ```
+
+错误情况下：
+```
+ const obj = {name:'tom',age:20};   // 隐式定义了obj的name与age的类型
+ obj.name = 20; // Type 'number' is not assignable to type 'string'.
+ obj.age = true;    //Type 'boolean' is not assignable to type 'number'.
+```
+
+---
+
+## <span id="i3">3.元数据</span>
+
+## <span id="i4">4.泛型</span>

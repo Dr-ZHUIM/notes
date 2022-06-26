@@ -2,17 +2,27 @@
 
 ## 目录
 
-### <a href="#id1">1.类型分类</a>
-### <a href="#id2">2.类型校验模式</a>
+- [1.类型校验模式](#1%E7%B1%BB%E5%9E%8B%E6%A0%A1%E9%AA%8C%E6%A8%A1%E5%BC%8F)
+  - [1) 类型控制 **(显式赋值)**](#1-%E7%B1%BB%E5%9E%8B%E6%8E%A7%E5%88%B6-%E6%98%BE%E5%BC%8F%E8%B5%8B%E5%80%BC)
+  - [2) 类型推断 **(隐式赋值)**](#2-%E7%B1%BB%E5%9E%8B%E6%8E%A8%E6%96%AD-%E9%9A%90%E5%BC%8F%E8%B5%8B%E5%80%BC)
+  - [3) 数组、元组的类型推断](#3-%E6%95%B0%E7%BB%84%E5%85%83%E7%BB%84%E7%9A%84%E7%B1%BB%E5%9E%8B%E6%8E%A8%E6%96%AD)
+  - [4) 对象的类型推断](#4-%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%B1%BB%E5%9E%8B%E6%8E%A8%E6%96%AD)
+  - [5. 组合类型的声明](#5-%E7%BB%84%E5%90%88%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%A3%B0%E6%98%8E)
+  - [6.any 类型的定义](#6any-%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%AE%9A%E4%B9%89)
+  - [7. unknown 类型的定义](#7-unknown-%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%AE%9A%E4%B9%89)
+  - [8. void 与 never 类型的定义](#8-void-%E4%B8%8E-never-%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%AE%9A%E4%B9%89)
+- [2.TS 函数运用](#2ts-%E5%87%BD%E6%95%B0%E8%BF%90%E7%94%A8)
+  - [1) 函数类型声明](#1-%E5%87%BD%E6%95%B0%E7%B1%BB%E5%9E%8B%E5%A3%B0%E6%98%8E)
+  - [2) 函数参数类型定义](#2-%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0%E7%B1%BB%E5%9E%8B%E5%AE%9A%E4%B9%89)
+  - [3) 函数返回值类型定义](#3-%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC%E7%B1%BB%E5%9E%8B%E5%AE%9A%E4%B9%89)
+- [3.枚举](#3%E6%9E%9A%E4%B8%BE)
+- [4.断言](#4%E6%96%AD%E8%A8%80)
+- [5.类与接口](#5%E7%B1%BB%E4%B8%8E%E6%8E%A5%E5%8F%A3)
+- [6.泛型](#6%E6%B3%9B%E5%9E%8B)
 
 ---
 
-## <span id="i1">1.类型分类</span>
-
-
----
-
-## <span id="i2">2.类型校验模式</span>
+## 1.类型校验模式
 
 ### 1) 类型控制 **(显式赋值)**
 
@@ -20,7 +30,8 @@
 
 先说明 **`显式赋值`** 的定义 : 直接定义变量的类型。
 
-一如 ：  
+一如 ：
+
 ```
 // 定义一个数字类型的变量
  const num:number = 1
@@ -32,17 +43,20 @@ const fun = (a: number, b: number): void => {
 ```
 
 ---
+
 首先写一个求和函数
 
 我们传入两个数字，返回值为正常的数字
-````
+
+```
     function sum(a,b){
         return a + b
     };
     console.log(sum(1,3)) //4
-````
+```
 
 我们在传入一个数字和一个字符串，返回值变为了拼接的字符串。
+
 ```
         function sum(a,b){
         return a + b
@@ -55,12 +69,14 @@ const fun = (a: number, b: number): void => {
 `答案是使用 **TS的类型**`
 
 我们限制传入参数的类型皆为数字，当传入参数不是数字时，就会在开发阶段与编译阶段报错
+
 ```
         function sum(a:number,b:number){
         return a + b
     };
     console.log(sum('ad',3)) //编译报错Argument of type 'string' is not assignable to parameter of type 'number'.
 ```
+
 ---
 
 ### 2) 类型推断 **(隐式赋值)**
@@ -71,27 +87,32 @@ const fun = (a: number, b: number): void => {
 先说明 **`隐式赋值`** 的定义 : 间接定义变量的类型。
 
 一如：
+
 ```
 const a = 1;    //隐式定义变量a为类型number
 ```
 
 在上一小节的例子中我们已经遇到了隐式赋值的小问题
+
 ```
     const fun = (a,b)=>{
         return a + b
     };
     console.log(fun('ad',2))
 ```
-在遇到拥有不确定值的变量 a 、 b 后，TS将它们都定义为了 `any` 类型 ， 即任意类型，这显然是不能满足我们想要数字相加的需求的。
+
+在遇到拥有不确定值的变量 a 、 b 后，TS 将它们都定义为了 `any` 类型 ， 即任意类型，这显然是不能满足我们想要数字相加的需求的。
 
 所以在做类型校验的时候，尽量要使用 **`显式赋值`**
 
-### 3) 数组的类型推断
+### 3) 数组、元组的类型推断
+
 数组在定义时，传入的值的类型会隐式赋值给数组。
 
- **`隐式定义`** 一个字符串型数组
+**`隐式定义`** 一个字符串型数组
 
- 正常情况下：
+正常情况下：
+
 ```
 //定义了一个字符串型
 const arr = ['ad', 'bc'];
@@ -102,15 +123,17 @@ console.log(arr);   //'ab','bc','ss'
 ```
 
 当添加非字符串类型数据时报错：
+
 ```
 const arr = ['ab','bc'];
 arr.push(12);
 console.log(arr);   // Argument of type 'number' is not assignable to parameter of type 'string'
 ```
 
- **`隐式定义`** 一个字符串、数字混合数组
+**`隐式定义`** 一个字符串、数字混合数组
 
 正常情况下：
+
 ```
 const arr = [1,2,'ab'];
 arr.push(12);
@@ -119,6 +142,7 @@ console.log(arr);   // 1,2,'ab',12,'bc'
 ```
 
 当添加非字符串、数字类型数据时报错：
+
 ```
 const arr = [1,2,'ab'];
 arr.push({a:1});
@@ -130,31 +154,292 @@ console.log(arr);   //Argument of type '{ a: number; }' is not assignable to par
 语法: `const(或者var、let) arr:(type|type)[] = []`
 
 ```
-const arr:(string|number|boolean)[] = ['a',2,false]
+const arr:(string|number|boolean)[] = ['a',2,false] //此处没有涉及到泛型的定义方式
+```
+
+**`隐式定义`** 一个字符串、数字混合数组
+
+**`元组`**
+元组是确认了每一位元素的具体类型的数组
+
+```
+const arr:[string,string,number] = ['test','test',123]
 ```
 
 ---
 
 ### 4) 对象的类型推断
- **`隐式定义`** 对象的类型
+
+**`隐式定义`** 对象的类型
 
 正常情况下：
- ```
- const obj = {name:'tom',age:20};   // 隐式定义了obj的name与age的类型
- obj.name = 'Bom';
- obj.age = 30;
- console.log(obj)   //{name:'Bom',age:30}
- ```
+
+```
+const obj = {name:'tom',age:20};   // 隐式定义了obj的name与age的类型
+obj.name = 'Bom';
+obj.age = 30;
+console.log(obj)   //{name:'Bom',age:30}
+```
 
 错误情况下：
+
 ```
  const obj = {name:'tom',age:20};   // 隐式定义了obj的name与age的类型
  obj.name = 20; // Type 'number' is not assignable to type 'string'.
  obj.age = true;    //Type 'boolean' is not assignable to type 'number'.
 ```
 
+**`显式定义`** 对象的类型  
+可以直接声明变量为对象  
+也可以声明变量为对象的同时，声明变量属性的类型。
+
+> **可以通过 `?:` 的方式声明一个属性为不必须的**
+
+```
+let obj:object = {} //限定obj为对象
+let obj2:{name:string,age:number,url?:string}   //限定obj2为name是字符串,age是数字,url为不必须的字符串的对象
+```
+
+### 5. 组合类型的声明
+
+定义一个多种类型的基础数据类型变量
+
+```
+let word:string|number;
+word = 'test';
+word = 12;  //都不报错
+```
+
+定义一个组合类型的数组
+
+```
+let arr:(string|number)[] = ['test',123];
+console.log(arr) //[ 'test', 123 ]
+```
+
+使用泛型定义一个组合类型的数组
+
+```
+let arr:Array<string|number> = ['test',123]
+```
+
 ---
 
-## <span id="i3">3.元数据</span>
+### 6.any 类型的定义
 
-## <span id="i4">4.泛型</span>
+`any` 类型的变量可以赋任意类型的值。
+
+> `any` 类型 是其他类型的总集  
+> 如果定义变量时什么类型都不给，默认为 `any` 类型, **这一情况应当被阻止**。
+>
+> > 在 tsconfig.json 中设定 `"noImplictAny" : true` 阻止隐式定义 `any` 类型
+
+**`隐式定义`** 一个 any 类型的变量
+
+```
+let word;
+word = true;
+word = 123;
+word = 'afds';
+word = class{}
+```
+
+**`显式定义`** 一个 any 类型的变量
+
+```
+let word:any;
+word = true;
+word = 123;
+word = 'afds';
+word = class{}
+```
+
+定义一个可以传入任意类型数据的数组
+
+```
+let arr: any[] = [];
+arr = ["asd", 123, true, [1, 2, 3], null, undefined];
+console.log('arr',arr)  //arr [ 'asd', 123, true, [ 1, 2, 3 ], null, undefined ]
+```
+
+**注意！使用 any 类型将失去 ts 的严格类型保护**
+
+```
+class MyClass {
+    constructor(){};
+    get = () => 'test'
+}
+const test:any = new MyClass;
+console.log(test.show());   //编辑器不会报错，运行时才会报错
+```
+
+而在这个案例中，我们会发现我们将 any 类型的 obj 赋值给 string 类型的 a 后，a 不会校验类型
+
+```
+let obj: any = 123
+let a: string;
+
+a = obj;
+console.log('a',a)  // a 123
+```
+
+> 尽量不要使用 any 类型
+
+---
+
+### 7. unknown 类型的定义
+
+`unknown` 类型 顾名思义就是不清楚的类型，但是它存在类型校验。  
+当 `unknown` 类型的变量被直接赋值给其他有类型的变量时会报错。
+
+这时候我们需要引入新的概念——断言 `as`
+
+在这个案例中将 unknown 类型的 obj 断言为 string 类型
+
+```
+let obj: unknown = 123
+let a: string;
+
+a = obj as string;  //在这里将unknown类型的obj断言为string类型
+console.log('a',a)  // a 123
+```
+
+> 我们得到了什么好处？  
+> 1.能够定义一个任意类型的变量  
+> 2.保留 ts 的严格类型校验
+
+如果我们想借助 `unknown` 类型来破坏 ts 的类型校验也是可以的
+
+只要将变量的类型先断言为 `unknown` 类型再断言为相应类型便可。
+
+```
+let str: string = '123';
+let num: number = 123;
+console.log(typeof num); //number
+num = str as unknown as number;
+console.log('num',num) //num 123
+console.log(typeof num) //string
+```
+
+---
+
+### 8. void 与 never 类型的定义
+
+`void` 类型的值只能是 `undefined`
+
+```
+let a:void = undefined
+```
+
+`never` 类型不能拥有值
+
+```
+let b:never
+```
+
+> `void` 使用场景：  
+> `void` 类型用于定义函数的返回值为 `undefined`
+
+```
+const foo = ():void => {
+    const a:string = 'ab'
+}   //该函数的返回值是undefined
+```
+
+> `never` 使用场景：  
+> `never` 类型用于定义没有返回值的函数，如函数中使用 `throw` 的情况
+
+```
+const foo = ():never => {
+    throw('error:whatever')
+}
+```
+
+---
+
+---
+
+## 2.TS 函数运用
+
+### 1) 函数类型声明
+
+隐式声明一个函数
+
+```
+const foo = () => '我是一个函数'
+```
+
+显式声明一个函数
+
+```
+const foo:Function = () => '我是一个函数'
+```
+
+---
+
+### 2) 函数参数类型定义
+
+TS 的函数参数声明方式与 JS 基本一致
+
+1.一般参数
+
+```
+const foo = (name:string,age:number) => {    return {name, age}
+}
+```
+
+2.拥有默认值的参数  
+表示如果该参数不传的话，有一个默认值
+
+```
+const foo = (name:string,age:number,money:number=200) => {return {name, age,money}
+}
+```
+
+3.可选参数  
+表示该参数可以选择不传
+
+```
+const foo = (name:string,age:number,money:number=200,address?:string) => {return {name, age,money, address}
+}
+```
+
+> 应当注意的是：函数参数的定义顺序是：一般参数 -> 默认值参数 -> 可选参数
+
+4.剩余参数  
+表示除去已经定义的参数以外的参数
+
+```
+const foo = (name: string, ...args: number[]): object => {
+  const sum: number = args.reduce((s, n) => s + n, 0);
+  return { name, sum };
+};
+
+const count = foo('testCount', 1, 2, 3, 4, 5, 6);
+console.log('count',count) // count { name: 'testCount', sum: 21 }
+```
+
+---
+
+### 3) 函数返回值类型定义
+
+应当知晓的是：函数要先执行才会有返回值  
+所以函数返回值类型的定义要在 `括号` 后面
+
+```
+const foo = ():string => "string-foo"
+
+function foo2():number{
+    return 200
+}
+```
+
+---
+
+## 3.枚举
+
+## 4.断言
+
+## 5.类与接口
+
+## 6.泛型

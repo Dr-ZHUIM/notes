@@ -15,7 +15,7 @@
   - [1) 函数类型声明](#1-%E5%87%BD%E6%95%B0%E7%B1%BB%E5%9E%8B%E5%A3%B0%E6%98%8E)
   - [2) 函数参数类型定义](#2-%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0%E7%B1%BB%E5%9E%8B%E5%AE%9A%E4%B9%89)
   - [3) 函数返回值类型定义](#3-%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC%E7%B1%BB%E5%9E%8B%E5%AE%9A%E4%B9%89)
-- [3.枚举](#3%E6%9E%9A%E4%B8%BE)
+- [3.枚举类](#3%E6%9E%9A%E4%B8%BE)
 - [4.断言](#4%E6%96%AD%E8%A8%80)
 - [5.类与接口](#5%E7%B1%BB%E4%B8%8E%E6%8E%A5%E5%8F%A3)
 - [6.泛型](#6%E6%B3%9B%E5%9E%8B)
@@ -357,8 +357,6 @@ const foo = ():never => {
 
 ---
 
----
-
 ## 2.TS 函数运用
 
 ### 1) 函数类型声明
@@ -436,9 +434,139 @@ function foo2():number{
 
 ---
 
-## 3.枚举
+## 3.枚举类
+
+枚举类型 `enum` 用于对同一类型的值做语义化的设置
+
+举个例子：一个人的性别，数据库传过来可能是 `0` 或者 `1` ，而我们希望在设计接口的时候方便认知，我们可以借助枚举类型。
+
+**枚举类型的值如果不设定默认值的话，是在枚举类中的索引(index)值**
+```
+enum GenderType{
+    male,   //0
+    female  //1
+};
+const tom = {
+    name : 'Tom',
+    gender:GenderType.male
+};
+console.log(tom);   //{ name: 'Tom', gender: 0 }
+```
+
+枚举类型允许设定默认值 , **从规范来讲，同一枚举类中的值的类型应当统一**
+
+```
+enum ScoreType{
+    Tom = 80 ,
+    Bom = 90
+};
+const testRes = {
+    student : 'Tom',
+    score : ScoreType.Tom
+};
+console.log(testRes) //{ student: 'Tom', score: 80 }
+```
 
 ## 4.断言
+
+### 1). 断言的定义
+
+> 断言：用于 **决定** 一个多种类型的值具体为哪一个类型。
+
+看一个函数：  
+
+这个函数可以返回两种类型 `string` `number`  ， 由arg这个布尔值类型的变量来错做返回的是什么类型的值。
+
+我们将函数的返回值存入变量res中，那么res的类型便是 `string | number`  
+
+这时我们可以为res赋 `string` 或者 `number` 类型的值
+
+```
+const foo = (arg:boolean):string|number => {
+    return arg?'test':123
+};
+let res =  foo(true);
+res = 'im string';
+res = 200
+```
+
+但是我们不希望res的值是混合类型，这时候就可以使用断言
+
+```
+const foo = (arg:boolean):string|number => {
+    return arg?'test':123
+};
+let res =  foo(true) as string;
+res = 'im string';
+res = 123 // 报错，number类型不能赋给string类型
+```
+
+### 2). as const断言
+
+`as const` 断言 ： 
+
+- 基本数据类型的变量使用时 ： 将变量的类型变为当前的值（值类型）
+- 数组使用时：将数组变为元组，值只读
+- 对象使用时：将每一项的类型变为value的类型，值只读
+
+```
+/*基本数据类型*/
+let a = 12 as const ; // a的类型为 12
+/*数组*/
+let b:string = '123';
+let c:number = 123;
+let arr = [a,b,c] as const ; //arr[0]的类型为12，arr[1]的类型为string ，arr[2]的类型为number
+/*对象*/
+let obj = {
+    num : a,
+    string : b
+} as const  //num,string的类型为只读的12和字符串
+```
+
+**`as const` 的 使用场景**
+
+- 数组使用 as const 将数组变为只读数组
+```
+let a = 'string';
+let b = 123;
+let arr = [a,b] as const;
+```
+- 解构赋值时赋予类型
+```
+const foo = () => {
+    let a = 'myfunction';
+    let b = (x: number, y: number) => x + y;
+    return [a,b] as const // 避免了解析出来的元素拥有混合类型
+}
+const [n, m] = foo();
+console.log('m(20,40)',m(20,40)) //60
+```
+---
+
+### 3). 非空断言
+
+非空断言 ：用于表示变量的值一定不会是 `null`
+
+使用方法：
+
+- as 变量的类型
+- 值的最后写 !
+
+在不使用非空断言的情况下查询dom元素，我们都知道这个dom节点它不一定存在，所以他的类型是 `HTMLDivElement | null`
+```
+const li:HTMLDivElement = document.querySelector('.test') 
+//报错：不能将类型“HTMLDivElement | null”分配给类型“HTMLDivElement”。
+```
+**在确信该变量的值的类型下**，使用非空断言。
+
+```
+const li: HTMLDivElement = document.querySelector(".test") as HTMLDivElement;
+```
+或者
+```
+const li: HTMLDivElement = document.querySelector(".test")!;
+```
+---
 
 ## 5.类与接口
 

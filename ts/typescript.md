@@ -3,20 +3,23 @@
 ## 目录
 
 - [1.类型校验模式](#1%E7%B1%BB%E5%9E%8B%E6%A0%A1%E9%AA%8C%E6%A8%A1%E5%BC%8F)
-  - [1) 类型控制 **(显式赋值)**](#1-%E7%B1%BB%E5%9E%8B%E6%8E%A7%E5%88%B6-%E6%98%BE%E5%BC%8F%E8%B5%8B%E5%80%BC)
-  - [2) 类型推断 **(隐式赋值)**](#2-%E7%B1%BB%E5%9E%8B%E6%8E%A8%E6%96%AD-%E9%9A%90%E5%BC%8F%E8%B5%8B%E5%80%BC)
-  - [3) 数组、元组的类型推断](#3-%E6%95%B0%E7%BB%84%E5%85%83%E7%BB%84%E7%9A%84%E7%B1%BB%E5%9E%8B%E6%8E%A8%E6%96%AD)
-  - [4) 对象的类型推断](#4-%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%B1%BB%E5%9E%8B%E6%8E%A8%E6%96%AD)
-  - [5. 组合类型的声明](#5-%E7%BB%84%E5%90%88%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%A3%B0%E6%98%8E)
-  - [6.any 类型的定义](#6any-%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%AE%9A%E4%B9%89)
-  - [7. unknown 类型的定义](#7-unknown-%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%AE%9A%E4%B9%89)
-  - [8. void 与 never 类型的定义](#8-void-%E4%B8%8E-never-%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%AE%9A%E4%B9%89)
+  - [1). 类型控制 **(显式赋值)**](#1-%E7%B1%BB%E5%9E%8B%E6%8E%A7%E5%88%B6-%E6%98%BE%E5%BC%8F%E8%B5%8B%E5%80%BC)
+  - [2). 类型推断 **(隐式赋值)**](#2-%E7%B1%BB%E5%9E%8B%E6%8E%A8%E6%96%AD-%E9%9A%90%E5%BC%8F%E8%B5%8B%E5%80%BC)
+  - [3). 数组、元组的类型推断](#3-%E6%95%B0%E7%BB%84%E5%85%83%E7%BB%84%E7%9A%84%E7%B1%BB%E5%9E%8B%E6%8E%A8%E6%96%AD)
+  - [4). 对象的类型推断](#4-%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%B1%BB%E5%9E%8B%E6%8E%A8%E6%96%AD)
+  - [5). 组合类型的声明](#5-%E7%BB%84%E5%90%88%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%A3%B0%E6%98%8E)
+  - [6).any 类型的定义](#6any-%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%AE%9A%E4%B9%89)
+  - [7). unknown 类型的定义](#7-unknown-%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%AE%9A%E4%B9%89)
+  - [8). void 与 never 类型的定义](#8-void-%E4%B8%8E-never-%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%AE%9A%E4%B9%89)
 - [2.TS 函数运用](#2ts-%E5%87%BD%E6%95%B0%E8%BF%90%E7%94%A8)
   - [1) 函数类型声明](#1-%E5%87%BD%E6%95%B0%E7%B1%BB%E5%9E%8B%E5%A3%B0%E6%98%8E)
   - [2) 函数参数类型定义](#2-%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0%E7%B1%BB%E5%9E%8B%E5%AE%9A%E4%B9%89)
   - [3) 函数返回值类型定义](#3-%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC%E7%B1%BB%E5%9E%8B%E5%AE%9A%E4%B9%89)
-- [3.枚举类](#3%E6%9E%9A%E4%B8%BE)
+- [3.枚举类](#3%E6%9E%9A%E4%B8%BE%E7%B1%BB)
 - [4.断言](#4%E6%96%AD%E8%A8%80)
+  - [1). 断言的定义](#1-%E6%96%AD%E8%A8%80%E7%9A%84%E5%AE%9A%E4%B9%89)
+  - [2). as const 断言](#2-as-const-%E6%96%AD%E8%A8%80)
+  - [3). 非空断言](#3-%E9%9D%9E%E7%A9%BA%E6%96%AD%E8%A8%80)
 - [5.类与接口](#5%E7%B1%BB%E4%B8%8E%E6%8E%A5%E5%8F%A3)
 - [6.泛型](#6%E6%B3%9B%E5%9E%8B)
 
@@ -24,7 +27,7 @@
 
 ## 1.类型校验模式
 
-### 1) 类型控制 **(显式赋值)**
+### 1). 类型控制 **(显式赋值)**
 
 > **`显示赋值` 的意义**：主动限制变量的类型
 
@@ -79,7 +82,7 @@ const fun = (a: number, b: number): void => {
 
 ---
 
-### 2) 类型推断 **(隐式赋值)**
+### 2). 类型推断 **(隐式赋值)**
 
 > **`隐式赋值的意义`** ：为有值的变量提供类型  
 > **`缺点`** : 面对值不确定的变量时，不能提供开发人员的预期类型
@@ -105,7 +108,7 @@ const a = 1;    //隐式定义变量a为类型number
 
 所以在做类型校验的时候，尽量要使用 **`显式赋值`**
 
-### 3) 数组、元组的类型推断
+### 3). 数组、元组的类型推断
 
 数组在定义时，传入的值的类型会隐式赋值给数组。
 
@@ -168,7 +171,7 @@ const arr:[string,string,number] = ['test','test',123]
 
 ---
 
-### 4) 对象的类型推断
+### 4). 对象的类型推断
 
 **`隐式定义`** 对象的类型
 
@@ -200,7 +203,7 @@ let obj:object = {} //限定obj为对象
 let obj2:{name:string,age:number,url?:string}   //限定obj2为name是字符串,age是数字,url为不必须的字符串的对象
 ```
 
-### 5. 组合类型的声明
+### 5). 组合类型的声明
 
 定义一个多种类型的基础数据类型变量
 
@@ -225,7 +228,7 @@ let arr:Array<string|number> = ['test',123]
 
 ---
 
-### 6.any 类型的定义
+### 6).any 类型的定义
 
 `any` 类型的变量可以赋任意类型的值。
 
@@ -287,7 +290,7 @@ console.log('a',a)  // a 123
 
 ---
 
-### 7. unknown 类型的定义
+### 7). unknown 类型的定义
 
 `unknown` 类型 顾名思义就是不清楚的类型，但是它存在类型校验。  
 当 `unknown` 类型的变量被直接赋值给其他有类型的变量时会报错。
@@ -323,7 +326,7 @@ console.log(typeof num) //string
 
 ---
 
-### 8. void 与 never 类型的定义
+### 8). void 与 never 类型的定义
 
 `void` 类型的值只能是 `undefined`
 
@@ -441,6 +444,7 @@ function foo2():number{
 举个例子：一个人的性别，数据库传过来可能是 `0` 或者 `1` ，而我们希望在设计接口的时候方便认知，我们可以借助枚举类型。
 
 **枚举类型的值如果不设定默认值的话，是在枚举类中的索引(index)值**
+
 ```
 enum GenderType{
     male,   //0
@@ -473,13 +477,13 @@ console.log(testRes) //{ student: 'Tom', score: 80 }
 
 > 断言：用于 **决定** 一个多种类型的值具体为哪一个类型。
 
-看一个函数：  
+看一个函数：
 
-这个函数可以返回两种类型 `string` `number`  ， 由arg这个布尔值类型的变量来错做返回的是什么类型的值。
+这个函数可以返回两种类型 `string` `number` ， 由 arg 这个布尔值类型的变量来错做返回的是什么类型的值。
 
-我们将函数的返回值存入变量res中，那么res的类型便是 `string | number`  
+我们将函数的返回值存入变量 res 中，那么 res 的类型便是 `string | number`
 
-这时我们可以为res赋 `string` 或者 `number` 类型的值
+这时我们可以为 res 赋 `string` 或者 `number` 类型的值
 
 ```
 const foo = (arg:boolean):string|number => {
@@ -490,7 +494,7 @@ res = 'im string';
 res = 200
 ```
 
-但是我们不希望res的值是混合类型，这时候就可以使用断言
+但是我们不希望 res 的值是混合类型，这时候就可以使用断言
 
 ```
 const foo = (arg:boolean):string|number => {
@@ -501,13 +505,13 @@ res = 'im string';
 res = 123 // 报错，number类型不能赋给string类型
 ```
 
-### 2). as const断言
+### 2). as const 断言
 
-`as const` 断言 ： 
+`as const` 断言 ：
 
 - 基本数据类型的变量使用时 ： 将变量的类型变为当前的值（值类型）
 - 数组使用时：将数组变为元组，值只读
-- 对象使用时：将每一项的类型变为value的类型，值只读
+- 对象使用时：将每一项的类型变为 value 的类型，值只读
 
 ```
 /*基本数据类型*/
@@ -526,12 +530,15 @@ let obj = {
 **`as const` 的 使用场景**
 
 - 数组使用 as const 将数组变为只读数组
+
 ```
 let a = 'string';
 let b = 123;
 let arr = [a,b] as const;
 ```
+
 - 解构赋值时赋予类型
+
 ```
 const foo = () => {
     let a = 'myfunction';
@@ -541,6 +548,7 @@ const foo = () => {
 const [n, m] = foo();
 console.log('m(20,40)',m(20,40)) //60
 ```
+
 ---
 
 ### 3). 非空断言
@@ -552,20 +560,25 @@ console.log('m(20,40)',m(20,40)) //60
 - as 变量的类型
 - 值的最后写 !
 
-在不使用非空断言的情况下查询dom元素，我们都知道这个dom节点它不一定存在，所以他的类型是 `HTMLDivElement | null`
+在不使用非空断言的情况下查询 dom 元素，我们都知道这个 dom 节点它不一定存在，所以他的类型是 `HTMLDivElement | null`
+
 ```
-const li:HTMLDivElement = document.querySelector('.test') 
+const li:HTMLDivElement = document.querySelector('.test')
 //报错：不能将类型“HTMLDivElement | null”分配给类型“HTMLDivElement”。
 ```
+
 **在确信该变量的值的类型下**，使用非空断言。
 
 ```
 const li: HTMLDivElement = document.querySelector(".test") as HTMLDivElement;
 ```
+
 或者
+
 ```
 const li: HTMLDivElement = document.querySelector(".test")!;
 ```
+
 ---
 
 ## 5.类与接口

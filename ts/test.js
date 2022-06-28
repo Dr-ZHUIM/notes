@@ -1,2 +1,2 @@
 "use strict";
-var arr = ["test", "test", 123];
+var li = document.querySelector(".test");

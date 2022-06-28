@@ -1,1 +1,1 @@
-const arr: [string, string, number] = ["test", "test", 123];
+const li: HTMLDivElement = document.querySelector(".test") as HTMLDivElement;

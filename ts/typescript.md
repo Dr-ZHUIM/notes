@@ -583,4 +583,112 @@ const li: HTMLDivElement = document.querySelector(".test")!;
 
 ## 5.类与接口
 
+### 1). TS中使用类
+
+一起来实现一个基础的类
+
+```
+class Person {
+  constructor(name:string,age:number){
+    this.name = name;
+    this.age = age;
+  }
+  name:string;
+  age:number
+};
+```
+
+使用类来创建两个实例对象，这两个实例的类型就是Person类
+
+```
+class Person {
+  constructor(name:string,age:number){
+    this.name = name;
+    this.age = age;
+  }
+  name:string;
+  age:number
+};
+const François = new Person('François',22);
+const Dency = new Person('Dency',23);
+```
+
+**重点：TS中可以将类作为类型赋予变量**
+
+```
+class Person {
+  constructor(name:string,age:number){
+    this.name = name;
+    this.age = age;
+  }
+  name:string;
+  age:number
+};
+const François = new Person('François',22);
+const Dency = new Person('Dency',23);
+const personsArr:Person[] = [François,Dency];
+
+console.log('François',François);   //François Person { name: 'François', age: 22 }
+console.log('Dency',Dency);     //Dency Person { name: 'Dency', age: 23 }
+console.log('personsArr',personsArr);
+/*
+personsArr [
+  Person { name: 'François', age: 22 },
+  Person { name: 'Dency', age: 23 }    
+]
+*/
+```
+
+### 2). 类的关键字 public , protected , private
+
+先引入一个概念：权限等级
+
+在类中的属性分为三个权限等级：`public` , `protected` , `private`
+
+`public` ： 最低等级权限，允许当前属性在类的外部、子类、当前类中使用
+
+`protected` ：第二权限等级，允许当前属性在子类、当前类中使用
+
+`private` ：最高权限等级，只允许当前属性在当前类中使用
+
+拥有 `protected` 关键字的属性被子类继承时 , 子类在有更改权限等级的需求下，只能将其转变为 `public`
+
+来看个案例
+
+```
+class Person {
+  constructor(name:string,age:number){
+    this.name = name;
+    this.age = age;
+  }
+  protected name:string;
+  public age:number;
+  private showPerson(){
+    return `名字：${this.name} ; 年龄：${this.age}`
+  }
+  protected getPerson(){
+    console.log('showPerson()',this.showPerson())
+  }
+};
+
+class User extends Person{
+  constructor(name:string,age:number){
+    super(name,age);
+    this.name = name;
+  };
+  //降级处理，允许类外部使用name变量
+  public name:string;
+  public show(){
+    //方法在实例原型链上继承，属性由类继承
+    this.getPerson()
+  }
+}
+
+const Dency = new User('Dency',23);
+
+Dency.show()    //showPerson() 名字：Dency ; 年龄：23
+```
+
 ## 6.泛型
+
+

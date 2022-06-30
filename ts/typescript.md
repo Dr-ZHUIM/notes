@@ -689,6 +689,50 @@ const Dency = new User('Dency',23);
 Dency.show()    //showPerson() 名字：Dency ; 年龄：23
 ```
 
+---
+
+### 3). 类的关键字 readonly
+
+readonly 关键字指该属性是只读的，不可修改
+
+```
+class Person {
+  public constructor(name: string) {
+    this.name = name
+  };
+  public readonly name: string;
+}
+
+const Tom = new Person('Tom')
+Tom.name = "Bom"  // 报错，Person类的name属性只读
+```
+
+但是使用readonly关键字的属性在构建函数中初始化时，可以修改
+```
+class Axios {
+  public constructor(path?:string){
+    this.path = path || this.path
+  };
+  protected path:string = 'https://www.github.com'
+  public showApi(api:string){
+    return `${this.path}/${api}`
+  }
+}
+
+const users = new Axios();
+const account = new Axios('www.baidu.com');
+
+//users.showApi('users') https://www.github.com/users
+console.log("users.showApi('users')",users.showApi('users'))
+//account.showApi('account') www.baidu.com/account
+console.log("account.showApi('account')",account.showApi('account'))
+```
+
+---
+
+### 4). TS类中的构造函数
+
+
 ## 6.泛型
 
 

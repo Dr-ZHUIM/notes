@@ -645,7 +645,7 @@ personsArr [
 
 在类中的属性分为三个权限等级：`public` , `protected` , `private`
 
-`public` ： 最低等级权限，允许当前属性在类的外部、子类、当前类中使用
+`public` ： 最低等级权限，允许当前属性在实例对象、子类、当前类中使用
 
 `protected` ：第二权限等级，允许当前属性在子类、当前类中使用
 
@@ -689,9 +689,31 @@ const Dency = new User('Dency',23);
 Dency.show()    //showPerson() 名字：Dency ; 年龄：23
 ```
 
+### 3). 关键字 static 
+
+static 关键字指该属性只能通过类来调用  
+static 的作用：    
+- static 关键词将属性存入类中，避免了实例存储相同属性浪费性能的问题。  
+
+**static关键字在public、protected、private关键字的后面**
+
+```
+class Person {
+  static type:string = 'Person';
+  private static classID:string = '111';
+
+  static show(){
+    console.log(Person.classID)
+  }
+}
+
+console.log(Person.type); //Person
+Person.show(); //111
+```
+
 ---
 
-### 3). 类的关键字 readonly
+### 4). 类的关键字 readonly
 
 readonly 关键字指该属性是只读的，不可修改
 
@@ -730,8 +752,87 @@ console.log("account.showApi('account')",account.showApi('account'))
 
 ---
 
-### 4). TS类中的构造函数
+### 5). TS类中的构造函数
 
+类的构造函数的作用是 ： 初始化类的实例的属性
+
+来实现如下一个案例
+
+我们先写一个类Person，在类中的构造函数中初始化属性name
+
+将传入的name赋给实例的name属性
+```
+class Person {
+  constructor(name:string){
+    this.name = name
+  }
+  public name:string
+}
+```
+
+接着，我们再定义一个可选参数，由于可选参数的返回值是 type|undefined 所以要再初始化的时候提供undefined的对应值
+
+这样一来我们就为Person类的job属性提供了一个默认值
+```
+class Person {
+  constructor(name:string,job?:string){
+    this.name = name;
+    this.job = job || 'student'
+  }
+  public name:string
+  public job:string
+}
+```
+
+我们想看一下实例的情况，在类里写一个函数来打印实例
+
+```
+class Person {
+  constructor(name:string,job?:string){
+    this.name = name;
+    this.job = job || 'student'
+  }
+  public name:string;
+  public job:string;
+  public show(){
+    console.log('this',this)
+  }
+}
+
+const Tom = new Person('Tom');
+
+Tom.show()  // this Person { name: 'Tom', job: 'student' }
+```
+
+### 6). 单例模式
+
+单例模式：指一个类只能生成单个实例
+
+假设我们有一个class Axios
+1.将构造函数设为private使外部不能 new Axios  
+2.建立一个private static属性，该属性的类型为Axios | null ，用于标识是否建立过Axios的实例  
+3.建立static属性函数   
+
+```
+class Axios {
+  private static query: Axios | null = null
+  private constructor(){
+    console.log('constructor')
+  }
+  static make():Axios{
+    if(Axios.query == null){
+      Axios.query = new Axios()
+    }
+    return Axios.query
+  }
+}
+
+const query = Axios.make();
+const query2 = Axios.make();
+
+```
+
+---
 
 ## 6.泛型
 

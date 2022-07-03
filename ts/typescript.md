@@ -831,6 +831,31 @@ const query = Axios.make();
 const query2 = Axios.make();
 
 ```
+---
+
+### 7). 访问器get与set - 计算属性
+
+在类中，我们可以借助访问器 get 与 set 来作为计算属性，控制属性的
+
+```
+class User{
+constructor(name: string) {
+  this._name = name
+}
+private _name: string
+public get name(): string {
+  return this._name
+}
+public set name(name: string){
+    this._name = name
+}
+}
+
+const Tom = new User("Tom");
+Tom.name = 'Bom';
+console.log('Tom',Tom) //Tom User { _name: 'Bom' }
+```
+
 
 ---
 

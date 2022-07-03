@@ -1,15 +1,16 @@
-class Axios {
-  private static query: Axios | null = null
-  private constructor(){
-    console.log('constructor')
+class User{
+  constructor(name: string) {
+    this._name = name
   }
-  static make():Axios{
-    if(Axios.query == null){
-      Axios.query = new Axios()
-    }
-    return Axios.query
+  private _name: string
+  public get name(): string {
+    return this._name
+  }
+  public set name(name: string){
+      this._name = name
   }
 }
 
-const query = Axios.make();
-const query2 = Axios.make();
+const Tom = new User("Tom");
+Tom.name = 'Bom';
+console.log('Tom',Tom)

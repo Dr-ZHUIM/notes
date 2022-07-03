@@ -856,6 +856,83 @@ Tom.name = 'Bom';
 console.log('Tom',Tom) //Tom User { _name: 'Bom' }
 ```
 
+---
+
+### 8). abstract抽象类
+
+抽象类的定义：为子类提供业务逻辑以及规范的类，不能被实例化
+
+抽象类中所定义的抽象属性**不会被继承**，但会形成规范，强制要求继承该类的子类同样拥有该属性的定义
+
+**抽象类不能实例化**
+
+**抽象属性只能在抽象类中定义**
+
+```
+//将类包进块级作用域，因为DOM有Animation类
+{
+  abstract class Animation {
+    abstract name:string
+    abstract move():void
+    protected getPosition(x: number, y: number): number[] {
+      return [x, y];
+    }
+  }
+
+  class Tank extends Animation {
+    name: string = 'enemy';
+    public move(): void {
+      console.log(`${this.name}坦克移动`);
+    }
+  }
+
+  class Player extends Animation {
+    name:string = 'player'
+    public move(): void {
+      console.log(`${this.name}坦克移动`);
+    }
+  }
+}
+
+```
+
+### 9.) interface 接口
+
+接口的定义：只提供规范的类
+
+接口的使用：在类的后部添加关键字 implements 然后写上接口的名字
+
+如  `class Person implements PersonInterface{}`
+
+```
+{
+  interface AnimationInterface {
+    name: string;
+    move(): void;
+  }
+
+  abstract class Animation {
+    protected getPosition(x: number, y: number): number[] {
+      return [x, y];
+    }
+  }
+
+  class Tank extends Animation implements AnimationInterface{
+    name: string = "enemy";
+    public move(): void {
+      console.log(`${this.name}坦克移动`);
+    }
+  }
+
+  class Player extends Animation implements AnimationInterface {
+    name: string = "player";
+    public move(): void {
+      console.log(`${this.name}坦克移动`);
+    }
+  }
+}
+
+```
 
 ---
 

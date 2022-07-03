@@ -1,16 +1,26 @@
-class User{
-  constructor(name: string) {
-    this._name = name
+{
+  interface AnimationInterface {
+    name: string;
+    move(): void;
   }
-  private _name: string
-  public get name(): string {
-    return this._name
+
+  abstract class Animation {
+    protected getPosition(x: number, y: number): number[] {
+      return [x, y];
+    }
   }
-  public set name(name: string){
-      this._name = name
+
+  class Tank extends Animation implements AnimationInterface{
+    name: string = "enemy";
+    public move(): void {
+      console.log(`${this.name}坦克移动`);
+    }
+  }
+
+  class Player extends Animation implements AnimationInterface {
+    name: string = "player";
+    public move(): void {
+      console.log(`${this.name}坦克移动`);
+    }
   }
 }
-
-const Tom = new User("Tom");
-Tom.name = 'Bom';
-console.log('Tom',Tom)

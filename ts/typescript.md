@@ -934,6 +934,37 @@ console.log('Tom',Tom) //Tom User { _name: 'Bom' }
 
 ```
 
+来看看interface如何对Object约束
+
+在下面的案例中，我们创建了一个 `UserInterface`接口，并将对象 `Tom` 的类型设定为 `UserInterface` ， 对象`Tom` 的属性就被约束了，必须要满足 `UserInterface` 的规定才能够编译
+
+**如果想要设定可选属性：`age?:number` 在冒号前加`？`即可**
+
+**如果允许该类有额外属性：`[key:string]: any`**
+```
+interface UserInterface{
+  name : string
+  age : number
+  info():string
+}
+
+const Tom:UserInterface = {
+  name : 'Tom',
+  age : 20,
+  info : function(){
+    return `${this.name},${this.age}`
+  }
+}
+
+console.log('Tom.info()',Tom.info())  //Tom.info() Tom,20
+```
+
+---
+
+### 10). 接口的继承
+
+
+
 ---
 
 ## 6.泛型

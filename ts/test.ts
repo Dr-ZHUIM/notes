@@ -1,7 +1,11 @@
 {
-  interface AnimationInterface {
-    name: string;
-    move(): void;
+  interface PlayEndInterface {
+    end(): void
+  }
+
+  interface AnimationInterface extends PlayEndInterface {
+    name: string
+    move(): void
   }
 
   abstract class Animation {
@@ -10,10 +14,13 @@
     }
   }
 
-  class Tank extends Animation implements AnimationInterface{
+  class Tank extends Animation implements AnimationInterface {
     name: string = "enemy";
     public move(): void {
       console.log(`${this.name}坦克移动`);
+    }
+    public end(): void {
+      console.log('敌人无啦');
     }
   }
 
@@ -21,6 +28,9 @@
     name: string = "player";
     public move(): void {
       console.log(`${this.name}坦克移动`);
+    }
+    public end(): void {
+      console.log('玩家无啦');
     }
   }
 }

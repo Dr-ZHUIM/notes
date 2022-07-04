@@ -31,7 +31,10 @@ var __extends = (this && this.__extends) || (function () {
             return _this;
         }
         Tank.prototype.move = function () {
-            console.log(this.name + "\u5766\u514B\u79FB\u52A8");
+            console.log("".concat(this.name, "\u5766\u514B\u79FB\u52A8"));
+        };
+        Tank.prototype.end = function () {
+            console.log('敌人无啦');
         };
         return Tank;
     }(Animation_1));
@@ -43,7 +46,10 @@ var __extends = (this && this.__extends) || (function () {
             return _this;
         }
         Player.prototype.move = function () {
-            console.log(this.name + "\u5766\u514B\u79FB\u52A8");
+            console.log("".concat(this.name, "\u5766\u514B\u79FB\u52A8"));
+        };
+        Player.prototype.end = function () {
+            console.log('玩家无啦');
         };
         return Player;
     }(Animation_1));

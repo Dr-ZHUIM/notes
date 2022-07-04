@@ -934,7 +934,7 @@ console.log('Tom',Tom) //Tom User { _name: 'Bom' }
 
 ```
 
-来看看interface如何对Object约束
+#### 1.interface对Object的约束
 
 在下面的案例中，我们创建了一个 `UserInterface`接口，并将对象 `Tom` 的类型设定为 `UserInterface` ， 对象`Tom` 的属性就被约束了，必须要满足 `UserInterface` 的规定才能够编译
 
@@ -961,9 +961,9 @@ console.log('Tom.info()',Tom.info())  //Tom.info() Tom,20
 
 ---
 
-### 10). 接口的继承
+#### 2.interface的混合使用
 
-
+interface有两种混合使用的方式 ：interface使用关键字extends继承 、同时使用多个interface 
 
 ---
 

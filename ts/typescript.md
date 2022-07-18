@@ -21,6 +21,19 @@
   - [2). as const 断言](#2-as-const-%E6%96%AD%E8%A8%80)
   - [3). 非空断言](#3-%E9%9D%9E%E7%A9%BA%E6%96%AD%E8%A8%80)
 - [5.类与接口](#5%E7%B1%BB%E4%B8%8E%E6%8E%A5%E5%8F%A3)
+  - [1). TS 中使用类](#1-ts%E4%B8%AD%E4%BD%BF%E7%94%A8%E7%B1%BB)
+  - [2). 类的关键字 public , protected , private](#2-%E7%B1%BB%E7%9A%84%E5%85%B3%E9%94%AE%E5%AD%97-public--protected--private)
+  - [3). 关键字 static](#3-%E5%85%B3%E9%94%AE%E5%AD%97-static)
+  - [4). 类的关键字 readonly](#4-%E7%B1%BB%E7%9A%84%E5%85%B3%E9%94%AE%E5%AD%97-readonly)
+  - [5). TS 类中的构造函数](#5-ts%E7%B1%BB%E4%B8%AD%E7%9A%84%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0)
+  - [6). 单例模式](#6-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F)
+  - [7). 访问器 get 与 set - 计算属性](#7-%E8%AE%BF%E9%97%AE%E5%99%A8get%E4%B8%8Eset---%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7)
+  - [8). abstract 抽象类](#8-abstract%E6%8A%BD%E8%B1%A1%E7%B1%BB)
+  - [9.) interface 接口](#9-interface-%E6%8E%A5%E5%8F%A3)
+    - [1.interface 对 Object 的约束](#1interface%E5%AF%B9object%E7%9A%84%E7%BA%A6%E6%9D%9F)
+    - [2.interface 的混合使用](#2interface%E7%9A%84%E6%B7%B7%E5%90%88%E4%BD%BF%E7%94%A8)
+    - [3.interface 对 Function 的约束(约束参数)](#3interface%E5%AF%B9function%E7%9A%84%E7%BA%A6%E6%9D%9F%E7%BA%A6%E6%9D%9F%E5%8F%82%E6%95%B0)
+    - [4. interface 对 class 的约束](#4-interface%E5%AF%B9class%E7%9A%84%E7%BA%A6%E6%9D%9F)
 - [6.泛型](#6%E6%B3%9B%E5%9E%8B)
 
 ---
@@ -583,7 +596,7 @@ const li: HTMLDivElement = document.querySelector(".test")!;
 
 ## 5.类与接口
 
-### 1). TS中使用类
+### 1). TS 中使用类
 
 一起来实现一个基础的类
 
@@ -598,7 +611,7 @@ class Person {
 };
 ```
 
-使用类来创建两个实例对象，这两个实例的类型就是Person类
+使用类来创建两个实例对象，这两个实例的类型就是 Person 类
 
 ```
 class Person {
@@ -613,7 +626,7 @@ const François = new Person('François',22);
 const Dency = new Person('Dency',23);
 ```
 
-**重点：TS中可以将类作为类型赋予变量**
+**重点：TS 中可以将类作为类型赋予变量**
 
 ```
 class Person {
@@ -634,7 +647,7 @@ console.log('personsArr',personsArr);
 /*
 personsArr [
   Person { name: 'François', age: 22 },
-  Person { name: 'Dency', age: 23 }    
+  Person { name: 'Dency', age: 23 }
 ]
 */
 ```
@@ -689,13 +702,14 @@ const Dency = new User('Dency',23);
 Dency.show()    //showPerson() 名字：Dency ; 年龄：23
 ```
 
-### 3). 关键字 static 
+### 3). 关键字 static
 
 static 关键字指该属性只能通过类来调用  
-static 的作用：    
-- static 关键词将属性存入类中，避免了实例存储相同属性浪费性能的问题。  
+static 的作用：
 
-**static关键字在public、protected、private关键字的后面**
+- static 关键词将属性存入类中，避免了实例存储相同属性浪费性能的问题。
+
+**static 关键字在 public、protected、private 关键字的后面**
 
 ```
 class Person {
@@ -729,7 +743,8 @@ const Tom = new Person('Tom')
 Tom.name = "Bom"  // 报错，Person类的name属性只读
 ```
 
-但是使用readonly关键字的属性在构建函数中初始化时，可以修改
+但是使用 readonly 关键字的属性在构建函数中初始化时，可以修改
+
 ```
 class Axios {
   public constructor(path?:string){
@@ -752,15 +767,16 @@ console.log("account.showApi('account')",account.showApi('account'))
 
 ---
 
-### 5). TS类中的构造函数
+### 5). TS 类中的构造函数
 
 类的构造函数的作用是 ： 初始化类的实例的属性
 
 来实现如下一个案例
 
-我们先写一个类Person，在类中的构造函数中初始化属性name
+我们先写一个类 Person，在类中的构造函数中初始化属性 name
 
-将传入的name赋给实例的name属性
+将传入的 name 赋给实例的 name 属性
+
 ```
 class Person {
   constructor(name:string){
@@ -770,9 +786,10 @@ class Person {
 }
 ```
 
-接着，我们再定义一个可选参数，由于可选参数的返回值是 type|undefined 所以要再初始化的时候提供undefined的对应值
+接着，我们再定义一个可选参数，由于可选参数的返回值是 type|undefined 所以要再初始化的时候提供 undefined 的对应值
 
-这样一来我们就为Person类的job属性提供了一个默认值
+这样一来我们就为 Person 类的 job 属性提供了一个默认值
+
 ```
 class Person {
   constructor(name:string,job?:string){
@@ -808,10 +825,9 @@ Tom.show()  // this Person { name: 'Tom', job: 'student' }
 
 单例模式：指一个类只能生成单个实例
 
-假设我们有一个class Axios
-1.将构造函数设为private使外部不能 new Axios  
-2.建立一个private static属性，该属性的类型为Axios | null ，用于标识是否建立过Axios的实例  
-3.建立static属性函数   
+假设我们有一个 class Axios 1.将构造函数设为 private 使外部不能 new Axios  
+2.建立一个 private static 属性，该属性的类型为 Axios | null ，用于标识是否建立过 Axios 的实例  
+3.建立 static 属性函数
 
 ```
 class Axios {
@@ -831,9 +847,10 @@ const query = Axios.make();
 const query2 = Axios.make();
 
 ```
+
 ---
 
-### 7). 访问器get与set - 计算属性
+### 7). 访问器 get 与 set - 计算属性
 
 在类中，我们可以借助访问器 get 与 set 来作为计算属性，控制属性的
 
@@ -858,7 +875,7 @@ console.log('Tom',Tom) //Tom User { _name: 'Bom' }
 
 ---
 
-### 8). abstract抽象类
+### 8). abstract 抽象类
 
 抽象类的定义：为子类提供业务逻辑以及规范的类，不能被实例化
 
@@ -902,7 +919,7 @@ console.log('Tom',Tom) //Tom User { _name: 'Bom' }
 
 接口的使用：在类的后部添加关键字 implements 然后写上接口的名字
 
-如  `class Person implements PersonInterface{}`
+如 `class Person implements PersonInterface{}`
 
 ```
 {
@@ -934,13 +951,14 @@ console.log('Tom',Tom) //Tom User { _name: 'Bom' }
 
 ```
 
-#### 1.interface对Object的约束
+#### 1.interface 对 Object 的约束
 
 在下面的案例中，我们创建了一个 `UserInterface`接口，并将对象 `Tom` 的类型设定为 `UserInterface` ， 对象`Tom` 的属性就被约束了，必须要满足 `UserInterface` 的规定才能够编译
 
 **如果想要设定可选属性：`age?:number` 在冒号前加`？`即可**
 
 **如果允许该类有额外属性：`[key:string]: any`**
+
 ```
 interface UserInterface{
   name : string
@@ -961,12 +979,258 @@ console.log('Tom.info()',Tom.info())  //Tom.info() Tom,20
 
 ---
 
-#### 2.interface的混合使用
+#### 2.interface 的混合使用
 
-interface有两种混合使用的方式 ：interface使用关键字extends继承 、同时使用多个interface 
+interface 有两种混合使用的方式 ：
+
+- 使用关键字 extends 继承
+- 同时使用多个 interface
+
+`extends 方式:`
+
+```
+interface Person {
+  name: string,
+  age:number
+}
+
+interface User extends Person{
+  id:string
+}
+
+class VipUser implements User{
+  constructor(id: string,name:string,age:number) {
+    this.id = id;
+    this.name = name;
+    this.age = age
+  };
+  public id: string;
+  public name: string;
+  public age:number
+}
+```
+
+`同时使用多个interface 方式`
+
+```
+interface Person {
+  name: string,
+  age:number
+}
+
+interface User{
+  id:string
+}
+
+class VipUser implements Person,User{
+  constructor(id: string,name:string,age:number) {
+    this.id = id;
+    this.name = name;
+    this.age = age
+  };
+  public id: string;
+  public name: string;
+  public age:number
+}
+```
+
+#### 3.interface 对 Function 的约束(约束参数)
+
+当我们使用 interface 对函数的参数提供约束时，可以得到两个好处：
+
+- 编译器提供输入提示
+- 对函数的参数进行了类型约束
+
+```
+interface UserInterface {
+  name: string;
+  age: number;
+  gender?: string;
+  isLogin: boolean;
+}
+
+const user = {
+  name: "Tom",
+  age: 20,
+  gender: "man",
+  isLogin: true,
+};
+
+function checkLogin(user: UserInterface):void {
+  if (!user.isLogin) {
+    console.log(`${user.name}没有登录！`);
+    return;
+  }
+  console.log(`${user.age}岁的${user.name}来啦！`);
+}
+
+checkLogin(user)  //20岁的Tom来啦！
+
+```
+
+**这里特别提醒一种写法： 我们可以将接口与函数同时声明，将代码量下降**
+
+```
+//定义接口Pay，其中的函数参数price是number类型，返回boolean类型的值
+interface Pay{
+  (price:number) : boolean
+}
+
+const Wepay: Pay = (price:number) => true
+```
 
 ---
 
+#### 4. interface 对 class 的约束
+
+```
+interface UserInterface {
+  name: string;
+  age: number;
+  gender?: string;
+  isLogin: boolean;
+}
+
+class User{
+  _data: UserInterface
+  constructor(user: UserInterface) {
+    this._data = user
+  }
+  get data() {
+    return this._data
+  }
+}
+
+const Tom = new User({ name: 'Tom', age: 20, isLogin: true });
+console.log('Tom',Tom)
+```
+---
+
+#### 5. interface以及enum的混合使用
+
+在如下一个场景：
+```
+interface UserInterface {
+  name: string;
+  age: number;
+  sex : number
+}
+
+const tom:UserInterface = {name:'tom',age:20,sex:0}
+```
+我们希望接口 UserInterface 的 sex 属性的数字能更加语义化，这时候可以使用枚举 `enum` 来提供语义化的操作
+
+```
+enum UserSex {
+  Male,Female
+}
+interface UserInterface {
+  name: string;
+  age: number;
+  sex : UserSex
+}
+
+const tom: UserInterface = { name: 'tom', age: 20, sex: UserSex.Male }
+
+console.log('tom.sex',tom.sex) //tom.sex 0
+
+```
+
+---
+
+### 10.) type 
+
+`type`可以代替`interface`来声明变量
+```
+type User = {
+  name: string,
+  age: number
+}
+
+interface Person {
+  name: string;
+  age: number;
+}
+
+const tom: User = { name: 'tom', age: 20 };
+const bom: Person = { name: 'bom', age: 20 };
+```
+
+`type`可以声明为基本数据类型的别名
+```
+type Sex = 'boy' | 'girl'
+type isLogin = boolean
+
+type User = {
+  name: string,
+  age: number,
+  isLogin: isLogin,
+  sex:Sex
+}
+
+const tom: User = { name: 'tom', age: 20,isLogin:false,sex:'boy'};
+
+```
+
+---
+
+#### **`type` 与 `interface` 的区别**
+
+- 1.interface可以重复声明来进行扩展，type只能一个名称只能声明一次
+
+  interface 通过重复声明进行扩展
+  ```
+  interface man {
+    name : string
+  }
+
+  interface man {
+    age : number
+  }
+
+  const tom:man = {name: 'tom',age:20}
+  ```
+
+  type不能重复声明
+  ```
+  //报错：Duplicate identifier 'man'.
+
+  type man = {
+  name : string
+  }
+
+  type man = {
+    age : number
+  }
+  ```
+
+- 2.`interface`通过`extends`继承，`type`通过`&`获得两种校验；通过`|`获得其中一种或多种校验
+
+  ```
+  interface Name {
+    name : string
+  }
+
+  interface Man extends Name {
+    age:number
+  }
+
+  type Id = {
+    id : string
+  }
+
+  type Num = {
+    num : number
+  }
+
+  type Account = Id & Num
+
+  const tom: Man = { name: 'tom', age: 20 };
+  const bank:Account = {id:'222',num:222}const tom: Man = { name: 'tom', age: 20 };
+  const bank:Account = {id:'222',num:222}
+  ```
+
+---
+
+
 ## 6.泛型
-
-

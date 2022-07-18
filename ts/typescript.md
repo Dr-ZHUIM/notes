@@ -1232,5 +1232,43 @@ const tom: User = { name: 'tom', age: 20,isLogin:false,sex:'boy'};
 
 ---
 
-
 ## 6.泛型
+
+泛型是什么 ： 泛型是类型的参数，也就是动态的类型
+
+看一个实际的场景：这里有两个完全相同的逻辑的函数，苦于传入的参数类型不同，不得不写了两个函数，虽然可以通过 `|运算符` 来传入类型，但不确定是否有更多的类型。
+
+```
+const check = (element: string): string => {
+  return element
+}
+
+const checkBoolean = (element: boolean): boolean => {
+  return element
+}
+```
+
+这时候，泛型 generics 闪亮登场。  
+我们设定一个 泛型 `<T>` 来作为类型的参数，实现动态的类型传参
+
+```
+const check = <T>(element: T): T => {
+  return element;
+};
+
+const resS = check<string>('aa');
+const resB = check<boolean>(true);
+```
+
+事实上，泛型会自动推断基本数据类型
+
+因此 该段代码可以修改为
+
+```
+const check = <T>(element: T): T => {
+  return element;
+};
+
+const resS = check('aa');
+const resB = check(true);
+```

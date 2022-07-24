@@ -1272,3 +1272,102 @@ const check = <T>(element: T): T => {
 const resS = check('aa');
 const resB = check(true);
 ```
+---
+
+### 1. 泛型的继承
+
+泛型继承的功能：为泛型提供属性校验
+
+在如下这么一个场景：
+
+我们想要实现一个函数 `getLength` 能够获取到传入的变量的长度，这个变量不出意外的话应当是 `string` 或者 `Array` 类型
+
+```
+function getLength(arg: string | Array<any>): number {
+  return arg.length;
+}
+
+console.log(getLength([1, 2, 3]));
+console.log(getLength("123213321"));
+```
+
+但是，请注意，我在上文提到：
+> 这个变量 ***不出意外*** 的话应当是 `string` 或者 `Array` 类型
+
+现在，我来提供一个意外，我们创建一个具有 `length : number` 的属性的type 
+
+```
+type myString = {
+  length : number
+}
+
+function getLength(arg: string | Array<any>): number {
+  return arg.length;
+}
+
+const str:myString = '123'
+
+console.log(getLength([1, 2, 3]));
+console.log(getLength("123213321"));
+//报错：类型myString上没有字符串的一系列属性
+console.log(getLength(str));
+```
+
+这种情况，我们有两种方案进行解决
+
+1.创建一个新的类，将myString类与string合并
+
+2.使用泛型
+
+显然，第一种方案没什么意义，如果我们有更多的自定义类拥有length属性，岂不是要创建同等数量的type来合并string类型吗？
+
+因此我们来选择第二种方案——泛型
+
+
+初步定义下，应当是这样的，创建一个泛型T，将传入的参数的类型声明为泛型T。
+
+```
+function getLength<T>(arg:T): number {
+  return arg.length;
+}
+
+console.log(getLength([1, 2, 3]));
+console.log(getLength("123213321"));
+```
+**此时报错：类型“T”上不存在属性“length”**
+
+这个时候我们需要借助泛型的继承功能来解决这个问题
+
+```
+function getLength<T extends {length:number}>(arg:T): number {
+  return arg.length;
+}
+
+console.log(getLength([1, 2, 3]));
+console.log(getLength("123213321"));
+```
+
+此时我们将泛型T继承了 一个属性length，此时函数getLength传入的参数被检查是否拥有属性length，没有则报错
+
+---
+
+### 2. 泛型在类中使用
+
+提供一个场景：
+
+先定义一个类，然后类中定义收集方法，最终实现对数据的收集。
+
+```
+class Collection<T>{
+  data : T[] = []
+  public push(...items: T[]) {
+    this.data.push(...items)
+  }
+}
+
+const numberCollection = new Collection<number>();
+numberCollection.push(1, 2, 3, 4, 5)
+
+console.log(numberCollection.data);
+
+```

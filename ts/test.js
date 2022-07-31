@@ -1,18 +1,16 @@
 "use strict";
-var Collection = /** @class */ (function () {
-    function Collection() {
-        this.data = [];
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+function decorator(target) { }
+var User = /** @class */ (function () {
+    function User() {
     }
-    Collection.prototype.push = function () {
-        var _a;
-        var items = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            items[_i] = arguments[_i];
-        }
-        (_a = this.data).push.apply(_a, items);
-    };
-    return Collection;
+    User = __decorate([
+        decorator
+    ], User);
+    return User;
 }());
-var numberCollection = new Collection();
-numberCollection.push(1, 2, 3, 4, 5);
-console.log(numberCollection.data);

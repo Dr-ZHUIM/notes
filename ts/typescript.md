@@ -1374,4 +1374,69 @@ console.log(numberCollection.data);
 
 ---
 
-### 2. 泛型在构造函数中使用
+### 3. 泛型在构造函数中使用
+
+```
+class User<T>{
+  constructor(private _user:T){
+  }
+  public get ():T{
+    return this._user
+  }
+}
+
+interface UserInterface{
+  name : string,
+  age : number,
+  options ?: OptionsInterface
+}
+
+interface OptionsInterface{
+  [key:string] : any
+}
+
+const Tom = new User<UserInterface>({name:'tom',age:20});
+
+console.log('Tom',Tom);
+```
+
+---
+
+### 4. 泛型的混合使用
+
+```
+interface ArticleInterface<B, C> {
+  title: string,
+  isLock: B,
+  commentS: C[]
+}
+
+type CommentType = {
+  content: string
+}
+
+const article: ArticleInterface<Boolean, CommentType> = {
+  title: 'article_title',
+  isLock: false,
+  commentS: [{ content: 'article_comment_1' }, { content: 'article_comment_2' }]
+}
+```
+
+---
+
+## 7.装饰器
+
+### 1.装饰器配置环境
+
+要使用装饰器，首先确保项目根目录下有 `tsconfig.json` 文件
+
+
+如果没有，在终端中输入以下指令
+```
+tsc --init
+```
+
+当你拥有 `tsconfig.json` 文件后，在其搜索 `experimentalDecorators` 与 `emitDecoratorMetadata` 属性，将其解开注释，并确保值为 `true`
+
+
+

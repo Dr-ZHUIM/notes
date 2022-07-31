@@ -1371,3 +1371,7 @@ numberCollection.push(1, 2, 3, 4, 5)
 console.log(numberCollection.data);
 
 ```
+
+---
+
+### 2. 泛型在构造函数中使用

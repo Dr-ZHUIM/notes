@@ -8,3 +8,7 @@ const a = 12;
 // a. log 会成为 console.log(a);
 console.log(a)
 ```
+
+## 2.live-server
+
+在 html 文件 `Alt + L + O` 直接启动页面

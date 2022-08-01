@@ -1438,5 +1438,81 @@ tsc --init
 
 当你拥有 `tsconfig.json` 文件后，在其搜索 `experimentalDecorators` 与 `emitDecoratorMetadata` 属性，将其解开注释，并确保值为 `true`
 
+---
 
+### 2.类装饰器
+
+假设我们有两个类，一个叫 `Tank` ，一个叫 `Player` , 我们希望在这两个类中同时拥有一个方法，我们会考虑在它们的原型上添加，但一个一个添加过于麻烦，我们可以考虑借助装饰器。
+
+> **类装饰器函数会把类的构造函数作为参数，进行处理。**
+
+```
+// 定义一个类式装饰器，参数为target
+const moveDecorator: ClassDecorator = (target: Function) => {
+  target.prototype.getPosition = (): { x: number, y: number } => {
+    return { x: 100, y: 200 }
+  }
+}
+
+@moveDecorator
+class Tank {
+  public getPosition() { }
+}
+
+@moveDecorator
+class Player {
+  public getPosition() { }
+}
+
+const t = new Tank();
+const p = new Player();
+
+//t.getPosition() { x: 100, y: 200 }
+console.log('t.getPosition()', t.getPosition());
+
+//p.getPosition() { x: 100, y: 200 }
+console.log('p.getPosition()', p.getPosition());
+```
+
+---
+
+### 3. 装饰器 decorator 语法糖
+
+在上面一个小节中，我们成功实现了一个由装饰器来为类添加方法的案例，其中我们使用了
+`@moveDecorator`  的方式，声明了接下来的类使用了 `moveDecorator` 装饰器。  
+实际上，`@decorator` 是装饰器的一个语法糖。
+
+如果我们不这么声明，直接用装饰器函数传入类，得到的结果是一样的。
+
+```
+const moveDecorator: ClassDecorator = (target: Function) => {
+  target.prototype.getPosition = (): { x: number, y: number } => {
+    return { x: 100, y: 200 }
+  }
+}
+
+class Tank {
+  public getPosition() { }
+}
+
+class Player {
+  public getPosition() { }
+}
+
+//使用装饰器函数，将类作为参数直接传递
+moveDecorator(Tank);
+moveDecorator(Player);
+
+const t = new Tank();
+const p = new Player();
+
+console.log('t.getPosition()', t.getPosition())
+console.log('p.getPosition()', p.getPosition())
+```
+
+---
+
+### 4.装饰器叠加
+
+装饰器是可以叠加使用的，这比直接使用继承更加有优势。
 

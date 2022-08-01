@@ -1,21 +1,47 @@
-const moveDecorator: ClassDecorator = (target: Function) => {
-  target.prototype.getPosition = (): { x: number, y: number } => {
-    return { x: 100, y: 200 }
+type MyType = 'login' | 'store' | null
+
+//声明一个装饰器工厂
+const MessageDecoratorFactory = (type:MyType):ClassDecorator => {
+   switch(type){
+    case 'login' :{
+      return (target: Function) => {
+        target.prototype.message = (): void => {
+          console.log('login ---- show message')
+        }
+      }
+    };
+    case 'store' :{
+      return (target: Function) => {
+        target.prototype.message = (): void => {
+          console.log('store ---- show message')
+        }
+      }
+    };
+    default :{
+      return (target: Function) => {
+        target.prototype.message = (): void => {
+          console.log('null ---- show message')
+        }
+      }
+    }
   }
 }
 
-class Tank {
-  public getPosition() { }
+@MessageDecoratorFactory('login')
+class LoginController {
+  public message() { }
+  public login() {
+    this.message()
+  }
 }
 
-class Player {
-  public getPosition() { }
+@MessageDecoratorFactory('store')
+class Store {
+  public message() { }
+  public getStore() {
+    this.message()
+  }
 }
 
-moveDecorator(Tank);
-moveDecorator(Player);
-
-const t = new Tank();
-console.log('t.getPosition()', t.getPosition())
-const p = new Player();
-console.log('p.getPosition()', p.getPosition())
+new LoginController().login()
+new Store().getStore()

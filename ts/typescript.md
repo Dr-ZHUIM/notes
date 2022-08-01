@@ -1516,3 +1516,132 @@ console.log('p.getPosition()', p.getPosition())
 
 装饰器是可以叠加使用的，这比直接使用继承更加有优势。
 
+在以下的案例中，我们建立了两个装饰器，将它们一同标注给 `Class` `TankGame` 。
+
+最终发现，我们在装饰器中追加的方法都生效了。
+
+```
+const MoveDecorator: ClassDecorator = (target: Function) => {
+  target.prototype.name = 'tom'
+  target.prototype.getPosition = (): { x: number, y: number } => {
+    return { x: 100, y: 100 }
+  }
+}
+
+const MusicDecorator: ClassDecorator = (target: Function) => {
+  target.prototype.playMusic = ():string => {
+    return 'play music'
+  }
+}
+
+enum TankGameState {
+  playing,pause,over
+}
+
+@MoveDecorator @MusicDecorator
+class TankGame {
+  constructor(private _gameState:TankGameState){}
+  public get():TankGameState{
+    return this._gameState
+  }
+  public getPosition(){}
+  public playMusic(){}
+}
+
+const initGame = new TankGame(TankGameState.playing);
+
+console.log('initGame.getPosition()',initGame.getPosition());
+console.log('initGame.playMusic',initGame.playMusic())
+```
+
+---
+
+### 5. 利用装饰器批量处理类
+
+根据上文我们可以看出，装饰器本身作为一个函数，可以被反复调用来批量修改类。
+
+如下例所示，为两个类同时增加一个log功能
+
+```
+const MessageDecorator: ClassDecorator = (target: Function) => {
+  target.prototype.message = (content: string): void => {
+    console.log('content', content)
+  }
+}
+
+@MessageDecorator
+class LoginController {
+  public message(content: string) { }
+  public login() {
+    console.log('sign in success');
+    this.message("恭喜你登陆成功了！")
+  }
+}
+
+@MessageDecorator
+class Store {
+  public message(content: string) { }
+  public getStore() {
+    this.message('存储信息成功！')
+  }
+}
+
+new LoginController().login()
+new Store().getStore()
+```
+
+---
+
+### 6. 装饰器工厂
+
+**装饰器工厂的本质：装饰器的再次封装**
+
+```
+type MyType = 'login' | 'store' | null
+
+//声明一个装饰器工厂
+const MessageDecoratorFactory = (type:MyType):ClassDecorator => {
+   switch(type){
+    case 'login' :{
+      return (target: Function) => {
+        target.prototype.message = (): void => {
+          console.log('login ---- show message')
+        }
+      }
+    };
+    case 'store' :{
+      return (target: Function) => {
+        target.prototype.message = (): void => {
+          console.log('store ---- show message')
+        }
+      }
+    };
+    default :{
+      return (target: Function) => {
+        target.prototype.message = (): void => {
+          console.log('null ---- show message')
+        }
+      }
+    }
+  }
+}
+
+@MessageDecoratorFactory('login')
+class LoginController {
+  public message() { }
+  public login() {
+    this.message()
+  }
+}
+
+@MessageDecoratorFactory('store')
+class Store {
+  public message() { }
+  public getStore() {
+    this.message()
+  }
+}
+
+new LoginController().login()
+new Store().getStore()
+```

@@ -1,47 +1,12 @@
-type MyType = 'login' | 'store' | null
-
-//声明一个装饰器工厂
-const MessageDecoratorFactory = (type:MyType):ClassDecorator => {
-   switch(type){
-    case 'login' :{
-      return (target: Function) => {
-        target.prototype.message = (): void => {
-          console.log('login ---- show message')
-        }
-      }
-    };
-    case 'store' :{
-      return (target: Function) => {
-        target.prototype.message = (): void => {
-          console.log('store ---- show message')
-        }
-      }
-    };
-    default :{
-      return (target: Function) => {
-        target.prototype.message = (): void => {
-          console.log('null ---- show message')
-        }
-      }
-    }
-  }
+const showDecorator:MethodDecorator = (...args:any[]) => {
+  console.log(args);
 }
 
-@MessageDecoratorFactory('login')
-class LoginController {
-  public message() { }
-  public login() {
-    this.message()
-  }
+class User{
+  @showDecorator
+  public show(...args:any[]){}
 }
 
-@MessageDecoratorFactory('store')
-class Store {
-  public message() { }
-  public getStore() {
-    this.message()
-  }
-}
+const Tom = new User();
 
-new LoginController().login()
-new Store().getStore()
+Tom.show('tom-show-arg1','tom-show-arg2')

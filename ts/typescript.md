@@ -1645,3 +1645,6 @@ class Store {
 new LoginController().login()
 new Store().getStore()
 ```
+
+### 7.方法装饰器
+

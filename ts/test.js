@@ -5,59 +5,32 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-//声明一个装饰器工厂
-var MessageDecoratorFactory = function (type) {
-    switch (type) {
-        case 'login':
-            {
-                return function (target) {
-                    target.prototype.message = function () {
-                        console.log('login ---- show message');
-                    };
-                };
-            }
-            ;
-        case 'store':
-            {
-                return function (target) {
-                    target.prototype.message = function () {
-                        console.log('store ---- show message');
-                    };
-                };
-            }
-            ;
-        default: {
-            return function (target) {
-                target.prototype.message = function () {
-                    console.log('null ---- show message');
-                };
-            };
-        }
-    }
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var LoginController = /** @class */ (function () {
-    function LoginController() {
+var showDecorator = function () {
+    var args = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+        args[_i] = arguments[_i];
     }
-    LoginController.prototype.message = function () { };
-    LoginController.prototype.login = function () {
-        this.message();
-    };
-    LoginController = __decorate([
-        MessageDecoratorFactory('login')
-    ], LoginController);
-    return LoginController;
-}());
-var Store = /** @class */ (function () {
-    function Store() {
+    console.log(args);
+};
+var User = /** @class */ (function () {
+    function User() {
     }
-    Store.prototype.message = function () { };
-    Store.prototype.getStore = function () {
-        this.message();
+    User.prototype.show = function () {
+        var args = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            args[_i] = arguments[_i];
+        }
     };
-    Store = __decorate([
-        MessageDecoratorFactory('store')
-    ], Store);
-    return Store;
+    __decorate([
+        showDecorator,
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", [Object]),
+        __metadata("design:returntype", void 0)
+    ], User.prototype, "show", null);
+    return User;
 }());
-new LoginController().login();
-new Store().getStore();
+var Tom = new User();
+Tom.show('tom-show-arg1', 'tom-show-arg2');

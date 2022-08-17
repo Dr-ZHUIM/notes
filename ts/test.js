@@ -8,42 +8,41 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var ErrorDecorator = function (title) {
-    return function (target, propertyKey, descriptor) {
-        var method = descriptor.value;
-        descriptor.value = function () {
-            try {
-                method();
-            }
-            catch (err) {
-                console.log("%c".concat(title), 'color:green;font-size:20px');
-                console.log("%c".concat(err.message), 'color:red;font-size:16px');
-            }
-        };
+var user = {
+    name: 'Tom',
+    isLogin: true
+};
+var AccessDecorator = function () {
+    var args = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+        args[_i] = arguments[_i];
+    }
+    var descriptor = args[2];
+    var method = descriptor.value;
+    descriptor.value = function () {
+        if (user.isLogin) {
+            return method();
+        }
+        ;
+        console.log('未登录');
+        return;
     };
 };
-var User = /** @class */ (function () {
-    function User() {
+var Article = /** @class */ (function () {
+    function Article() {
     }
-    User.prototype.find = function () {
-        throw new Error('您查找的用户不存在！');
+    Article.prototype.show = function () {
+        console.log('显示文章');
     };
-    User.prototype.create = function () {
-        throw new Error('创建用户数据不完整！');
+    Article.prototype.store = function () {
+        console.log('保存文章');
     };
     __decorate([
-        ErrorDecorator('查找用户报错！'),
+        AccessDecorator,
         __metadata("design:type", Function),
         __metadata("design:paramtypes", []),
         __metadata("design:returntype", void 0)
-    ], User.prototype, "find", null);
-    __decorate([
-        ErrorDecorator('创建用户报错！'),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", []),
-        __metadata("design:returntype", void 0)
-    ], User.prototype, "create", null);
-    return User;
+    ], Article.prototype, "store", null);
+    return Article;
 }());
-new User().find();
-new User().create();
+new Article().store();

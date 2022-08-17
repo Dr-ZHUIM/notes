@@ -1645,6 +1645,137 @@ class Store {
 new LoginController().login()
 new Store().getStore()
 ```
+---
 
 ### 7.方法装饰器
 
+方法装饰器是用于修改类中的方法的装饰器，他一共接受三个参数: `target`,`propertyKey`,`descriptor`
+
+`target` 属性显示方法装饰器所装饰的方法的来源：
+1. 一般方法： `target`指向原型对象
+2. static方法： `target`指向构造函数
+
+`propertyKey` 属性显示方法装饰器所装饰的方法的名字
+
+`descriptor` 属性显示方法装饰器所装饰的方法的函数描述
+
+在如下的案例中,在User类中，我们定义了两个方法，一个为 `一般方法show` ，另一个则是 `静态方法getUser` ，我们为他们一同添加 `方法装饰器 showDecorator` 。
+
+```
+const showDecorator: MethodDecorator = (target: Object, propertyKey: string | symbol, descriptor: PropertyDescriptor) => {
+  descriptor.value = () => {
+    console.log(target,123);
+  };
+}
+
+class User {
+  @showDecorator
+  public show() { }
+  @showDecorator
+  public static getUser(){
+  console.log('User', User)
+  }
+}
+
+const Tom = new User();
+Tom.show(); //{ show: [Function (anonymous)] } 123
+User.getUser(); //[Function: User] { getUser: [Function (anonymous)] } 123
+```
+
+---
+
+### 8.利用方法装饰器实现文字高亮
+
+在如下的案例中，我们实现了使用装饰器来更改方法的函数体
+
+```
+const highlightDecorator: MethodDecorator = (
+  target: object,
+  propKey: string | symbol
+  , descriptor: PropertyDescriptor) => {
+  descriptor.value = function(this:HTMLText){
+    if(this.isHighLight){
+      return `<div style="color:red">${this.text}</div>`
+    }else {
+      return `<div>${this.text}</div>`
+    }
+  }
+};
+
+class HTMLText {
+  constructor(text: string, isHighLight: boolean = true) {
+    this.text = text;
+    this.isHighLight = isHighLight;
+  }
+  text: string
+  isHighLight: boolean
+  @highlightDecorator
+  public response() {
+    return `<div>${this.text}</div>`
+  }
+}
+
+document.body.insertAdjacentHTML('beforeend', new HTMLText('sad').response())
+document.body.insertAdjacentHTML('beforeend', new HTMLText('sad',false).response())
+```
+
+---
+
+### 9. 利用装饰器进行全局的错误处理
+
+首先用单个装饰器来自定义控制台打印
+```
+const ErrorDecorator:MethodDecorator = (...args:any[]) => {
+  const [,,descriptor] = args;
+  const method = descriptor.value;
+  descriptor.value = () => {
+    try{            
+      method()
+    }catch(error:any){
+      console.log("%cerr",'color:green;font-size:24px');
+      console.log(`%c${error}`,'color:red;font-size:14px');
+    }
+  }
+}
+
+class User{
+  @ErrorDecorator
+  find(){
+    throw new Error('something wrong!')
+  }
+}
+
+new User().find()
+```
+
+再尝试用装饰器工厂来封装装饰器，以此批量自定义控制台打印
+
+```
+const ErrorDecorator = (title: string): MethodDecorator => {
+  return (target: object, propertyKey: string | symbol, descriptor: PropertyDescriptor) => {
+    const method = descriptor.value;
+    descriptor.value = () => {
+      try{
+        method()
+      }catch(err:any){
+        console.log(`%c${title}`,'color:green;font-size:20px');
+        console.log(`%c${err.message}`,'color:red;font-size:16px');
+      }
+    }
+  }
+}
+
+class User{
+  @ErrorDecorator('查找用户报错！')
+  find(){
+    throw new Error('您查找的用户不存在！')
+  }
+  @ErrorDecorator('创建用户报错！')
+  create(){
+    throw new Error('创建用户数据不完整！')
+  }
+}
+
+new User().find();
+new User().create();
+```

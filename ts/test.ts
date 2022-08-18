@@ -1,28 +1,38 @@
-const user = {
-  name : 'Tom',
-  isLogin : true
-};
-
-const AccessDecorator:MethodDecorator = (...args:any[]) => {
+const UserDecorator:MethodDecorator = (...args:any[]) => {
   const [,,descriptor] = args;
   const method = descriptor.value;
   descriptor.value = () => {
-    if(user.isLogin){
-      return method()
-    };
-    console.log('未登录');
-    return;
-  }
-}
-class Article {
-  show(){
-    console.log('显示文章')
-  }
-  @AccessDecorator
-  store(){
-    console.log('保存文章');
-    
+    if(User.identity === Identity.admin){
+      console.log("admin");
+    }else if (User.identity === Identity.user){
+      console.log("user");
+    }else if (User.identity === Identity.unlogin){
+      console.log("unlogin");
+    }else{
+      method()
+    }
   }
 }
 
-new Article().store()
+enum Identity {
+  user,admin,unlogin
+}
+
+class UserInterface {
+  name : string
+  identity ?: Identity
+  constructor(name:string,identity?: Identity){
+    this.name = name;
+    this.identity = identity;
+  };
+  @UserDecorator
+  showIdentity(){
+    console.log("no identity")
+  }
+  @UserDecorator
+  showMe(){
+    console.log("show me ");
+  }
+}
+
+const User = new UserInterface("Tom",Identity.unlogin);

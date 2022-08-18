@@ -8,11 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var user = {
-    name: 'Tom',
-    isLogin: true
-};
-var AccessDecorator = function () {
+var UserDecorator = function () {
     var args = [];
     for (var _i = 0; _i < arguments.length; _i++) {
         args[_i] = arguments[_i];
@@ -20,29 +16,50 @@ var AccessDecorator = function () {
     var descriptor = args[2];
     var method = descriptor.value;
     descriptor.value = function () {
-        if (user.isLogin) {
-            return method();
+        if (User.identity === Identity.admin) {
+            console.log("admin");
         }
-        ;
-        console.log('未登录');
-        return;
+        else if (User.identity === Identity.user) {
+            console.log("user");
+        }
+        else if (User.identity === Identity.unlogin) {
+            console.log("unlogin");
+        }
+        else {
+            method();
+        }
     };
 };
-var Article = /** @class */ (function () {
-    function Article() {
+var Identity;
+(function (Identity) {
+    Identity[Identity["user"] = 0] = "user";
+    Identity[Identity["admin"] = 1] = "admin";
+    Identity[Identity["unlogin"] = 2] = "unlogin";
+})(Identity || (Identity = {}));
+var UserInterface = /** @class */ (function () {
+    function UserInterface(name, identity) {
+        this.name = name;
+        this.identity = identity;
     }
-    Article.prototype.show = function () {
-        console.log('显示文章');
+    ;
+    UserInterface.prototype.showIdentity = function () {
+        console.log("no identity");
     };
-    Article.prototype.store = function () {
-        console.log('保存文章');
+    UserInterface.prototype.showMe = function () {
+        console.log("show me ");
     };
     __decorate([
-        AccessDecorator,
+        UserDecorator,
         __metadata("design:type", Function),
         __metadata("design:paramtypes", []),
         __metadata("design:returntype", void 0)
-    ], Article.prototype, "store", null);
-    return Article;
+    ], UserInterface.prototype, "showIdentity", null);
+    __decorate([
+        UserDecorator,
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", []),
+        __metadata("design:returntype", void 0)
+    ], UserInterface.prototype, "showMe", null);
+    return UserInterface;
 }());
-new Article().store();
+var User = new UserInterface("Tom", Identity.unlogin);

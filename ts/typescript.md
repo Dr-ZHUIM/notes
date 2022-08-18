@@ -1779,3 +1779,4 @@ class User{
 new User().find();
 new User().create();
 ```
+

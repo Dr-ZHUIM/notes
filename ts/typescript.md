@@ -1613,7 +1613,9 @@ new Store().getStore()
 
 ### 6. 装饰器工厂
 
-**装饰器工厂的本质：装饰器的再次封装**
+**装饰器工厂的本质：装饰器的再次封装**  
+
+**装饰器工厂的功能：为装饰器提供传参的可能性**
 
 ```
 type MyType = 'login' | 'store' | null
@@ -1837,4 +1839,108 @@ new Article().store()
 ### 11. 利用方法装饰器进行权限限制（角色管理）
 
 ```
+interface UserInterface {
+  name: string,
+  isLogin: boolean,
+  permission: string[]
+}
+const user: UserInterface = {
+  name: 'Tom',
+  isLogin: true,
+  permission: ['store','manager']
+};
+
+const AccessDecorator = (keys:string[]): MethodDecorator => {
+  return (...args: any[]) => {
+    const [, , descriptor] = args;
+    const method = descriptor.value;
+    const validate = ():boolean =>{
+      return keys.every(k=>{
+        return user.permission.includes(k)
+      })
+    }
+    descriptor.value = () => {
+      if (user.isLogin && validate()) {
+        return method()
+      };
+      console.log('验证失败');
+      return;
+    }
+  }
+}
+class Article {
+  show() {
+    console.log('显示文章')
+  }
+  @AccessDecorator(['store','manager'])
+  store() {
+    console.log('保存文章');
+  }
+}
+
+new Article().store()
 ```
+---
+
+### 12. 利用方法装饰器进行网络请求
+```
+const UserDecorator = (url: string): MethodDecorator => {
+  return (...args: any[]) => {
+    const [, , descriptor] = args;
+    const method = descriptor.value;
+    new Promise<any[]>(resolve => {
+      setTimeout(() => {
+        console.log('my_promise');
+        resolve([{ name: 'Tom' }, { name: 'Bom' }])
+      }, 2000)
+    }).then(users => {
+      method(users);
+    })
+  }
+}
+
+class User {
+  @UserDecorator('http://www.baidu.com')
+  public all(users: any[]) {
+    console.log(users)
+  }
+}
+```
+---
+
+### 13. 属性装饰器与参数装饰器
+
+属性装饰器 `PropertyDecorator`用于修饰class中的属性， 有两个参数：`target` 、 `propertyKey`
+
+当装饰器所属的属性为 **一般属性** 时，`target` 指向原型对象  
+当装饰器所属的属性为 **static属性** 时，`target` 指向构造函数
+
+`propertyKey` 指属性的名称
+
+参数装饰器 `ParameterDecorator`用于修饰函数的参数， 有三个参数：`target` 、`propertyKey` 、`parameterIndex`
+
+当装饰器所属的参数所在函数为 **一般属性** 时，`target` 指向原型对象  
+当装饰器所属的参数所在函数为 **static属性** 时，`target` 指向构造函数
+
+`propertyKey` 指参数的名称
+
+`parameterIndex` 指参数在函数的参数数组中的位置
+
+```
+const propDecorator: PropertyDecorator = (...args: any[]) => {
+  console.log('args', args)
+}
+const paramDecorator: ParameterDecorator = (...args: any[]) => {
+  console.log('args', args)
+}
+class User {
+  @propDecorator
+  public name: string | undefined
+  @propDecorator
+  public static age: number = 20
+  public show(see:string,go:number,@paramDecorator talk:string){
+    
+  }
+}
+```
+

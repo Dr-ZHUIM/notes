@@ -8,58 +8,32 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var UserDecorator = function () {
-    var args = [];
-    for (var _i = 0; _i < arguments.length; _i++) {
-        args[_i] = arguments[_i];
-    }
-    var descriptor = args[2];
-    var method = descriptor.value;
-    descriptor.value = function () {
-        if (User.identity === Identity.admin) {
-            console.log("admin");
-        }
-        else if (User.identity === Identity.user) {
-            console.log("user");
-        }
-        else if (User.identity === Identity.unlogin) {
-            console.log("unlogin");
-        }
-        else {
-            method();
-        }
-    };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
 };
-var Identity;
-(function (Identity) {
-    Identity[Identity["user"] = 0] = "user";
-    Identity[Identity["admin"] = 1] = "admin";
-    Identity[Identity["unlogin"] = 2] = "unlogin";
-})(Identity || (Identity = {}));
-var UserInterface = /** @class */ (function () {
-    function UserInterface(name, identity) {
-        this.name = name;
-        this.identity = identity;
+const propDecorator = (...args) => {
+    console.log('args', args);
+};
+const paramDecorator = (...args) => {
+    console.log('args', args);
+};
+class User {
+    name;
+    static age = 20;
+    show(see, go, talk) {
     }
-    ;
-    UserInterface.prototype.showIdentity = function () {
-        console.log("no identity");
-    };
-    UserInterface.prototype.showMe = function () {
-        console.log("show me ");
-    };
-    __decorate([
-        UserDecorator,
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", []),
-        __metadata("design:returntype", void 0)
-    ], UserInterface.prototype, "showIdentity", null);
-    __decorate([
-        UserDecorator,
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", []),
-        __metadata("design:returntype", void 0)
-    ], UserInterface.prototype, "showMe", null);
-    return UserInterface;
-}());
-var User = new UserInterface("Tom", Identity.unlogin);
+}
+__decorate([
+    propDecorator,
+    __metadata("design:type", Object)
+], User.prototype, "name", void 0);
+__decorate([
+    __param(2, paramDecorator),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, Number, String]),
+    __metadata("design:returntype", void 0)
+], User.prototype, "show", null);
+__decorate([
+    propDecorator,
+    __metadata("design:type", Number)
+], User, "age", void 0);

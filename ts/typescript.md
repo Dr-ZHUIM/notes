@@ -2019,7 +2019,7 @@ console.log(User.Member.name);  //Bom
 ```
 <!--终端输入-->
 //npx tsc --outFile 输出文件 入口文件(可以是多个文件)
-npx tsc --outFile ./dist/app.js main.ts test.ts
+npx tsc --outFile ./dist/app.js main.ts test.ts index.ts
 <!--html-->
 <script src="./dist/app.js"></script>
 ```
@@ -2028,7 +2028,26 @@ npx tsc --outFile ./dist/app.js main.ts test.ts
 
 ### 3. reference 打包合并
 
+我们在上一小节,我们将入口文件统一放置在了终端指令中，但是这会导致如果入口文件极多时，几乎无法完整打包。
+
+此时我们可以使用 TS 允许的 reference标签，将其余的文件关联至单一的入口文件。
+
+```
+<!-- main.ts 环境： -->
+
+/// <reference path="./index.ts" />
+/// <reference path="./test.ts" />
+
+<!-- 终端输入 -->
+npx tsc --outFile ./dist/app.js main.ts
+```
 
 ---
 
 ### 4. amd 与 require.js 管理 TS 模块
+
+将 `tsconfig.json` 的 `module` 设为 `amd` 
+
+引入 require.js
+
+在html中以 require() 的方式来引用js模块

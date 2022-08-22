@@ -1,8 +1,13 @@
-"use strict";
+var main = function () {
+    var arr = [1, 2, 3, 4, 5];
+    arr.map(function (ele) {
+        console.log('ele', ele);
+    });
+};
 var User;
 (function (User) {
     User.name = 'Tom';
-    let Member;
+    var Member;
     (function (Member) {
         Member.name = 'Bom';
     })(Member = User.Member || (User.Member = {}));

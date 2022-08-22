@@ -2,39 +2,58 @@
 
 ## 目录
 
-- [1.类型校验模式](#1%E7%B1%BB%E5%9E%8B%E6%A0%A1%E9%AA%8C%E6%A8%A1%E5%BC%8F)
-  - [1). 类型控制 **(显式赋值)**](#1-%E7%B1%BB%E5%9E%8B%E6%8E%A7%E5%88%B6-%E6%98%BE%E5%BC%8F%E8%B5%8B%E5%80%BC)
-  - [2). 类型推断 **(隐式赋值)**](#2-%E7%B1%BB%E5%9E%8B%E6%8E%A8%E6%96%AD-%E9%9A%90%E5%BC%8F%E8%B5%8B%E5%80%BC)
-  - [3). 数组、元组的类型推断](#3-%E6%95%B0%E7%BB%84%E5%85%83%E7%BB%84%E7%9A%84%E7%B1%BB%E5%9E%8B%E6%8E%A8%E6%96%AD)
-  - [4). 对象的类型推断](#4-%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%B1%BB%E5%9E%8B%E6%8E%A8%E6%96%AD)
-  - [5). 组合类型的声明](#5-%E7%BB%84%E5%90%88%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%A3%B0%E6%98%8E)
-  - [6).any 类型的定义](#6any-%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%AE%9A%E4%B9%89)
-  - [7). unknown 类型的定义](#7-unknown-%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%AE%9A%E4%B9%89)
-  - [8). void 与 never 类型的定义](#8-void-%E4%B8%8E-never-%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%AE%9A%E4%B9%89)
-- [2.TS 函数运用](#2ts-%E5%87%BD%E6%95%B0%E8%BF%90%E7%94%A8)
-  - [1) 函数类型声明](#1-%E5%87%BD%E6%95%B0%E7%B1%BB%E5%9E%8B%E5%A3%B0%E6%98%8E)
-  - [2) 函数参数类型定义](#2-%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0%E7%B1%BB%E5%9E%8B%E5%AE%9A%E4%B9%89)
-  - [3) 函数返回值类型定义](#3-%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC%E7%B1%BB%E5%9E%8B%E5%AE%9A%E4%B9%89)
-- [3.枚举类](#3%E6%9E%9A%E4%B8%BE%E7%B1%BB)
-- [4.断言](#4%E6%96%AD%E8%A8%80)
-  - [1). 断言的定义](#1-%E6%96%AD%E8%A8%80%E7%9A%84%E5%AE%9A%E4%B9%89)
-  - [2). as const 断言](#2-as-const-%E6%96%AD%E8%A8%80)
-  - [3). 非空断言](#3-%E9%9D%9E%E7%A9%BA%E6%96%AD%E8%A8%80)
-- [5.类与接口](#5%E7%B1%BB%E4%B8%8E%E6%8E%A5%E5%8F%A3)
-  - [1). TS 中使用类](#1-ts%E4%B8%AD%E4%BD%BF%E7%94%A8%E7%B1%BB)
-  - [2). 类的关键字 public , protected , private](#2-%E7%B1%BB%E7%9A%84%E5%85%B3%E9%94%AE%E5%AD%97-public--protected--private)
-  - [3). 关键字 static](#3-%E5%85%B3%E9%94%AE%E5%AD%97-static)
-  - [4). 类的关键字 readonly](#4-%E7%B1%BB%E7%9A%84%E5%85%B3%E9%94%AE%E5%AD%97-readonly)
-  - [5). TS 类中的构造函数](#5-ts%E7%B1%BB%E4%B8%AD%E7%9A%84%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0)
-  - [6). 单例模式](#6-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F)
-  - [7). 访问器 get 与 set - 计算属性](#7-%E8%AE%BF%E9%97%AE%E5%99%A8get%E4%B8%8Eset---%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7)
-  - [8). abstract 抽象类](#8-abstract%E6%8A%BD%E8%B1%A1%E7%B1%BB)
-  - [9.) interface 接口](#9-interface-%E6%8E%A5%E5%8F%A3)
-    - [1.interface 对 Object 的约束](#1interface%E5%AF%B9object%E7%9A%84%E7%BA%A6%E6%9D%9F)
-    - [2.interface 的混合使用](#2interface%E7%9A%84%E6%B7%B7%E5%90%88%E4%BD%BF%E7%94%A8)
-    - [3.interface 对 Function 的约束(约束参数)](#3interface%E5%AF%B9function%E7%9A%84%E7%BA%A6%E6%9D%9F%E7%BA%A6%E6%9D%9F%E5%8F%82%E6%95%B0)
-    - [4. interface 对 class 的约束](#4-interface%E5%AF%B9class%E7%9A%84%E7%BA%A6%E6%9D%9F)
-- [6.泛型](#6%E6%B3%9B%E5%9E%8B)
+
+* [1.类型校验模式](#1%E7%B1%BB%E5%9E%8B%E6%A0%A1%E9%AA%8C%E6%A8%A1%E5%BC%8F)
+  + [1). 类型控制 **(显式赋值)**](#1-%E7%B1%BB%E5%9E%8B%E6%8E%A7%E5%88%B6-%E6%98%BE%E5%BC%8F%E8%B5%8B%E5%80%BC)
+  + [2). 类型推断 **(隐式赋值)**](#2-%E7%B1%BB%E5%9E%8B%E6%8E%A8%E6%96%AD-%E9%9A%90%E5%BC%8F%E8%B5%8B%E5%80%BC)
+  + [3). 数组、元组的类型推断](#3-%E6%95%B0%E7%BB%84%E5%85%83%E7%BB%84%E7%9A%84%E7%B1%BB%E5%9E%8B%E6%8E%A8%E6%96%AD)
+  + [4). 对象的类型推断](#4-%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%B1%BB%E5%9E%8B%E6%8E%A8%E6%96%AD)    
+  +  [5). 组合类型的声明](#5-%E7%BB%84%E5%90%88%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%A3%B0%E6%98%8E)    
+  +  [6).any 类型的定义](#6any-%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%AE%9A%E4%B9%89)
+  + [7). unknown 类型的定义](#7-unknown-%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%AE%9A%E4%B9%89)      
+  + [8). void 与 never 类型的定义](#8-void-%E4%B8%8E-never-%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%AE%9A%E4%B9%89)
+* [2.TS 函数运用](#2ts-%E5%87%BD%E6%95%B0%E8%BF%90%E7%94%A8)
+  + [1) 函数类型声明](#1-%E5%87%BD%E6%95%B0%E7%B1%BB%E5%9E%8B%E5%A3%B0%E6%98%8E)
+  + [2) 函数参数类型定义](#2-%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0%E7%B1%BB%E5%9E%8B%E5%AE%9A%E4%B9%89)
+  + [3) 函数返回值类型定义](#3-%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC%E7%B1%BB%E5%9E%8B%E5%AE%9A%E4%B9%89)
+* [3.枚举类](#3%E6%9E%9A%E4%B8%BE%E7%B1%BB)
+* [4.断言](#4%E6%96%AD%E8%A8%80)
+  + [1). 断言的定义](#1-%E6%96%AD%E8%A8%80%E7%9A%84%E5%AE%9A%E4%B9%89)
+  + [2). as const 断言](#2-as-const-%E6%96%AD%E8%A8%80)
+  + [3). 非空断言](#3-%E9%9D%9E%E7%A9%BA%E6%96%AD%E8%A8%80)
+* [5.类与接口](#5%E7%B1%BB%E4%B8%8E%E6%8E%A5%E5%8F%A3)
+  + [1). TS 中使用类](#1-ts-%E4%B8%AD%E4%BD%BF%E7%94%A8%E7%B1%BB)
+  + [2). 类的关键字 public , protected , private](#2-%E7%B1%BB%E7%9A%84%E5%85%B3%E9%94%AE%E5%AD%97-public--protected--private)
+  + [3). 关键字 static](#3-%E5%85%B3%E9%94%AE%E5%AD%97-static)
+  + [4). 类的关键字 readonly](#4-%E7%B1%BB%E7%9A%84%E5%85%B3%E9%94%AE%E5%AD%97-readonly)    
+  + [5). TS 类中的构造函数](#5-ts-%E7%B1%BB%E4%B8%AD%E7%9A%84%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0)
+  + [6). 单例模式](#6-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F)
+  + [7). 访问器 get 与 set - 计算属性](#7-%E8%AE%BF%E9%97%AE%E5%99%A8-get-%E4%B8%8E-set---%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7)
+  + [8). abstract 抽象类](#8-abstract-%E6%8A%BD%E8%B1%A1%E7%B1%BB)
+  + [9.) interface 接口](#9-interface-%E6%8E%A5%E5%8F%A3)
+    - [1.interface 对 Object 的约束](#1interface-%E5%AF%B9-object-%E7%9A%84%E7%BA%A6%E6%9D%9F)
+    - [2.interface 的混合使用](#2interface-%E7%9A%84%E6%B7%B7%E5%90%88%E4%BD%BF%E7%94%A8)   
+    - [3.interface 对 Function 的约束(约束参数)](#3interface-%E5%AF%B9-function-%E7%9A%84%E7%BA%A6%E6%9D%9F%E7%BA%A6%E6%9D%9F%E5%8F%82%E6%95%B0)
+    - [4. interface 对 class 的约束](#4-interface-%E5%AF%B9-class-%E7%9A%84%E7%BA%A6%E6%9D%9F)
+    - [5. interface以及enum的混合使用](#5-interface%E4%BB%A5%E5%8F%8Aenum%E7%9A%84%E6%B7%B7%E5%90%88%E4%BD%BF%E7%94%A8)
+  + [10.) type](#10-type)
+    - [**`type` 与 `interface` 的区别**](#type-%E4%B8%8E-interface-%E7%9A%84%E5%8C%BA%E5%88%AB)
+* [6.泛型](#6%E6%B3%9B%E5%9E%8B)
+  + [1. 泛型的继承](#1-%E6%B3%9B%E5%9E%8B%E7%9A%84%E7%BB%A7%E6%89%BF)
+  + [2. 泛型在类中使用](#2-%E6%B3%9B%E5%9E%8B%E5%9C%A8%E7%B1%BB%E4%B8%AD%E4%BD%BF%E7%94%A8) 
+  + [3. 泛型在构造函数中使用](#3-%E6%B3%9B%E5%9E%8B%E5%9C%A8%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E4%B8%AD%E4%BD%BF%E7%94%A8)
+  + [4. 泛型的混合使用](#4-%E6%B3%9B%E5%9E%8B%E7%9A%84%E6%B7%B7%E5%90%88%E4%BD%BF%E7%94%A8) 
+* [7.装饰器](#7%E8%A3%85%E9%A5%B0%E5%99%A8)
+  + [1.装饰器配置环境](#1%E8%A3%85%E9%A5%B0%E5%99%A8%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83)   
+  + [2.类装饰器](#2%E7%B1%BB%E8%A3%85%E9%A5%B0%E5%99%A8)
+  + [3. 装饰器 decorator 语法糖](#3-%E8%A3%85%E9%A5%B0%E5%99%A8-decorator-%E8%AF%AD%E6%B3%95%E7%B3%96)
+  + [4.装饰器叠加](#4%E8%A3%85%E9%A5%B0%E5%99%A8%E5%8F%A0%E5%8A%A0)
+  + [5. 利用装饰器批量处理类](#5-%E5%88%A9%E7%94%A8%E8%A3%85%E9%A5%B0%E5%99%A8%E6%89%B9%E9%87%8F%E5%A4%84%E7%90%86%E7%B1%BB)
+  + [6. 装饰器工厂](#6-%E8%A3%85%E9%A5%B0%E5%99%A8%E5%B7%A5%E5%8E%82)
+  + [7.方法装饰器](#7%E6%96%B9%E6%B3%95%E8%A3%85%E9%A5%B0%E5%99%A8)
+  + [8.利用方法装饰器实现文字高亮](#8%E5%88%A9%E7%94%A8%E6%96%B9%E6%B3%95%E8%A3%85%E9%A5%B0%E5%99%A8%E5%AE%9E%E7%8E%B0%E6%96%87%E5%AD%97%E9%AB%98%E4%BA%AE)
+  + [9. 利用装饰器进行全局的错误处理](#9-%E5%88%A9%E7%94%A8%E8%A3%85%E9%A5%B0%E5%99%A8%E8%BF%9B%E8%A1%8C%E5%85%A8%E5%B1%80%E7%9A%84%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86)
+  + [10. 利用装饰器进行登录验证](#10-%E5%88%A9%E7%94%A8%E8%A3%85%E9%A5%B0%E5%99%A8%E8%BF%9B%E8%A1%8C%E7%99%BB%E5%BD%95%E9%AA%8C%E8%AF%81)
 
 ---
 
@@ -1594,7 +1613,9 @@ new Store().getStore()
 
 ### 6. 装饰器工厂
 
-**装饰器工厂的本质：装饰器的再次封装**
+**装饰器工厂的本质：装饰器的再次封装**  
+
+**装饰器工厂的功能：为装饰器提供传参的可能性**
 
 ```
 type MyType = 'login' | 'store' | null
@@ -1781,7 +1802,7 @@ new User().create();
 ```
 ---
 
-### 10. 利用装饰器进行登录验证
+### 10. 利用方法装饰器进行登录验证
 
 ```
 const user = {
@@ -1813,4 +1834,201 @@ class Article {
 
 new Article().store()
 ```
+---
 
+### 11. 利用方法装饰器进行权限限制（角色管理）
+
+```
+interface UserInterface {
+  name: string,
+  isLogin: boolean,
+  permission: string[]
+}
+const user: UserInterface = {
+  name: 'Tom',
+  isLogin: true,
+  permission: ['store','manager']
+};
+
+const AccessDecorator = (keys:string[]): MethodDecorator => {
+  return (...args: any[]) => {
+    const [, , descriptor] = args;
+    const method = descriptor.value;
+    const validate = ():boolean =>{
+      return keys.every(k=>{
+        return user.permission.includes(k)
+      })
+    }
+    descriptor.value = () => {
+      if (user.isLogin && validate()) {
+        return method()
+      };
+      console.log('验证失败');
+      return;
+    }
+  }
+}
+class Article {
+  show() {
+    console.log('显示文章')
+  }
+  @AccessDecorator(['store','manager'])
+  store() {
+    console.log('保存文章');
+  }
+}
+
+new Article().store()
+```
+---
+
+### 12. 利用方法装饰器进行网络请求
+```
+const UserDecorator = (url: string): MethodDecorator => {
+  return (...args: any[]) => {
+    const [, , descriptor] = args;
+    const method = descriptor.value;
+    new Promise<any[]>(resolve => {
+      setTimeout(() => {
+        console.log('my_promise');
+        resolve([{ name: 'Tom' }, { name: 'Bom' }])
+      }, 2000)
+    }).then(users => {
+      method(users);
+    })
+  }
+}
+
+class User {
+  @UserDecorator('http://www.baidu.com')
+  public all(users: any[]) {
+    console.log(users)
+  }
+}
+```
+---
+
+### 13. 属性装饰器与参数装饰器
+
+属性装饰器 `PropertyDecorator`用于修饰class中的属性， 有两个参数：`target` 、 `propertyKey`
+
+当装饰器所属的属性为 **一般属性** 时，`target` 指向原型对象  
+当装饰器所属的属性为 **static属性** 时，`target` 指向构造函数
+
+`propertyKey` 指属性的名称
+
+参数装饰器 `ParameterDecorator`用于修饰函数的参数， 有三个参数：`target` 、`propertyKey` 、`parameterIndex`
+
+当装饰器所属的参数所在函数为 **一般属性** 时，`target` 指向原型对象  
+当装饰器所属的参数所在函数为 **static属性** 时，`target` 指向构造函数
+
+`propertyKey` 指参数的名称
+
+`parameterIndex` 指参数在函数的参数数组中的位置
+
+```
+const propDecorator: PropertyDecorator = (...args: any[]) => {
+  console.log('args', args)
+}
+const paramDecorator: ParameterDecorator = (...args: any[]) => {
+  console.log('args', args)
+}
+class User {
+  @propDecorator
+  public name: string | undefined
+  @propDecorator
+  public static age: number = 20
+  public show(see:string,go:number,@paramDecorator talk:string){
+    
+  }
+}
+```
+---
+
+## 8. namespace 命名空间
+
+ts的命名空间与其他语言的命名空间没什么区别
+
+namespace定义：开辟一个空间允许在其中声明变量，同一个空间中不能声明相同的变量名，不同的空间可以声明相同的变量名。
+
+namespace使用：
+
+**命名空间的每一级调用都要导出**
+
+```
+namespace user{
+  export let name:string = 'Tom'
+}
+
+namespace User{
+  export let name:string = 'Bom'
+}
+
+console.log(user.name); //Tom
+console.log(User.name); //Bom
+
+```
+
+### 1) 命名空间的嵌套
+
+有时我们希望在同一个命名空间中嵌套一个命名空间，来实现父子级的功能
+
+```
+namespace User{
+  export let name:string = 'Tom'
+  export namespace Member{
+    export let name:string = 'Bom'
+  }
+}
+
+console.log(User.Member.name);  //Bom
+```
+
+---
+
+## 9. TypeScript 编译打包
+
+### 1. 单独编译引入
+
+假设我们当前目录有三个ts文件，test.ts,main.ts,index.ts,使用单独编译引入将会是如下的操作。
+
+```
+
+  <!--终端输入-->
+
+  npx tsc 
+
+  <!--html-->
+
+  <script src="test.js"></script>
+  <script src="main.js"></script>
+  <script src="index.js"></script>
+
+```
+
+---
+
+### 2. 命令行多文件合并打包
+
+显然上一小节的单独编译引入的操作十分繁琐，每一个最终生成的js文件都要重复引入，这不符合我们的效率需求。
+
+因此，我们再迈一步，将多个文件打包成一个js文件。
+
+我们仍然拥有上一小节的三个ts文件，test.ts,main.ts,index.ts，操作如下。
+
+```
+<!--终端输入-->
+//npx tsc --outFile 输出文件 入口文件(可以是多个文件)
+npx tsc --outFile ./dist/app.js main.ts test.ts
+<!--html-->
+<script src="./dist/app.js"></script>
+```
+
+---
+
+### 3. reference 打包合并
+
+
+---
+
+### 4. amd 与 require.js 管理 TS 模块

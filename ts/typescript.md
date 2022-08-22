@@ -1943,4 +1943,92 @@ class User {
   }
 }
 ```
+---
 
+## 8. namespace 命名空间
+
+ts的命名空间与其他语言的命名空间没什么区别
+
+namespace定义：开辟一个空间允许在其中声明变量，同一个空间中不能声明相同的变量名，不同的空间可以声明相同的变量名。
+
+namespace使用：
+
+**命名空间的每一级调用都要导出**
+
+```
+namespace user{
+  export let name:string = 'Tom'
+}
+
+namespace User{
+  export let name:string = 'Bom'
+}
+
+console.log(user.name); //Tom
+console.log(User.name); //Bom
+
+```
+
+### 1) 命名空间的嵌套
+
+有时我们希望在同一个命名空间中嵌套一个命名空间，来实现父子级的功能
+
+```
+namespace User{
+  export let name:string = 'Tom'
+  export namespace Member{
+    export let name:string = 'Bom'
+  }
+}
+
+console.log(User.Member.name);  //Bom
+```
+
+---
+
+## 9. TypeScript 编译打包
+
+### 1. 单独编译引入
+
+假设我们当前目录有三个ts文件，test.ts,main.ts,index.ts,使用单独编译引入将会是如下的操作。
+
+```
+
+  <!--终端输入-->
+
+  npx tsc 
+
+  <!--html-->
+
+  <script src="test.js"></script>
+  <script src="main.js"></script>
+  <script src="index.js"></script>
+
+```
+
+---
+
+### 2. 命令行多文件合并打包
+
+显然上一小节的单独编译引入的操作十分繁琐，每一个最终生成的js文件都要重复引入，这不符合我们的效率需求。
+
+因此，我们再迈一步，将多个文件打包成一个js文件。
+
+我们仍然拥有上一小节的三个ts文件，test.ts,main.ts,index.ts，操作如下。
+
+```
+<!--终端输入-->
+//npx tsc --outFile 输出文件 入口文件(可以是多个文件)
+npx tsc --outFile ./dist/app.js main.ts test.ts
+<!--html-->
+<script src="./dist/app.js"></script>
+```
+
+---
+
+### 3. reference 打包合并
+
+
+---
+
+### 4. amd 与 require.js 管理 TS 模块

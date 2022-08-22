@@ -1,16 +1,8 @@
-const propDecorator: PropertyDecorator = (...args: any[]) => {
-  console.log('args', args)
-}
-const paramDecorator: ParameterDecorator = (...args: any[]) => {
-  console.log('args', args)
-}
-class User {
-  @propDecorator
-  public name: string | undefined
-  @propDecorator
-  public static age: number = 20
-  public show(see:string,go:number,@paramDecorator talk:string){
-    
+namespace User{
+  export let name:string = 'Tom'
+  export namespace Member{
+    export let name:string = 'Bom'
   }
 }
 
+console.log(User.Member.name);  //Bom

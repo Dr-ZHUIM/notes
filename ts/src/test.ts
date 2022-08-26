@@ -1,4 +1,4 @@
-namespace User{
+export namespace User{
   export let name:string = 'Tom'
   export namespace Member{
     export let name:string = 'Bom'

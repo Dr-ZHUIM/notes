@@ -1,0 +1,2 @@
+(()=>{"use strict";var e,o={127:(e,o)=>{var r;Object.defineProperty(o,"__esModule",{value:!0}),o.User=void 0,function(e){let o;e.name="Tom",function(e){e.name="Bom"}(o=e.Member||(e.Member={}))}(r=o.User||(o.User={})),console.log(r.Member.name)}},r={};e=function e(n){var s=r[n];if(void 0!==s)return s.exports;var t=r[n]={exports:{}};return o[n](t,t.exports,e),t.exports}(127).User.name,[1,2,3,4,5].map((e=>{console.log("ele",e)})),console.log(e)})();
+//# sourceMappingURL=app.js.map

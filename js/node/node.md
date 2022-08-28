@@ -1,5 +1,9 @@
 # Node.js
 
+Node.js 是一个开源的，基于 C++ 与 js V8 引擎开发的运行环境，该环境允许用户在浏览器外运行Javascript。
+
+单线程single process , 异步的asynchronous , 非阻塞I/O non-blocking paradigms
+
 ## 1.Node.js与浏览器的区别
 
 ### 生态环境不同

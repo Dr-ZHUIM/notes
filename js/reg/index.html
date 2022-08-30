@@ -9,13 +9,11 @@
 </head>
 
 <body>
-    <h1 id="helloReg">helloWorld!</h1>
+    <h1 id="title">helloWorld!</h1>
     <script>
-        const helloReg = document.getElementById("helloReg");
-        let reg = new RegExp('ll', 'g');
-        helloReg.innerHTML = helloReg.innerHTML.replace(reg,search=>{
-            return `<span style="color:red">ll</span>`
-        })
+        const reg = new RegExp('lla|w|W', 'g');
+        const title = 'helloWorld';
+        console.log(reg.test(title));
     </script>
 </body>
 

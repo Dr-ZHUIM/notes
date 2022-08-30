@@ -30,3 +30,55 @@
 
 提供一个`h1`标签，文本信息为 `helloWorld` , 将`ll`描红
 
+```
+<!-- HTML -->
+<h1 id="title">HelloWorld!</h1>
+<!-- JavaScript -->
+const title = document.getElementById("title");
+const reg = new RegExp('ll','g');
+title.innerHTML = title.innerHTML.replace(reg,search=>{
+    return `<span style="color:red">${search}</span>`
+})
+```
+---
+
+## 2. 正则选择符
+
+### 1. 或 |
+
+由 `或` 连接的多个条件中满足一个则返回 `true`
+
+```
+const reg = new RegExp('lla|w|W', 'g');
+const title = 'helloWorld';
+console.log(reg.test(title));
+```
+
+### 2. 原子表与原子组中的选择符
+
+`原子表 [] ` , 不需要写 ` | ` 符号，因为原子表本质上是多个正则的连接，是 `或` 的关系
+
+```
+let reg = /[1234567890]/ // 等于 /1|2|3|4|5|6|7|8|9|0/
+```
+
+`原子组 ()` , 需要些 ` | ` 符号， 因为原子组本质上是多个正则的连接，是 `与` 的关系
+
+ ```
+ let reg = /(12)|(34)/  // 等于 /12|34/
+ ```
+---
+
+## 3. 转义
+
+转义是指将 **有歧义的属性** 确认为原本的含义。
+
+以下这个正则表达式就用到了转义
+
+```
+let reg = /\d+\.\d+/
+```
+
+`\d` 的意思是检索数字 ， `\d+`的意思是检索一或多个数字  
+而 `\.` 就用到了转义，因为正则表达式中的 `.` 同时意味着任意值和小数点 ，使用转义将 `.` 的检索对象变为小数点  
+也就是说这个正则表达式的检索对象是： 数字+小数点+数字

@@ -91,3 +91,145 @@ let reg2 = new RegExp("\\d+\\.\\d+");
 
 ## 4. 字符边界约束
 
+**`^` 以...为始**
+
+**`$` 以...为尾**
+
+## 5. 元字符
+
+元字符是正则表达式的最小单位，表示一类字符中的一个。
+
+### 1. 数值与空白元字符
+
+`\d` 数值  
+
+```
+let str = 'helloWorld 2022';
+console.log(str.match(/\d{4}/g));   // ['2022']
+```
+
+`\D` 非数值
+
+```
+let str = 'helloWorld 2022';
+console.log(str.match(/\D{5}/g));   //[ 'hello', 'World' ]
+```
+
+`\s` 空白
+
+```
+let str = 'hell oWo rld 202 2';
+console.log(str.match(/\s/g)); //[ ' ', ' ', ' ', ' ' ]
+```
+
+`\S` 非空白
+
+```
+/*
+[
+  'h', 'e', 'l', 'l',
+  'o', 'W', 'o', 'r',
+  'l', 'd', '2', '0',
+  '2', '2'
+]
+*/
+let str = 'hell oWo rld 202 2';
+console.log(str.match(/\S/g));
+```
+
+---
+
+ ### 2. w 与 W 元字符
+
+ `\w` 数值，字母，下划线
+
+ ```
+let str = 'helloWorld_2022';
+console.log(str.match(/\w+/g));  //[ 'helloWorld_2022' ]
+ ```
+
+ 来用 `\w` 实现一个基础的邮箱验证：
+
+ ```
+let str = '372919916@qq.com';
+console.log(str.match(/^\w+@\w+\.\w+$/));  
+ ```
+
+ 当然这种正则判断并不严谨，`.com` 可以写成 `.acaca`，所以说只是一个基础的邮箱验证
+
+ `\W` 非数值，字母，下划线
+
+ ```
+let str = 'helloWorld----_2022';
+console.log(str.match(/\W+/g));  //[ '----' ]
+ ```
+
+---
+
+### 3. 点元字符
+
+点元字符 `.` 包含除去换行符以外的任何字符
+
+```
+let str = '3729199!#@!$!#_--十大16@qq.com';
+console.log(str.match(/.+/));  //[  '3729199!#@!$!#_--十大16@qq.com']
+```
+---
+
+### 4. 基于以上的元字符来匹配所有字符
+
+`/[\s\S]+/g`  用原子表来获取所有的空白和非空白 => 所有字符  
+ `/[\d\D]+/g` 用原子表来获取所有的数值和非数值 => 所有字符  
+ `/[\w\W]+/g` 用原子表来获取所有的数值，字母，下划线和非数值，字母，下划线 => 所有字符  
+
+---
+
+## 6. 修正符
+
+### 1. i 不区分大小写
+
+### 2. g 全局匹配
+
+```
+let str = 'heLloWorld';
+//匹配字符串中的所有 l 和 L
+console.log(str.match(/l/gi));  //[ 'L', 'l', 'l' ]
+```
+
+### 3. m 多行匹配
+
+
+```
+let str = `
+ #1 aaa,go #
+ #2 bbb,gogo #
+ #3 ccc,gogogo # asd
+ #4 ddd,gogogogo #
+`;
+const list = str.match(/^\s*#\d+\s+.+\s+#$/gm);
+console.log(list); //[ '\n #1 aaa,go #', ' #2 bbb,gogo #', ' #4 ddd,gogogogo #' ]
+const newList = list.map(item => {
+  const newItem = item.replace(/\s*#\d+\s*/, '').replace(/#/, '');
+  const [key, value] = newItem.split(',');
+  return {
+    key,
+    value
+  }
+});
+/**
+ * [
+  { key: 'aaa', value: 'go ' },
+  { key: 'bbb', value: 'gogo ' },
+  { key: 'ddd', value: 'gogogogo ' }
+]
+*/
+console.log(newList)
+```
+
+---
+
+## 7. 汉字与字符属性
+
+`\p{}` 字符属性
+
+`\p{sc=Han}` 匹配汉字

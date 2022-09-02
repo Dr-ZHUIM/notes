@@ -104,4 +104,125 @@ In production environment of Next.js , it will automatically **prefetch** the co
 
 ## Static Assets
 
+### 1. Image Component
 
+- Images are lazy loaded by default
+
+```
+import Image from 'next/image';
+
+const YourComponent = () => (
+  <Image
+    src="/images/profile.jpg" // Route of the image file
+    height={144} // Desired size with correct aspect ratio
+    width={144} // Desired size with correct aspect ratio
+    alt="Your Name"
+  />
+);
+```
+---
+
+### 2. Metadata in Head Component
+
+Head Component allow you to edit `<head>` of a page.
+
+```
+import Head from 'next/head';
+export default function FirstPost() {
+  return (
+    <>
+      <Head>
+        <title>First Post</title>
+      </Head>
+      <h1>First Post</h1>
+      <h2>
+        <Link href="/">
+          <a>Back to home</a>
+        </Link>
+      </h2>
+    </>
+  );
+}
+```
+---
+
+### 3. Third-Party JavaScript
+
+Third-party JavaScript refers to any scripts that are added from a third-party source.
+
+- strategy controls when the third-party script should load.
+- lazyOnload tells Next.js to load this particular script lazily during browser idle time
+- onLoad is used to run any JavaScript code immediately after the script has finished loading.
+
+```
+import Script from 'next/script';
+
+export default function FirstPost() {
+  return (
+    <>
+      <Head>
+        <title>First Post</title>
+      </Head>
+      <Script
+        src="https://connect.facebook.net/en_US/sdk.js"
+        strategy="lazyOnload"
+        onLoad={() =>
+          console.log(`script loaded correctly, window.FB has been populated`)
+        }
+      />
+      <h1>First Post</h1>
+      <h2>
+        <Link href="/">
+          <a>Back to home</a>
+        </Link>
+      </h2>
+    </>
+  );
+}
+```
+
+
+### 4. Css / Sass Modules
+
+Next.js use CSS modules for **`components`** .
+
+CSS modules allow you to locally scope CSS at the component-level by automatically creating unique class names.
+
+To use those CSS classes or other selector , you need :
+- Import the CSS file and assign a name to it, like styles
+- Use styles.container as the className
+
+```
+import styles from './layout.module.css';
+
+export default function Layout({ children }) {
+  return <div className={styles.container}>{children}</div>;
+} 
+```
+
+**Automatically Generates Unique Class Names**
+
+A CSS module should be named as `[fileName].module.css` or `[fileName].module.scss`.
+
+If a className in component `Layout` as `home` , it will be transformed as `[componentName]_[ClassName]__[RandomCode]` which accomplishes scoping CSS.
+
+---
+
+### 5. Global Styles
+
+CSS Modules are useful for component-level styles. 
+
+But if you want some CSS to be loaded by every page. Next.js has support for that as well.
+
+- Create a top-level styles directory and a global.css file.
+- To load global CSS files, create a file called pages/_app.js with the following content:
+
+```
+import '../styles/global.scss';
+
+export default function App({ Component, pageProps }) {
+  return <Component {...pageProps} />;
+}
+```
+
+> In Next.js, you can add global CSS files by importing them from pages/_app.js. You cannot import global CSS anywhere else.

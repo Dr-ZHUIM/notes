@@ -233,3 +233,25 @@ console.log(newList)
 `\p{}` 字符属性
 
 `\p{sc=Han}` 匹配汉字
+
+
+## 8. lastIndex属性
+
+`RegExp.prototype.exec()` 方法在没有匹配值的情况下返回null，会将本正则表达式的`lastIndex`属性设为0  
+`RegExp.prototype.exec()` 方法在有匹配值的情况下返回一个数组，并更新`lastIndex`。  
+该数组的第一个元素是匹配的第一个字符组，从第二个元素开始是第一个被匹配的正则组，以此类推。
+
+
+
+```
+let str = "tomisbetter";
+let reg = /\w/g;
+while(res = reg.exec(str)){
+  console.log('res',res)
+}
+
+```
+
+## 9. y模式
+
+在y模式下，正则表达式会和g模式一样，全局匹配正则，但如果下一个字符不匹配就会立即停止。

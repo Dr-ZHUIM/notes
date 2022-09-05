@@ -2,14 +2,25 @@ import Head from 'next/head';
 import Image from 'next/image';
 import styles from './layout.module.scss';
 import utilStyles from '../styles/utils.module.scss';
-import Link from 'next/link';
+import { useState } from 'react';
 
 const name = 'Your Name';
 export const siteTitle = 'Le Blog __ François';
 
 export default function Layout({ children, home }) {
+
+  const [colorMode,setColorMode] = useState("dark");
+
+  const changeColorMode = () => {
+    setColorMode(currentColor=>{
+      console.log(currentColor);
+      let nextColor = currentColor === "dark" ? "light" : "dark";
+      return nextColor
+    })
+  }
+
   return (
-    <div className={styles.container}>
+    <div color-mode={colorMode} className={styles.container}>
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <meta
@@ -25,10 +36,15 @@ export default function Layout({ children, home }) {
         <meta name="og:title" content={siteTitle} />
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
-      <header className={styles.navbar}>
-
-      </header>
-      <main>{children}</main>
+      <section className={styles.navbarBox}>
+        <Image
+         onClick={changeColorMode} 
+         src="/images/colorMode.png" 
+         alt='colorMode_img' 
+         width={36} 
+         height={36}></Image>
+      </section>
+      <main className={styles.mainBox}>{children}</main>
       {/* author-block */}
       <section className={styles.avatarBox}>
         <p>[Your Self Introduction]</p>

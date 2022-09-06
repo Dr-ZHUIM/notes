@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import styles from './layout.module.scss';
-import utilStyles from '../styles/utils.module.scss';
 import { useState } from 'react';
 
 const name = 'Your Name';
@@ -9,7 +8,7 @@ export const siteTitle = 'Le Blog __ François';
 
 export default function Layout({ children, home }) {
 
-  const [colorMode,setColorMode] = useState("dark");
+  const [colorMode,setColorMode] = useState("light");
 
   const changeColorMode = () => {
     setColorMode(currentColor=>{
@@ -41,18 +40,26 @@ export default function Layout({ children, home }) {
          onClick={changeColorMode} 
          src="/images/colorMode.png" 
          alt='colorMode_img' 
-         width={36} 
-         height={36}></Image>
+         width={24} 
+         height={24}></Image>
       </section>
       <main className={styles.mainBox}>{children}</main>
       {/* author-block */}
-      <section className={styles.avatarBox}>
-        <p>[Your Self Introduction]</p>
+      <main className={styles.avatorBox}>
+        <div className={styles.avatorTop}>
+          <Image
+            src="/images/avator.jpg"
+            alt='avator'
+            width={180}
+            height={180}
+            className={styles.avatorTopImg}
+          ></Image>
+        </div>
+        <p>Hi! My name is Zhuim , a front-end engineer. Welcome to my Blog . Now I am reseraching Vite + React ecosystem . Let's learn and discuss together ! </p>
         <p>
-          (This is a sample website - you’ll be building a site like this on{' '}
-          <a href="https://nextjs.org/learn">our Next.js tutorial</a>.)
+          What you believe may create a elegant star night. 
         </p>
-      </section>
+      </main>
     </div>
   );
 }

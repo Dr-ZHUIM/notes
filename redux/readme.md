@@ -313,14 +313,78 @@ document
 
 Now, let's summarize the flow of data through a Redux application with this diagram.
 
-!['redux-data-flow'](redux_data_flow.gif)
-
 - use a event to dispatch your action to store 
 - store runs the reducer function by the `type` of action. 
 - the store inform your application to get the latest data and your application will rerender the UI at last. 
 
+<br/>
+
+!['redux-data-flow'](redux_data_flow.gif)
+
 ---
+
+<br/>
+<br/>
 
 <p style="font-size:50px">Part 2 — Concepts and Data Flow</p>
 
 # Introduction 
+
+In this part , we will explain Redux's **concepts** in more details and talk about how data flows through a Redux application.
+
+<br/>
+<br/>
+
+# Background Concepts
+
+Before we actually dive into the code, let's talk about those terms and concepts you'll need to know to use Redux.
+
+## State Management
+
+Let's start by learning a React Component which tracks a number in component state.
+
+```
+function Counter() {
+  // State: a counter value
+  const [counter, setCounter] = useState(0)
+
+  // Action: code that causes an update to the state when something happens
+  const increment = () => {
+    setCounter(prevCounter => prevCounter + 1)
+  }
+
+  // View: the UI definition
+  return (
+    <div>
+      Value: {counter} <button onClick={increment}>Increment</button>
+    </div>
+  )
+}
+```
+
+This is obviously a self-contained application with the following parts:
+
+- `State` , the source of truth that drives our app;
+- `View` , a declarative description of the UI based on the current state;
+- `Actions` , he events that occur in the app based on user input, and trigger updates in the state
+
+  **We call this example as `one-way data flow`**
+
+1. State describe the condition of App at a specific point in time .
+2. The View is rendered depend on the State.
+3. Actions like event will update the State.
+4. The View is rendered depend on the new State.
+
+![](one-way-data-flow.png)
+
+
+However, this simplicity cannot support an application with multiple components that need to share and use the same state, especially if those components are located in different parts of the application. Maybe you can relief this problem to a certain extent by `lifting state up` to parent components , but that doesn't always help. 
+
+One way to solve this is to extract the shared state from the components, and put it into a `centralized location` outside the component tree. Then any component can access the state or trigger action no matter where they are in the tree. 
+
+This is the basic idea behind Redux : a single centralized place to contain the global state in your application, and specific patterns to follow when updating that state to make your application more predictable.
+
+## Immutability
+
+
+

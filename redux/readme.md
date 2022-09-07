@@ -1,4 +1,6 @@
-# Redux
+<p style="font-size:50px">Part 1 — A Redux App program</p>
+
+# Redux Introduction
 
 ## What is Redux ?
 
@@ -67,11 +69,14 @@ There are some important points here:
 
 > Redux only manage State but never render your DOM.
 
+<br/>
+<br/>
+
 # Redux Example application
 
 Here is a minimal application with `Redux` but without any framework.   
-You need to know that `Redux` is normally used by installing the Redux packages from NPM, and the UI is created using a library like `React`.
-
+You need to know that `Redux` is normally used by installing the Redux packages from NPM, and the UI is created using a library like `React`.  
+By the way , this example is just a preview of how to use `Redux` but not let you understand the whole library of `Redux` 
  ```
  <!DOCTYPE html>
 <html>
@@ -187,15 +192,23 @@ const initialState = {
 
 ### - part. **Action**
 
+Secondly,you should define an `action` object.  
+`Action` object always have a `type` property , which should be a `string` to act as a unique name for the action.  
+Actually, the `type` should be a readable name so that your teammate could understand what it means.  
 
+```
+{type : 'counter/incremented'}
+```
 
 ---
 
 ### - Part. **Reducer**
 
-Secondly , we define a `reducer` function which receives two arguments , the current `state` and an `action` object.   
+Thirdly , we define a `reducer` function which receives two arguments , the current `state` and an `action` object.   
 
 > When the Redux application starts up , there is not any state yet so we provide the `initialState` as the **default** value for the **first argument** of `reducer`
+
+Based on the `type` of the `action`, you need to return a new object to be the new state, or return the origin state if nothing changed.
 
 ```
 // Create a "reducer" function that determines what the new state
@@ -215,4 +228,99 @@ function counterReducer(state = initialState, action) {
   }
 }
 ```
+---
 
+### - Part. **Store**
+
+Then, we can create a `store` instance by calling an API of the Redux library ,  `createStore`.
+
+We pass our `reducer` function to the store , and generate our initial state . In addition ,
+it will calculate any future updates.
+
+```
+const store = Redux.createStore(counterReducer);
+```
+
+---
+
+### - Part. **UI Rerender**
+
+> Attention! `Redux` cannot rerender the DOM of your application , but it can inform your application to rerender. 
+
+```
+// Our "user interface" is some text in a single HTML element
+const valueEl = document.getElementById('value')
+
+// Whenever the store state changes, update the UI by
+// reading the latest store state and showing new data
+function render() {
+  const state = store.getState()
+  valueEl.innerHTML = state.value.toString()
+}
+
+// Update the UI with the initial data
+render()
+// And subscribe to redraw whenever the data changes in the future
+store.subscribe(render)
+```
+
+Here we write a function render that knows how to get the latest state from the Redux store using the `store.getState()` method , then update the UI to show it.  
+Although we have a render function, we still not have a trigger to use our render function.  
+`Redux` lets us call `store.subscribe()` and pass our render to it . The callback function will be called everytime the store is updated.  
+At here , we can get the latest state and update the UI by the `state`.
+
+---
+
+### - Part. Dispatching Actions
+
+Finally, we need to dispatch `action` object to the `store`. When we use `store.dispatch(action)`, the `store` runs the `reducer` to calculate the updated `state` and runs the `subscriber` to update the UI.
+
+```
+// Handle user inputs by "dispatching" action objects,
+// which should describe "what happened" in the app
+document.getElementById('increment').addEventListener('click', function () {
+  store.dispatch({ type: 'counter/incremented' })
+})
+
+document.getElementById('decrement').addEventListener('click', function () {
+  store.dispatch({ type: 'counter/decremented' })
+})
+
+document
+  .getElementById('incrementIfOdd')
+  .addEventListener('click', function () {
+    // We can write logic to decide what to do based on the state
+    if (store.getState().value % 2 !== 0) {
+      store.dispatch({ type: 'counter/incremented' })
+    }
+  })
+
+document
+  .getElementById('incrementAsync')
+  .addEventListener('click', function () {
+    // We can also write async logic that interacts with the store
+    setTimeout(function () {
+      store.dispatch({ type: 'counter/incremented' })
+    }, 1000)
+  })
+```
+---
+
+<br/>
+<br/>
+
+# Redux Data Flow
+
+Now, let's summarize the flow of data through a Redux application with this diagram.
+
+!['redux-data-flow'](redux_data_flow.gif)
+
+- use a event to dispatch your action to store 
+- store runs the reducer function by the `type` of action. 
+- the store inform your application to get the latest data and your application will rerender the UI at last. 
+
+---
+
+<p style="font-size:50px">Part 2 — Concepts and Data Flow</p>
+
+# Introduction 

@@ -386,5 +386,45 @@ This is the basic idea behind Redux : a single centralized place to contain the 
 
 ## Immutability
 
+`Immutability` means something can never be changed.
 
+In order to update values immutably, your code must make copies of existing objects/arrays, and then modify the copies.
 
+Redux expects that all `state` updates are done **immutably** , such as below:
+
+```
+function counterReducer(state = initialState, action) {
+  switch (action.type) {
+    case 'counter/incremented':
+      // look here !
+      return { ...state, value: state.value + 1 } // look here !
+    default:
+      return state
+  }
+}
+```
+---
+
+# Redux Terminology
+
+There's some important Redux terms that you'll need to be familiar with before we continue:
+
+## Action
+
+An `action` is a plain JavaScript object that has a `type` property. You can think of an `action` as an event that describes something which happened in the application and a matcher that allow your store to use reducer function.
+
+An `action object` can have other properties with additional information about what happened.
+By convention, we call it as `payload`.
+
+A typical `action object` might look as this :
+
+```
+const addTodoAction = {
+  type : "todos/todoAdded",
+  payload : "Buy milk"
+}
+```
+
+## Reducers
+
+A `reducer` is a function that receives `the current state` and an `action object`, which describes how to update the state if a `action type` was matched. You can think of a `reducer` as an eventListener which handles events depending on the `action type`. 

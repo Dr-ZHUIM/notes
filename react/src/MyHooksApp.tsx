@@ -1,6 +1,6 @@
 import { useMouse, useWidth } from './myHooks'
 
-function App() {
+function MyHooksApp() {
 
   const w = useWidth();
 
@@ -14,4 +14,4 @@ function App() {
   )
 }
 
-export default App
+export default MyHooksApp

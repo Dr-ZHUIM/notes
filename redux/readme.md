@@ -180,7 +180,7 @@ At first , we define an initial `state` value to describe the application.
 We are tring to track the value of a counter to show how to use `Redux`.
 
 ```
-// define an inital state
+// define an initial state
 const initialState = {
     value: 0
     };
@@ -406,7 +406,6 @@ function counterReducer(state = initialState, action) {
 ---
 
 # Redux Terminology
-
 There's some important Redux terms that you'll need to be familiar with before we continue:
 
 ## Action
@@ -428,3 +427,121 @@ const addTodoAction = {
 ## Reducers
 
 A `reducer` is a function that receives `the current state` and an `action object`, which describes how to update the state if a `action type` was matched. You can think of a `reducer` as an eventListener which handles events depending on the `action type`. 
+
+`reducer` must always follow some specific rules
+
+- They should only calculate the new state value based on the state and action arguments.
+- They are not allowed to modify the existing state . Instead, they must make immutable updates, by copying the existing state and making changes to the copied values.
+- They must not do any asynchronous logic, calculate random values, or cause other "side effects"
+
+Steps :
+
+- Check to see if reducer cares about this action 
+  - If so, create a copy of the state, and update the copy with the new value and return it.
+  - if not, return the existing state back.
+
+Verson.If
+```
+const initState = {
+    value: 0
+};
+function counterReducer(state = initState, action) {
+    if (action.type === 'counter/incremented') {
+        return {
+            ...state,
+            value: state.value + 1
+        }
+    }
+    return state
+}
+```
+
+Verson.switch
+```
+const initState = {
+    value: 0
+};
+function counterReducer(state = initState, action) {
+    switch (action.type) {
+        case 'counter/incremented': {
+            return {
+                ...state,
+                value: state.value + 1
+            }
+        }
+        default: {
+            return state
+        }
+    }
+}
+```
+
+## Store
+
+The current Redux application state lives in an object called the `store`.
+
+The store is created by passing a `reducer` to function `configureStore` and has a method called `getState` that return the current `state`.
+
+```
+  import {configureStore} from "@reduxjs/toolkit"
+  const store = configureStore({reducer:counterReducer});
+  const currentState = store.getState();
+  console.log(currentState);  //{value:0}
+```
+
+## Dispatch
+`dispatch` is a method which is the only way to update the `state` by passing in an `action` object. The `store` will run its `reducer` function and save the new `state` value inside, and we can call` getState()` to retrieve the updated `state.`
+
+```
+store.dispatch({type:'counter/incremented'});
+console.log(store.getState());
+// {value: 1}
+```
+
+![](./redux_principle.jpg)
+
+## Selectors
+`selectors` are functions that know how to extract specific pieces of information from a state value. As an application grows bigger, this can help us avoid repeating logic as different parts of the application.
+
+```
+const selectCounterValue = state => state.value;
+const currentValue = selectCounterValue(store.getState());
+console.log(currentValue)
+// 2
+```
+
+# Core Concepts and Principles​
+
+Overall, we can summarize the intent behind Redux's design in three core concepts:
+
+## Single Source of Truth
+The global state of your application is stored as an object inside a single store. Any given piece of data should only exist in one location.
+
+This will make you easier to debug and inspect your app's state as things change
+
+## State is Read-Only
+The only way to update the state is to dispatch an action, and a pure reducer funciton will return a new state or the original state depending on the action.
+
+This is easier to trace why a state update happened.
+
+
+## Change are Made with Pure Reducer Function
+
+Reducers are pure functions that take the previous state and an action, and return the next state. 
+
+That can make our state read-only.
+
+# Redux Application Data Flow
+
+## Initial State
+- A Redux store is created using a root reducer function
+- The store calls the root reducer once, and saves the return value as its initial `state`
+- When the UI is rendered first, UI Components access the current state of the Redux store, and use that data to decide what to render.
+
+## updates
+- A trigger is used
+- The app code dispatch an action to Redux store 
+- The store runs the reducer function again with the previous state and the current action, and save the return value as the new state.
+- The store notifies all parts of the UI that the store has been updated.
+- Each UI component that needs data from the store checks to see if a state they need has been changed
+- Those UI component who has a needed-state changed will rerender on the screen.

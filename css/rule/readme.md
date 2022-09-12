@@ -51,7 +51,7 @@ html {
 
 ```
 /*
-  1. 可预测的伪类元素
+  1. 使用border-box，避免出现意料之外的内容溢出
 */
 *, *::before, *::after {
   box-sizing: border-box;

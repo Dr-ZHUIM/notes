@@ -21,7 +21,7 @@ additionally, here are some approaches to solve **heavy computation by rerender*
 here are two problems usually be relevant value to use `useMemo`:
 
 1. heavy computation
-2. preserve reference
+2. preserved reference
 
 ## `useCallback`
 

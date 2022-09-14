@@ -1,5 +1,6 @@
 {
   "devDependencies": {
-    "date-fns": "^2.29.2"
+    "date-fns": "^2.29.2",
+    "redux": "^4.2.0"
   }
 }

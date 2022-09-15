@@ -26,3 +26,16 @@ export const includeMeaningOfLife = (createStore) => {
     return { ...store, getState: newGetState }
   }
 }
+
+export const TakeYourTime = (createStore) => {
+  return (rootReducer, preloadedState, enhancers) => {
+    const store = createStore(rootReducer, preloadedState, enhancers)
+    function TakeTimeGetState() {
+      return {
+        ...store.getState(),
+        time : new Date()
+      }
+    }
+    return {...store,getState:TakeTimeGetState}
+  }
+}

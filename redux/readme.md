@@ -545,3 +545,12 @@ That can make our state read-only.
 - The store notifies all parts of the UI that the store has been updated.
 - Each UI component that needs data from the store checks to see if a state they need has been changed
 - Those UI component who has a needed-state changed will rerender on the screen.
+
+# State
+
+Store has several responsibilities:
+
+- `store.getState()` allows access to the current state
+- `store.dispatch(action)` allows state to be updated 
+- `store.subscribe(listener)` registers listener callbacks
+- `store.unsubscribe()` handles unregistering of listeners returned by `store.subscribe(listener)`

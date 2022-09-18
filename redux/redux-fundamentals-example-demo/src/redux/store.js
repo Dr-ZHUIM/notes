@@ -1,7 +1,6 @@
 import {createStore,compose,applyMiddleware} from "redux"
 import rootReducer from "./reducer"
 import {sayHiOnDispatch,TakeYourTime} from "../exampleAddons/enhancers"
-import {print1,print2,print3} from "../exampleAddons/middleware"
 import {myMiddlewareEs6} from "../myAddons/middleware"
 
 let preloadedState;

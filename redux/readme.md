@@ -554,3 +554,103 @@ Store has several responsibilities:
 - `store.dispatch(action)` allows state to be updated 
 - `store.subscribe(listener)` registers listener callbacks
 - `store.unsubscribe()` handles unregistering of listeners returned by `store.subscribe(listener)`
+
+# React + Redux
+
+## react-redux
+
+```
+npm install react-redux -D
+```
+
+## useSelector
+
+Call the `useSelector` hook to read data in React components.
+
+A selector is a function that takes the entire Redux store state as its argument, reads some value from the state, and returns that result.
+
+```
+import React from 'react'
+import { useSelector } from 'react-redux'
+import TodoListItem from './TodoListItem'
+
+const selectTodos = state => state.todos
+
+const TodoList = () => {
+  const todos = useSelector(selectTodos)
+
+  // since `todos` is an array, we can loop over it
+  const renderedListItems = todos.map(todo => {
+    return <TodoListItem key={todo.id} todo={todo} />
+  })
+
+  return <ul className="todo-list">{renderedListItems}</ul>
+}
+
+export default TodoList
+```
+
+## useDispatch
+
+`useDispatch` allows you to dispatch your `action` to store
+
+```
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+
+const Header = () => {
+  const [text, setText] = useState('')
+  const dispatch = useDispatch()
+
+  const handleChange = e => setText(e.target.value)
+
+  const handleKeyDown = e => {
+    const trimmedText = e.target.value.trim()
+    // If the user pressed the Enter key:
+    if (e.key === 'Enter' && trimmedText) {
+      // Dispatch the "todo added" action with this text
+      dispatch({ type: 'todos/todoAdded', payload: trimmedText })
+      // And clear out the text input
+      setText('')
+    }
+  }
+
+  return (
+    <input
+      type="text"
+      placeholder="What needs to be done?"
+      autoFocus={true}
+      value={text}
+      onChange={handleChange}
+      onKeyDown={handleKeyDown}
+    />
+  )
+}
+
+export default Header
+```
+
+## Provider
+
+Put `<Provider store={store}>` around your entire `<App>` component so that other components can talk to the store
+
+
+```
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
+
+import App from './App'
+import store from './store'
+
+ReactDOM.render(
+  // Render a `<Provider>` around the entire `<App>`,
+  // and pass the Redux store to as a prop
+  <React.StrictMode>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </React.StrictMode>,
+  document.getElementById('root')
+)
+```

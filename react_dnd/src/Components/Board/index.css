@@ -1,0 +1,8 @@
+.board{
+    box-sizing: border-box;
+    padding: 5% 10%;
+    width: 400px;
+    height: 400px;
+    margin: 0 10vw;
+    border: black solid 1px;
+}

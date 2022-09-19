@@ -2,7 +2,7 @@
 
 https://www.joshwcomeau.com/react/usememo-and-usecallback/
 
-## `useMemo` 
+# useMemo
 
 `useMemo` get two arguments :
 
@@ -23,7 +23,7 @@ here are two problems usually be relevant value to use `useMemo`:
 1. heavy computation
 2. preserved reference
 
-## `useCallback`
+# useCallback
 
 useCallback serves the same purpose as useMemo, but it's built specifically for functions.
 
@@ -56,5 +56,94 @@ Finally, `useReducer` returns an array with exactly two items:
 1. The ___`current state`___ of this state variable and initially set to the initail state you provided.
 2. The ___`dispatch function`___ that lets you change it in response to interaction.
 
+To update what’s on the screen, call dispatch with an object representing what the user did, called an action:
 
+```
+function reducer(state:any,action:{type:string,payload?:any}){
+    switch (action.type) {
+        case "showbox/increment":
+            return {...state,num:state.num + 1}        
+        default:
+            return state;
+    }
+}
+
+// bind this funciton to your element and the state managed by reducer will
+// compare the action's type , if it's right then state will be updated 
+function handleClick() {
+    dispatch({ type: 'showbox/increment' });
+    }
+
+const [state,dispatch] = useReducer(reducer,{num:0});
+
+```
+
+### Writing the reducer function
+Just as `Redux`, a `reducer` function is common to write it as a switch statement. For each case in the switch, you need to calculate and return some next state.
+
+```
+function reducer(state:any,action:{type:string,payload?:any}){
+    switch (action.type) {
+        case "showbox/increment":
+            return {...state,num:state.num + 1}        
+        default:
+            return state;
+    }
+}
+```
+
+Actions can have any shape. By convention, it’s common to pass objects with a type property identifying the action. It should include the minimal necessary information that the reducer needs to compute the next state.
+
+```
+ function handleButtonClick() {
+    dispatch({ type: 'incremented_age' });
+  }
+
+function handleInputChange(e) {
+    dispatch({
+      type: 'changed_name',
+      nextName: e.target.value
+    });
+  }
+```
+
+> State is read-only. Don’t modify any objects or arrays in state:
+  Instead, always return new objects from your reducer:
+
+```
+function reducer(state, action) {
+  switch (action.type) {
+    case 'incremented_age': {
+      // ✅ Instead, return a new object
+      return {
+        ...state,
+        age: state.age + 1
+      };
+    }
+```
+
+### Avoiding recreating the initial state
+
+React saves the initial state once and ignores it on the next renders.
+
+Howerver, if your initial state is created by a function, you should pass your function but not the value it returns to the `useReducer`'s third argument.
+
+>Although the result of createInitialState(username) is only used for the initial render, you’re still calling this function on every render. This can be wasteful if it’s creating large arrays or performing expensive calculations.
+
+```
+function createInitialState(username) {
+  // ...
+}
+ const [state, dispatch] = useReducer(reducer, username, createInitialState);
+```
+
+# useContext
+
+`usecontext` is React Hook that lets you read and subscribe to context from your component.
+
+```
+const value = useContext(SomeContext);
+```
+
+## Usage
 

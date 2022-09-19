@@ -1,10 +1,26 @@
-import { useState, useId, useMemo } from "react"
+import { useState, useId, useMemo, useReducer, useCallback } from "react"
 import Boxes from "./components/Boxes/Boxes";
 
 export default function ShowBoxes() {
 
     const [name, setName] = useState('');
     const [boxWidth, setBoxWidth] = useState(1);
+
+    function reducer(state:any,action:{type:string,payload?:any}){
+        switch (action.type) {
+            case "showbox/increment":
+                return {...state,num:state.num + 1}        
+            default:
+                return state;
+        }
+    }
+
+    function handleClick() {
+        dispatch({ type: 'showbox/increment' });
+      }
+
+    const [state,dispatch] = useReducer(reducer,{num:0});
+
     const id = useId();
 
     const boxes = useMemo(() => [
@@ -42,6 +58,8 @@ export default function ShowBoxes() {
                         setBoxWidth(Number(event.target.value));
                     }}
                 />
+                <button onClick={handleClick}>increment</button>
+                <span>{state.num}</span>
             </section>
         </>
     )

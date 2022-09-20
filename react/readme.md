@@ -147,3 +147,38 @@ const value = useContext(SomeContext);
 
 ## Usage
 
+### Passing data deeply into the tree
+
+Call `useContext` at the top level of your component to read and subscribe to your context.
+
+```
+import {useContext} from "react"
+const theme = useContext(ThemeContext);
+```
+
+`useContext` returns the context value for the context you passed . To determine the context value, React searches the component tree and find the closest `context provider` above for that particular context.
+
+To pass context to your component , you should wrap your component into a corresponding provider.
+
+```
+function MyPage() {
+  return (
+    <ThemeContext.Provider value="dark">
+      <Form />
+    </ThemeContext.Provider>
+  );
+}
+
+function Form() {
+  // ... renders buttons inside ...
+}
+```
+
+> If you want to get your context from another file, you should export your context when you are declaring it .
+
+```
+import {createContext} from "react"
+export const ExampleContext = createContext(null)
+<!-- your component -->
+```
+

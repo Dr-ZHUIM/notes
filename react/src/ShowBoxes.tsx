@@ -1,5 +1,8 @@
-import { useState, useId, useMemo, useReducer, useCallback } from "react"
+import React, { useState, useId, useMemo, useReducer,createContext ,useContext } from "react"
 import Boxes from "./components/Boxes/Boxes";
+import Box from "./components/Box/Box";
+
+export const BoxContext = createContext<any>(null);  
 
 export default function ShowBoxes() {
 
@@ -61,6 +64,10 @@ export default function ShowBoxes() {
                 <button onClick={handleClick}>increment</button>
                 <span>{state.num}</span>
             </section>
+            <BoxContext.Provider value={{title:"this is from BoxContext"}}>
+            <Box />
+            <Box />
+            </BoxContext.Provider>
         </>
     )
 }

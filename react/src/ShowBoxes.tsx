@@ -1,6 +1,7 @@
-import React, { useState, useId, useMemo, useReducer,createContext ,useContext } from "react"
+import React, { useState, useId, useMemo, useReducer,createContext ,useRef } from "react"
 import Boxes from "./components/Boxes/Boxes";
 import Box from "./components/Box/Box";
+import FowardRefInput from "./components/FowardRefInput/FowardRefInput";
 
 export const BoxContext = createContext<any>(null);  
 
@@ -8,7 +9,7 @@ export default function ShowBoxes() {
 
     const [name, setName] = useState('');
     const [boxWidth, setBoxWidth] = useState(1);
-
+    const ref = useRef<HTMLLabelElement>(null)
     function reducer(state:any,action:{type:string,payload?:any}){
         switch (action.type) {
             case "showbox/increment":
@@ -68,6 +69,10 @@ export default function ShowBoxes() {
             <Box />
             <Box />
             </BoxContext.Provider>
+            <form>
+              <FowardRefInput ref={ref} label="Enter your name" />
+              <button type="button" onClick={e=>{ref.current?.focus()}}>Chose this input</button>
+            </form>
         </>
     )
 }

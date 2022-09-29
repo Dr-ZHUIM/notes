@@ -182,3 +182,16 @@ export const ExampleContext = createContext(null)
 <!-- your component -->
 ```
 
+# ForwardRef
+
+## Usage
+
+### Exposing a DOM node to the parent component
+
+Sometimes it is useful to expose a DOM node to your parent component.
+
+For example: Allowing focus your child component
+
+```
+
+```

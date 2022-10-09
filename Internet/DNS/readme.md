@@ -86,4 +86,6 @@ When a recursive resolver receives a response from a TLD nameserver, that respon
 
 8. The DNS resolver then responds to the web browser with the IP address of the domain requested initially.
 
+![](https://www.cloudflare.com/img/learning/dns/what-is-dns/dns-lookup-diagram.png)
+
 </font>

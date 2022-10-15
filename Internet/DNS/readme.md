@@ -88,4 +88,36 @@ When a recursive resolver receives a response from a TLD nameserver, that respon
 
 ![](https://www.cloudflare.com/img/learning/dns/what-is-dns/dns-lookup-diagram.png)
 
+## What's The Difference Between an Autheritative DNS Server and a Recursive DNS Server ?
+
+Both concepts are integral to the DNS infrastructure, and perform different roles inside the pipeline of the DNS query .
+
+### Autheritative DNS Server
+- the last part of DNS query chain 
+- a server actually holds the queried resource record, and finally allow your DNS resolver make a query to the IP adress.  
+- satisfy queries from its own data but no need to query another source.
+
+### Recursive DNS Server
+- the first part of DNS lookup chain
+- respond to a recursive request from a client
+- make a series of query until it reaches the Autheritative DNS Server
+- cache the data for persistence process and help short-circuit the request.
+
+---
+
+# Study of DNS Queries
+
+## 1. Recursive Queries
+
+In a recursive query, a DNS client requires that a DNS server will response to the client with either the requested resource record or an error message.
+
+## 2. Iterative Queries
+
+In this situation the DNS client will allow a DNS server to return the best answer if it can. If the queried DNS server does not have a match for the query name, it will return a referral to a DNS server authoritative for a lower level of the domain namespace. The DNS client will then make a query to the referral address. This process continues with additional DNS servers down the query chain until either an error or timeout occurs.
+
+## 3. Non-Recursive Queries
+
+Typically this will occur when a DNS resolver client queries a DNS server for a record that it has access to either because it's authoritative for the record or the record exists inside of its cache. Typically, a DNS server will cache DNS records to prevent additional bandwidth consumption and load on upstream servers.
+
+
 </font>

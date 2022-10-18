@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
+import Link from "next/link";
 import styles from "./layout.module.scss";
 import { useState } from "react";
 
@@ -36,7 +37,7 @@ export default function Layout({ children }) {
       </Head>
 
       {/* navbarBox */}
-      <section className={styles.navbarBox}>
+      <section className={`${styles.navbarBox} flex-j-b flex-a-c`}>
         <Image
           onClick={changeColorMode}
           src="/images/colorMode.png"
@@ -44,12 +45,20 @@ export default function Layout({ children }) {
           width={24}
           height={24}
         ></Image>
+        <div className="flex-all">
+          <Link href="/posts">blog</Link>
+          <Image
+            onClick={changeColorMode}
+            src="/images/colorMode.png"
+            alt="colorMode_img"
+            width={24}
+            height={24}
+          ></Image>
+        </div>
       </section>
 
       {/* content-slot */}
-      <main className={`${styles.mainBox} flex-row flex-j-c`}>
-        {children}
-      </main>
+      <main className={`${styles.mainBox} flex-col`}>{children}</main>
     </div>
   );
 }

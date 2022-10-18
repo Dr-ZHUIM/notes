@@ -21,17 +21,31 @@
   }
 }
 
+.container{
+  --font-sm: 0.8rem;
+  --font-nm: 1rem;
+  --font-ml: 1.2rem;
+  --font-lg: 1.4rem;
+  --font-hg: 2rem;
+  --font-hg-ex: 2.2rem;
+  span{
+    font-size: var(--font-sm);
+  }
+}
+
 .container[color-mode="light"] {
   --primary: #f7f7f7;
   --box-backColor: #ffffff;
-  --font: #9d9d9d;
-  --icon-filter: unset
+  --font: #646464;
+  --font-em: #000000;
+  --icon-filter: unset;
 }
 
 .container[color-mode="dark"] {
   --primary: #1a1a1a;
   --box-backColor: #252525;
   --font: #e7e7e7;
+  --font-ex: #ffffff;
   --icon-filter: invert(1) hue-rotate(270deg);
 }
 
@@ -53,7 +67,6 @@
   min-height: 50px;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
   text-align: right;
   background-color: var(--primary);
   border-bottom: 1px solid;
@@ -65,7 +78,8 @@
 }
 
 .mainBox {
-  width: 100vw;
+  max-width: 860px;
   padding: 2rem 2rem;
+  margin: 0 auto;
 }
 

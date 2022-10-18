@@ -1,3 +1,26 @@
-.avator{
-  border-radius:50%
+.avatar{
+  border-radius:50%;
+}
+
+.avatar_intro{
+  margin-left: 1rem;
+  font-size: var(--font-nm);
+}
+
+.avatar_text{
+  color: var(--font-em);
+  font-size: var(--font-hg);
+  font-weight: bold;
+}
+
+.contents{
+  margin-top: 1.6rem;
+  word-break: keep-all;
+  word-wrap: normal;
+  &:first-child{
+    margin: 0 0 1rem 0;
+  }
+  p{
+    margin: 1rem 0;
+  }
 }

@@ -6,21 +6,31 @@
   transition: 0.5s all;
   background-color: var(--primary);
   color: var(--font);
-  p,div,ul,li,table{
+  p,
+  div,
+  ul,
+  li,
+  table {
     color: var(--font);
   }
 }
 
-.container[color-mode="light"]{
+@media screen and (max-width: 600px) {
+  .container {
+    padding: 4rem 1rem 0 1rem;
+  }
+}
+
+.container[color-mode="light"] {
   --primary: #f7f7f7;
-  --box-backColor:#ffffff;
+  --box-backColor: #ffffff;
   --font: #9d9d9d;
   --icon-filter: unset
 }
 
-.container[color-mode="dark"]{
+.container[color-mode="dark"] {
   --primary: #1a1a1a;
-  --box-backColor:#252525;
+  --box-backColor: #252525;
   --font: #e7e7e7;
   --icon-filter: invert(1) hue-rotate(270deg);
 }
@@ -36,7 +46,7 @@
   margin: 3rem 0 0;
 }
 
-.navbarBox{
+.navbarBox {
   position: fixed;
   top: 0;
   width: 95vw;
@@ -46,39 +56,16 @@
   justify-content: flex-end;
   text-align: right;
   background-color: var(--primary);
-  border-bottom: 1px  solid ;
+  border-bottom: 1px solid;
   border-color: var(--font);
-  img{
+
+  img {
     filter: var(--icon-filter);
   }
 }
 
-.avatorBox,.mainBox{
-  box-shadow: var(--font) 1px 1px 10px 1px;
+.mainBox {
+  width: 100vw;
   padding: 2rem 2rem;
 }
 
-.avatorBox{
-  width: 25%;
-  height: 45rem;
-  background-color: var(--box-backColor);
-  .avatorTop{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 10rem;
-    .avatorTopImg{
-      border: var(--font) 1px solid !important;
-      border-radius: 50%;
-    }
-  }
-  .avatorContent{
-    padding: 0 1rem;
-  }
-}
-
-.mainBox{
-  width: 70%;
-  margin-right: 5%;
-  background-color: var(--box-backColor);
-}

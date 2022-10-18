@@ -6,7 +6,7 @@ import { useState } from "react";
 const name = "Your Name";
 export const siteTitle = "Le Blog __ François";
 
-export default function Layout({ children, home }) {
+export default function Layout({ children }) {
   const [colorMode, setColorMode] = useState("light");
 
   const changeColorMode = () => {
@@ -34,6 +34,8 @@ export default function Layout({ children, home }) {
         <meta name="og:title" content={siteTitle} />
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
+
+      {/* navbarBox */}
       <section className={styles.navbarBox}>
         <Image
           onClick={changeColorMode}
@@ -43,26 +45,10 @@ export default function Layout({ children, home }) {
           height={24}
         ></Image>
       </section>
-      <main className={styles.mainBox}>{children}</main>
-      {/* author-block */}
-      <main className={styles.avatorBox}>
-        <div className={styles.avatorTop}>
-          <Image
-            src="/images/avator.jpg"
-            alt="avator"
-            width={180}
-            height={180}
-            className={styles.avatorTopImg}
-          ></Image>
-        </div>
-        <div className={styles.avatorContent}>
-          <p>
-            Hi! My name is Zhuim , a front-end engineer. Welcome to my Blog .
-            Now I am reseraching Vite + React ecosystem . Let's learn and
-            discuss together !
-          </p>
-          <p>What you believe may create a elegant star night.</p>
-        </div>
+
+      {/* content-slot */}
+      <main className={`${styles.mainBox} flex-row flex-j-c`}>
+        {children}
       </main>
     </div>
   );

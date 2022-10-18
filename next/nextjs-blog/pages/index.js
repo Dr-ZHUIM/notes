@@ -2,23 +2,8 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/index.module.scss";
 import Layout, { siteTitle } from "../components/Layout";
-import { getSortedPostsData } from "../lib/post";
-import { useEffect } from "react";
-
-export async function getStaticProps() {
-  const allPostsData = getSortedPostsData();
-  return {
-    props: {
-      allPostsData,
-    },
-  };
-}
-
+      
 export default function Home({ allPostsData }) {
-
-  useEffect(()=>{
-    console.log('allPostsData',allPostsData)
-  },[allPostsData])
 
   return (
     <Layout home>

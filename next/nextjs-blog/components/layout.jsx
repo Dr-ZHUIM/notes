@@ -38,15 +38,19 @@ export default function Layout({ children }) {
 
       {/* navbarBox */}
       <section className={`${styles.navbarBox} flex-j-b flex-a-c`}>
-        <Image
-          onClick={changeColorMode}
-          src="/images/colorMode.png"
-          alt="colorMode_img"
-          width={24}
-          height={24}
-        ></Image>
+        <Link href="/">
+          <a>
+            <Image
+              src="/images/sign.png"
+              alt="mysign"
+              width={150}
+              height={50}
+            ></Image>
+          </a>
+        </Link>
         <div className="flex-all">
-          <Link href="/posts">blog</Link>
+          <Link href="/">Me</Link>
+          <Link href="/blog">blog</Link>
           <Image
             onClick={changeColorMode}
             src="/images/colorMode.png"

@@ -1,0 +1,15 @@
+.blogItem{
+    margin-bottom: .6rem;
+}
+
+.title{
+    font-size: var(--font-hg);
+    cursor: pointer;
+    &:hover{
+        filter: invert(1);
+    }
+}
+
+.date{
+    font-size: var(--font-nm);
+}

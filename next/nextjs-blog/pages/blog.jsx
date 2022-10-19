@@ -1,7 +1,6 @@
-import { useEffect } from "react";
-import Layout from "../components/Layout";
 import Link from "next/link";
 import { getSortedBlogsData } from "../lib/post";
+import styles from "../styles/blog.module.scss";
 
 export async function getStaticProps() {
   const allBlogsData = getSortedBlogsData();
@@ -14,17 +13,17 @@ export async function getStaticProps() {
 
 export default function Posts(props) {
   return (
-    <Layout>
+    <>
       {props.allBlogsData.map((blogData) => {
         return (
-          <Link href={`/blog/${blogData.id}`} key={blogData.id}>
-            <div>
-              <p>{blogData.id}</p>
-              <p>{blogData.date}</p>
-            </div>
-          </Link>
+          <div  key={blogData.id} className={styles.blogItem}>
+            <Link href={`/blog/${blogData.id}`}>
+              <p className={styles.title}>{blogData.id}</p>
+            </Link>
+            <p className={styles.date}>{blogData.date}</p>
+          </div>
         );
       })}
-    </Layout>
+    </>
   );
 }

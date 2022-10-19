@@ -6,7 +6,6 @@ import { navRouters } from "../config/routers";
 import styles from "./layout.module.scss";
 
 const name = "Your Name";
-export const siteTitle = "Le Blog __ François";
 
 export default function Layout({ children }) {
   const [colorMode, setColorMode] = useState("light");
@@ -27,13 +26,6 @@ export default function Layout({ children }) {
           name="description"
           content="Learn how to build a personal website using Next.js"
         />
-        <meta
-          property="og:image"
-          content={`https://og-image.vercel.app/${encodeURI(
-            siteTitle
-          )}.png?theme=light&md=0&fontSize=75px&images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fnextjs-black-logo.svg`}
-        />
-        <meta name="og:title" content={siteTitle} />
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
 
@@ -42,7 +34,12 @@ export default function Layout({ children }) {
         <Link href="/">
           <a>
             <div className={styles.sign}>
-              <Image src="/images/sign.png" alt="mysign" layout="fill"></Image>
+              <Image
+                src="/images/sign.png"
+                alt="mysign"
+                layout="fill"
+                priority={true}
+              ></Image>
             </div>
           </a>
         </Link>
@@ -53,7 +50,11 @@ export default function Layout({ children }) {
             </Link>
           ))}
           {/* github */}
-          <a className={`${styles.navItems} flex-row flex-a-c`} href="https://github.com/Dr-ZHUIM" target="_blank">
+          <a
+            className={`${styles.navItems} flex-row flex-a-c`}
+            href="https://github.com/Dr-ZHUIM"
+            target="_blank"
+          >
             <Image
               src="/images/github.png"
               alt="github_img"
@@ -62,16 +63,16 @@ export default function Layout({ children }) {
             ></Image>
           </a>
           {/* colormode */}
-          <Image
-            onClick={changeColorMode}
-            src="/images/colorMode.png"
-            alt="colorMode_img"
-            width={24}
-            height={24}
-          ></Image>
+          <a onClick={changeColorMode} className={`flex-row flex-a-c ${styles.navbar_btn} ${styles.navItems}`}>
+            <Image
+              src="/images/colorMode.png"
+              alt="colorMode_img"
+              width={24}
+              height={24}
+            ></Image>
+          </a>
         </div>
       </section>
-
       {/* content-slot */}
       <main className={`${styles.mainBox} flex-col`}>{children}</main>
     </div>

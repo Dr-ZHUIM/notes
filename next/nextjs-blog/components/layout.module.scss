@@ -29,6 +29,7 @@
   --font-lg: 1.4rem;
   --font-hg: 2rem;
   --font-hg-ex: 2.2rem;
+  --border: #7d7d7d4d;
   span{
     font-size: var(--font-sm);
   }
@@ -52,6 +53,9 @@
   --icon-filter: invert(1) hue-rotate(270deg);
 }
 
+.navbar_btn{
+  cursor: pointer;
+}
 
 .header {
   display: flex;
@@ -83,10 +87,16 @@
   color: inherit;
   text-align: center;
   margin-right: 1.2rem;
+  &:hover{
+    filter: invert(.6)
+  }
+  &:last-child{
+    margin: initial
+  }
 };
 
 .mainBox {
-  max-width: 860px;
+  max-width: 680px;
   padding: 2rem 2rem;
   margin: 0 auto;
 }

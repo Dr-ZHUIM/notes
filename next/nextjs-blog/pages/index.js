@@ -1,14 +1,13 @@
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/index.module.scss";
-import Layout, { siteTitle } from "../components/Layout";
       
 export default function Home({ allPostsData }) {
 
   return (
-    <Layout home>
+    <>
       <Head>
-        <title>{siteTitle}</title>
+        <title>Dr.Zhuim's blog</title>
       </Head>
       {/* avatar */}
       <section>
@@ -38,10 +37,11 @@ export default function Home({ allPostsData }) {
         <p>
           Outside of programming, i enjoy doing paints and travaling. If you are interested in travaling too, let's share photos or memories with each other!
         </p>
+        <hr/>
         <p>
           Find me on <a href="https://github.com/Dr-ZHUIM" target="_blank">Github</a> or my Email 372919916@qq.com.
         </p>
       </section>
-    </Layout>
+    </>
   );
 }

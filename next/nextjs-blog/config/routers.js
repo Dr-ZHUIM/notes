@@ -6,5 +6,13 @@ export const navRouters = [
   { 
     id: "Blog",
     href: "/blog",
+  },
+  {
+    id: "Project",
+    href: "/project",
+  },
+  {
+    id: "playground",
+    href: "/playground",
   }
 ]

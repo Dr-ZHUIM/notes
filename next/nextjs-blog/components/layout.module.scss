@@ -1,8 +1,9 @@
 .container {
   position: relative;
   display: flex;
+  flex-direction: column;
   min-height: 100vh;
-  padding: 4rem 3rem 0 3rem;
+  padding: 2rem 3rem 0 3rem;
   transition: 0.5s all;
   background-color: var(--primary);
   color: var(--font);
@@ -15,10 +16,10 @@
   }
 }
 
-@media screen and (max-width: 600px) {
-  .container {
-    padding: 4rem 1rem 0 1rem;
-  }
+.sign{
+  width: 150px;
+  height: 50px;
+  position: relative;
 }
 
 .container{
@@ -37,6 +38,7 @@
   --primary: #f7f7f7;
   --box-backColor: #ffffff;
   --font: #646464;
+  --font-light:rgba(55,65,81,1);
   --font-em: #000000;
   --icon-filter: unset;
 }
@@ -45,6 +47,7 @@
   --primary: #1a1a1a;
   --box-backColor: #252525;
   --font: #e7e7e7;
+  --font-light:rgba(229,231,235,1);
   --font-ex: #ffffff;
   --icon-filter: invert(1) hue-rotate(270deg);
 }
@@ -61,22 +64,26 @@
 }
 
 .navbarBox {
-  position: fixed;
-  top: 0;
-  width: 95vw;
+  width: 100%;
   min-height: 50px;
   z-index: 1;
   display: flex;
   align-items: center;
   text-align: right;
   background-color: var(--primary);
-  border-bottom: 1px solid;
-  border-color: var(--font);
-
+  div,a{
+    color: var(--font-light);
+  }
   img {
     filter: var(--icon-filter);
   }
 }
+
+.navItems{
+  color: inherit;
+  text-align: center;
+  margin-right: 1.2rem;
+};
 
 .mainBox {
   max-width: 860px;
@@ -84,3 +91,12 @@
   margin: 0 auto;
 }
 
+@media screen and (max-width: 600px) {
+  .container {
+    padding: 4rem 1rem 0 1rem;
+  }
+  .sign{
+    width: 75px;
+    height: 25px;
+  }
+}

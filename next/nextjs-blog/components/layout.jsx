@@ -1,8 +1,9 @@
+import { useState } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
+import { navRouters } from "../config/routers";
 import styles from "./layout.module.scss";
-import { useState } from "react";
 
 const name = "Your Name";
 export const siteTitle = "Le Blog __ François";
@@ -40,17 +41,21 @@ export default function Layout({ children }) {
       <section className={`${styles.navbarBox} flex-j-b flex-a-c`}>
         <Link href="/">
           <a>
-            <Image
-              src="/images/sign.png"
-              alt="mysign"
-              width={150}
-              height={50}
-            ></Image>
+            <div className={styles.sign}>
+                <Image
+                  src="/images/sign.png"
+                  alt="mysign"
+                  layout="fill"
+                ></Image>
+            </div>
           </a>
         </Link>
-        <div className="flex-all">
-          <Link href="/">Me</Link>
-          <Link href="/blog">blog</Link>
+        <div className="flex-all flex-a-c flex-j-e flex-row">
+          {navRouters.map((router) => (
+            <Link key={router.id} href={router.href}>
+              <a className={styles.navItems}>{router.id}</a>
+            </Link>
+          ))}
           <Image
             onClick={changeColorMode}
             src="/images/colorMode.png"

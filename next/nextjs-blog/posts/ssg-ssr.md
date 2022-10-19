@@ -19,5 +19,29 @@ On the other hand, Static Generation is **not** a good idea if you cannot pre-re
 In that case, you can use **Server-Side Rendering**. It will be slower, but the pre-rendered page will always be up-to-date. Or you can skip pre-rendering and use client-side JavaScript to populate data.
 
 ```
-das
+const fs = require('fs')
+const markdown = require('markdown-it')
+const shiki = require('shiki')
+
+shiki.getHighlighter({
+  theme: 'nord'
+}).then(highlighter => {
+  const md = markdown({
+    html: true,
+    highlight: (code, lang) => {
+      return highlighter.codeToHtml(code, { lang })
+    }
+  })
+
+  const html = md.render(fs.readFileSync('index.md', 'utf-8'))
+  const out = `
+    <title>Shiki</title>
+    <link rel="stylesheet" href="style.css">
+    ${html}
+    <script src="index.js"></script>
+  `
+  fs.writeFileSync('index.html', out)
+
+  console.log('done')
+})
 ```

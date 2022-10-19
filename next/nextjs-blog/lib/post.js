@@ -1,9 +1,10 @@
 import fs from 'fs';
-import path from 'path';
+import path, { resolve } from 'path';
 import matter from 'gray-matter';
 import {remark} from 'remark';
 import html from 'remark-html';
-
+const shiki = require('shiki')
+const markdown = require('markdown-it')
 const postsDirectory = path.join(process.cwd(),'posts');
 
 export function getSortedBlogsData(){
@@ -46,17 +47,31 @@ export function getAllBlogsIds(){
   })
 }
 
+
+async function htmlOutPut(contentHtml){
+  const outData = await shiki.getHighlighter({
+    theme: 'nord'
+  }).then(highlighter => {
+    const md = markdown({
+      html: true,
+      highlight: (code) => {
+        return highlighter.codeToHtml(code, { lang: 'js' })
+      }
+    })
+    const html = md.render(contentHtml);
+    return html
+    })
+    return outData;
+}
+
 export async function getBlogData(id){
   const fullPath = path.join(postsDirectory,`${id}.md`);
   const fileContents = fs.readFileSync(fullPath,'utf-8');
   const matterResult = matter(fileContents);
-
-  const processedContent = await remark().use(html).process(matterResult.content);
-  const contentHtml = processedContent.toString();
-
+  const preparedHtml = await htmlOutPut(matterResult.content);
   return {
     id,
-    contentHtml,
+    preparedHtml,
     ...matterResult.data
   }
 }

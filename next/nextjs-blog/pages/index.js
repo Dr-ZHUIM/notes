@@ -32,7 +32,7 @@ export default function Home({ allPostsData }) {
           Hi! My name is Dr.Zhuim <span>(if you want, you can also call me François, that's my French name)</span>, a front-end engineer in Wuxi, majoring in Français, working in Troncell.
         </p>
         <p>
-          My dream is make my every engrossing idea come true. I focus on developing application based on React or React-Native. At my next goal, I will figure out the Vite and create some 
+          My dream is making my every engrossing idea come true. I focus on developing application based on React or React-Native. At my next goal, I will figure out the Vite and create some 
           fantastic Vite plugins for a bigger improvement.
         </p>
         <p>

@@ -42,11 +42,7 @@ export default function Layout({ children }) {
         <Link href="/">
           <a>
             <div className={styles.sign}>
-                <Image
-                  src="/images/sign.png"
-                  alt="mysign"
-                  layout="fill"
-                ></Image>
+              <Image src="/images/sign.png" alt="mysign" layout="fill"></Image>
             </div>
           </a>
         </Link>
@@ -56,6 +52,16 @@ export default function Layout({ children }) {
               <a className={styles.navItems}>{router.id}</a>
             </Link>
           ))}
+          {/* github */}
+          <a className={`${styles.navItems} flex-row flex-a-c`} href="https://github.com/Dr-ZHUIM" target="_blank">
+            <Image
+              src="/images/github.png"
+              alt="github_img"
+              width={24}
+              height={24}
+            ></Image>
+          </a>
+          {/* colormode */}
           <Image
             onClick={changeColorMode}
             src="/images/colorMode.png"

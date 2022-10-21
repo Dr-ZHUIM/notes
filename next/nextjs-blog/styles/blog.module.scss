@@ -13,3 +13,17 @@
 .date{
     font-size: var(--font-nm);
 }
+
+.year{
+    margin-top:1rem;
+    margin-bottom: .4rem;
+    &:first-child{
+        margin-top:0
+    }
+}
+
+.year_title{
+    hr{
+        width: 3em;
+    }
+}

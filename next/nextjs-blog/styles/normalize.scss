@@ -57,3 +57,36 @@ a:hover{
 ::-webkit-scrollbar{
   display: none;
 }
+
+article{
+  line-height: 1.75;
+  p{
+    margin: 1.25rem 0;
+  }
+  h1,h2,h3,h4,h5,h6{
+    color: var(--font-em);
+    margin: 1.5rem 0;
+  }
+  h1{
+    font-size: var(--font-hg);
+    &:first-child{
+      margin-top: 0;
+      margin-bottom: 1.5rem;
+    }
+  }
+  h2{
+    font-size: var(--font-lg-ex);
+  }
+  h3{
+    font-size: var(--font-lg)
+  }
+  ul{
+    color: var(--light);
+    text-indent: 2em;
+    list-style-position: inside;
+  }
+  ol{
+    text-indent: 1em;
+        list-style-position: inside;
+  }
+}

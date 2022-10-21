@@ -3,14 +3,12 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  padding: 2rem 3rem 0 3rem;
+  padding: 1.2rem 2rem 0 2rem;
   transition: 0.5s all;
   background-color: var(--primary);
   color: var(--font);
   p,
   div,
-  ul,
-  li,
   table {
     color: var(--font);
   }
@@ -27,6 +25,7 @@
   --font-nm: 1rem;
   --font-ml: 1.2rem;
   --font-lg: 1.4rem;
+  --font-lg-ex:1.6rem;
   --font-hg: 2rem;
   --font-hg-ex: 2.2rem;
   --border: #7d7d7d4d;
@@ -36,10 +35,11 @@
 }
 
 .container[color-mode="light"] {
-  --primary: #f9f9f9;
+  --primary: #fcfcfc;
   --box-backColor: #ffffff;
   --font: #646464;
   --font-light:rgba(55,65,81,1);
+  --light:#989898;
   --font-em: #000000;
   --icon-filter: unset;
 }
@@ -49,6 +49,7 @@
   --box-backColor: #252525;
   --font: #e7e7e7;
   --font-light:rgba(229,231,235,1);
+  --light: #f1f1f1;
   --font-ex: #ffffff;
   --icon-filter: invert(1) hue-rotate(270deg);
 }

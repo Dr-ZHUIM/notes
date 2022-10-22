@@ -1,12 +1,10 @@
 import fs from 'fs';
-import path, { resolve } from 'path';
+import path from 'path';
 import matter from 'gray-matter';
-import {remark} from 'remark';
-import html from 'remark-html';
 const shiki = require('shiki')
 const markdown = require('markdown-it')
-const postsDirectory = path.join(process.cwd(),'posts');
-
+const postsDirectory = path.join(process.cwd(),'articles');
+  
 export function getSortedBlogsData(){
   // Get file name under /posts
   const fileName = fs.readdirSync(postsDirectory);

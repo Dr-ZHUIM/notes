@@ -1,0 +1,7 @@
+{
+    "id" : 4,
+    "title" : "vscode_template_string_extension",
+    "description" : "Change text in your template string as a javascript code.",
+    "icon": "vs.png",
+    "href": "https://github.com/Dr-ZHUIM/vscode_template_string_extension"
+}

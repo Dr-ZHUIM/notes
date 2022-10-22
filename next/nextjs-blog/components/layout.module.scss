@@ -98,13 +98,13 @@
 
 .mainBox {
   max-width: 680px;
-  padding: 2rem 2rem;
+  padding: 2rem .4rem;
   margin: 0 auto;
 }
 
 @media screen and (max-width: 600px) {
   .container {
-    padding: 4rem 1rem 0 1rem;
+    padding: 1rem 1rem 0 1rem;
   }
   .sign{
     width: 75px;

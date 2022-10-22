@@ -1,0 +1,7 @@
+{
+    "id" : 2,
+    "title" : "notes",
+    "description" : "Personal notes",
+    "icon": "note.png",
+    "href": "https://github.com/Dr-ZHUIM/notes"
+}

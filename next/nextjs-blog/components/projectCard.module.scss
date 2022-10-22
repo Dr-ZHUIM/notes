@@ -1,0 +1,33 @@
+.wrapper{
+width: 320px;
+height: 120px;
+padding: .4rem .6rem;    
+cursor: pointer;
+img{
+    filter: invert(.6) 
+}
+&:hover{
+    .description,.title{color: #000000 !important;}
+    img{
+        filter: initial
+    }
+    }
+}
+
+.icon{
+    width: 36px;
+    height: 36px;
+}
+
+.intro_wrapper{
+    width: 245px;
+}
+
+.title{
+    font-size: var(--font-nm);
+}
+
+.description{
+    font-size: var(--font-sm);
+    color: var(--light) !important;
+}

@@ -20,6 +20,17 @@ export async function getStaticProps() {
     blogsData.push({ year, blogs });
   });
   console.log("blogsData", blogsData);
+  blogsData = blogsData.sort(({year:a},{year:b})=>{
+    console.log('a',a);
+    console.log('b',b);
+    if (a < b){
+      return 1
+    }else if (a > b){
+      return -1
+    }else {
+      return 0
+    }
+  });
   return {
     props: {
       blogsData,
@@ -33,10 +44,8 @@ export default function Posts(props) {
       {props.blogsData.map((blogData) => {
         return (
           <div className={styles.year} key={blogData.year}>
-            <p className={styles.year_title}>
-              {blogData.year}
-              <hr />
-            </p>
+            <p className={styles.year_title}>{blogData.year}</p>
+            <hr className={styles.blog_hr} />
             {blogData.blogs.map((blog) => {
               return (
                 <div key={blog.id} className={styles.blogItem}>
@@ -53,4 +62,3 @@ export default function Posts(props) {
     </>
   );
 }
-

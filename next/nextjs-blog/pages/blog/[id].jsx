@@ -4,7 +4,7 @@ import Head from "next/head";
 import { getAllBlogsIds, getBlogData } from "../../lib/post";
 
 
-export default function Post({ postData }) {
+export default function BlogArticle({ postData }) {
 
   return (
     <>

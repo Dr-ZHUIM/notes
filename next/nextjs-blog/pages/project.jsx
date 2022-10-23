@@ -1,6 +1,7 @@
 import { getDemos, getProjects } from "../lib/projects";
 import ProjectCard from "../components/projectCard";
 import Link from "next/link";
+import Head from "next/head";
 
 export async function getStaticProps() {
   const projectDatas = getProjects();
@@ -15,6 +16,9 @@ export default function Project(props) {
   console.log("demoDatas", demoDatas);
   return (
     <>
+      <Head>
+        <title>Project</title>
+      </Head>
       <h2>Projects</h2>
       <div className="flex-row flex-wrap">
         {projectDatas.map((data) => {

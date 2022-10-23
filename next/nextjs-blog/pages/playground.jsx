@@ -1,5 +1,6 @@
 import { Sandpack } from "@codesandbox/sandpack-react";
 import { nightOwl } from "@codesandbox/sandpack-themes";
+import Head from "next/head";
 
 export default function Playground() {
   const file = {
@@ -17,6 +18,9 @@ export default function App (){
   };
   return (
     <>
+      <Head>
+        <title>Playground</title>
+      </Head>
       Playground
       <Sandpack template="react" theme={nightOwl} files={file} />
     </>

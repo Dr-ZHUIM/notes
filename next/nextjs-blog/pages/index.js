@@ -7,7 +7,7 @@ export default function Home({ allPostsData }) {
   return (
     <>
       <Head>
-        <title>Dr.Zhuim's blog</title>
+        <title>Dr.Zhuim</title>
       </Head>
       {/* avatar */}
       <section>

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getSortedBlogsData } from "../lib/post";
+import Head from "next/head";
 import styles from "../styles/blog.module.scss";
 import moment from "moment";
 
@@ -20,15 +21,15 @@ export async function getStaticProps() {
     blogsData.push({ year, blogs });
   });
   console.log("blogsData", blogsData);
-  blogsData = blogsData.sort(({year:a},{year:b})=>{
-    console.log('a',a);
-    console.log('b',b);
-    if (a < b){
-      return 1
-    }else if (a > b){
-      return -1
-    }else {
-      return 0
+  blogsData = blogsData.sort(({ year: a }, { year: b }) => {
+    console.log("a", a);
+    console.log("b", b);
+    if (a < b) {
+      return 1;
+    } else if (a > b) {
+      return -1;
+    } else {
+      return 0;
     }
   });
   return {
@@ -41,6 +42,9 @@ export async function getStaticProps() {
 export default function Posts(props) {
   return (
     <>
+      <Head>
+        <title>Blog</title>
+      </Head>
       {props.blogsData.map((blogData) => {
         return (
           <div className={styles.year} key={blogData.year}>

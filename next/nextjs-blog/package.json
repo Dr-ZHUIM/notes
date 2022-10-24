@@ -2,7 +2,8 @@
   "author": "Dr.ZHUIM",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "npm run open-browser && next dev",
+    "open-browser":"start http://localhost:3000",
     "build": "next build",
     "export": "next export",
     "start": "next start"

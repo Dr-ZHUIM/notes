@@ -1,0 +1,11 @@
+html{
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.app{
+    width: 800px;
+    height: 800px;
+    border: #999999 solid 2px;
+}

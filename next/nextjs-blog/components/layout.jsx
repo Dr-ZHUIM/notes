@@ -12,7 +12,6 @@ export default function Layout({ children }) {
 
   const changeColorMode = () => {
     setColorMode((currentColor) => {
-      console.log(currentColor);
       let nextColor = currentColor === "dark" ? "light" : "dark";
       return nextColor;
     });

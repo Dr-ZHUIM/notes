@@ -6,14 +6,11 @@ import Head from "next/head";
 export async function getStaticProps() {
   const projectDatas = getProjects();
   const demoDatas = getDemos();
-  console.log("projectDatas", projectDatas);
   return { props: { projectDatas, demoDatas } };
 }
 
 export default function Project(props) {
   const { projectDatas, demoDatas } = props;
-  console.log("projectDatas", projectDatas);
-  console.log("demoDatas", demoDatas);
   return (
     <>
       <Head>

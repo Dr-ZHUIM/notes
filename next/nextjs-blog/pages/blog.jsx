@@ -20,10 +20,7 @@ export async function getStaticProps() {
     });
     blogsData.push({ year, blogs });
   });
-  console.log("blogsData", blogsData);
   blogsData = blogsData.sort(({ year: a }, { year: b }) => {
-    console.log("a", a);
-    console.log("b", b);
     if (a < b) {
       return 1;
     } else if (a > b) {

@@ -166,6 +166,21 @@ When a CA issues a certificate, they sign the certificate with their root certif
 - The last certificate is not a root certificate
 - This chain is not trusted
 
+---
+
+# HTTP
+
+## What is HTTP?
+
+The HyperText Transfer Protocol is an application layer protocol designed to transfer information between networked devices and runs on top of other layers of the network protocol stack.
+
+A typical example of usage of HTTP is that a flow over HTTP involves a client machine making a request to a server, which then send a response message.
+
+ HTTP is the foundation of the world wide web, and is used to load web pages using hypertext links.
+
+# What is a HTTP Request
+
+An HTTP request is the way internet communication platforms
 
 
 

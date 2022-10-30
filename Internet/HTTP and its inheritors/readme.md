@@ -180,7 +180,17 @@ A typical example of usage of HTTP is that a flow over HTTP involves a client ma
 
 # What is a HTTP Request
 
-An HTTP request is the way internet communication platforms
+An HTTP request is the way internet communication platforms.
+
+Each HTTP request made across the Internet carries with a series of encoded data.
+
+A typical HTTP request contains:
+
+- HTTP version type
+- URL
+- HTTP method
+- HTTP headers
+- Optional HTTP body
 
 
 

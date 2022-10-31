@@ -20,3 +20,13 @@
 - recursive adj. 递归的
 - iterative adj. 重复的
 - infrastructure n. 基础设施
+
+## 2022/10/31
+
+- scenario n. 方案,前景,脚本
+- regression n. 回归,退化
+- exploitable adj. 可开发的
+- diagram n. 图解
+- portion n. 一部分;命运 v. 分割;将...给予命运
+- annotation n. 注解,注释
+- demonstrate v. 示范

@@ -7,7 +7,24 @@
     <title>Vite + TS</title>
   </head>
   <body>
+    <template id="zhuim-paragraph">
+      <style>
+        p {
+          color: rgba(168, 180, 0, 0.8);
+          padding: 5px;
+        }
+      </style>
+      <p>asdf</p>
+      <p>asdf</p>
+      <p>asdf</p>
+      <p>asdf</p>
+    </template>
     <zhuim-title></zhuim-title>
+    <zhuim-p></zhuim-p>
+    <zhuim-popup-info
+      img="./src/one-way-data-flow.png"
+      data-text="this is a picture about redux data flow"
+    ></zhuim-popup-info>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

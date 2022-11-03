@@ -30,3 +30,11 @@
 - portion n. 一部分;命运 v. 分割;将...给予命运
 - annotation n. 注解,注释
 - demonstrate v. 示范
+
+## 2022/11/3
+
+- encapsulation n.封装
+- autonomous adj. 独立的；有自主权的 
+- markup n. 标记
+- underneath prop. 处于...的下面
+- terminology n. 术语

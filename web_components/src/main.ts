@@ -1,3 +1,4 @@
+import "./index.css"
 class ZhuimTitle extends HTMLElement{
   
   constructor(){

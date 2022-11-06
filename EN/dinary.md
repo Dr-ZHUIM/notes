@@ -38,3 +38,12 @@
 - markup n. 标记
 - underneath prop. 处于...的下面
 - terminology n. 术语
+
+## 2022/11/6
+
+- layer n.层级
+- emit v. 执行;发射
+- omit v. 忽略;删除
+- sequential adj. 序列的
+- irritating adj. 惹人恼怒的
+- rapidly adj. 迅速地

@@ -46,4 +46,4 @@
 - omit v. 忽略;删除
 - sequential adj. 序列的
 - irritating adj. 惹人恼怒的
-- rapidly adj. 迅速地
+- rapidly adv. 迅速地

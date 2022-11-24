@@ -18,7 +18,7 @@ export default function Layout({ children }) {
   };
 
   return (
-    <div color-mode={colorMode} className={styles.container}>
+    <div className={styles.container}  color-mode={colorMode}>
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <meta
@@ -62,7 +62,10 @@ export default function Layout({ children }) {
             ></Image>
           </a>
           {/* colormode */}
-          <a onClick={changeColorMode} className={`flex-row flex-a-c ${styles.navbar_btn} ${styles.navItems}`}>
+          <a
+            onClick={changeColorMode}
+            className={`flex-row flex-a-c ${styles.navbar_btn} ${styles.navItems}`}
+          >
             <Image
               src="/images/colorMode.png"
               alt="colorMode_img"
@@ -74,6 +77,20 @@ export default function Layout({ children }) {
       </section>
       {/* content-slot */}
       <main className={`${styles.mainBox} flex-col`}>{children}</main>
+      <footer className={`pos-ab flex-row flex-a-c flex-j-c ${styles.footer}`}>
+        <div className={`${styles.loyalty} cursor-pointer`}>
+          <Link
+            target="_blank"
+            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=32020602001386"
+            className={styles.href}
+          >
+            <div className="flex-row flex-a-c flex-j-c">
+              <Image className={styles.image} src="/images/loyalty.png" width={24} height={24}></Image>
+              <p className={styles.text}>苏公网安备 32020602001386号</p>
+            </div>
+          </Link>
+        </div>
+      </footer>
     </div>
   );
 }

@@ -1,20 +1,7 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
-import singletonCounter from '../singleton_3_freezeObject';
+import singletonCounter from './utils/singleton/singleton_3_freezeObject';
 import './App.css'
-
-function Button (props){
-  const {color,method,placeholder} = props;
-  const handleClick = () => {
-    const value = method();
-    console.log('value',value)
-  };
-  return (
-    <>
-      <button onClick={handleClick} style={{backgroundColor:color}}>{placeholder}</button>
-    </>
-  )
-}
 
 function App() {
   const [count, setCount] = useState(0)
@@ -41,8 +28,6 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
-      <Button color="red" method={singletonCounter.increment} placeholder="increment" />
-      <Button color="blue" method={singletonCounter.decrement} placeholder="decrement" />
     </div>
   )
 }

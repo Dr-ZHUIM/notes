@@ -21,7 +21,17 @@ export default function CanvasDemonstration() {
 
   // WebGL methods
 
-  const helloWebGL = () => {
+  const helloWebGL = (gl: WebGLRenderingContext) => {
+    gl.clearColor(0.0, 0.0, 0.0, 1.0);
+    gl.clear(gl.COLOR_BUFFER_BIT);
+  };
+
+  const drawPoint = (gl: WebGLRenderingContext) => {
+    const VSHARDER_SOURCE = "void main() {\n" + "gl_Position = vec4(0.0, 0.0, 0.0, 1.0);\n" + "gl_PointSize = 10.0;\n" + "}\n";
+    const FSHARDER_SOURCE = "void main() {\n" + "gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);\n" + "}\n";
+  };
+
+  useEffect(() => {
     const canvasElement = canvas.current;
     if (!canvasElement) {
       console.warn("There is no canvas, you should create one!");
@@ -29,13 +39,8 @@ export default function CanvasDemonstration() {
     }
     const gl = getWebGLContext(canvasElement);
     if (gl) {
-      gl.clearColor(0.0, 0.0, 0.0, 1.0);
-      gl.clear(gl.COLOR_BUFFER_BIT);
+      helloWebGL(gl);
     }
-  };
-
-  useEffect(() => {
-    helloWebGL();
   }, []);
 
   return (
@@ -44,3 +49,4 @@ export default function CanvasDemonstration() {
     </div>
   );
 }
+

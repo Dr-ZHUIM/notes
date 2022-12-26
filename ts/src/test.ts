@@ -5,4 +5,20 @@ export namespace User{
   }
 }
 
-console.log(User.Member.name);  //Bom
+const foo = (factor:number,...nums:number[]) => {
+  return nums.map(n => factor * n)
+}
+
+const foo2 = (param:string | number) => {
+  if( typeof param === 'string'){
+    return param
+  }else if( typeof param === 'number'){
+    return param + 10
+  }else{
+    param;
+  }
+}
+
+let arr = foo(10,2,3,4,5);
+
+console.log('arr',arr)

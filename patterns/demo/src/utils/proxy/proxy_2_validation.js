@@ -7,19 +7,19 @@ const person = {
 const personProxy = new Proxy(person,{
     get: (obj, prop) => {
         if(!obj[prop]){
-            throw `Hmm.. ${prop} doesn't seem to exist on the target object`
+            throw new Error(`Hmm.. ${prop} doesn't seem to exist on the target object`) 
         }
-        console.log(`The value of ${prop} is ${obj[prop]}`);
+        console.log(`The value of ${prop} is ${Reflect.get(obj, prop)}`);
+        return Reflect.get(obj, prop);
       },
     set: (obj, prop, value) => {
         if(prop == "age"  && typeof value !== "number"){
-            throw `Sorry, you can only pass numeric values for age.`;
+            throw new Error(`Sorry, you can only pass numeric values for age.`) ;
         } else if (prop === "name" && value.length < 2){
-            throw `You need to provide a valid name.`;
+            throw new Error(`You need to provide a valid name.`) ;
         }
-        console.log(`Changed ${prop} from ${obj[prop]} to ${value}`);
-        obj[prop] = value;
-        return true;
+        console.log(`Changed ${prop} from ${Reflect.get(obj, prop)} to ${value}`);
+        return Reflect.set(obj, prop, value);
     }
 })
 

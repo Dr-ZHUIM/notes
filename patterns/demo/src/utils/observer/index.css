@@ -1,0 +1,12 @@
+.untoggled,.toggled{
+    width: 200px;
+    height: 200px;
+}
+
+.untoggled{
+    background-color:  rgb(110, 226, 110);
+}
+
+.toggled{
+    background-color:  rgb(215, 46, 51);
+}

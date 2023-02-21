@@ -4,6 +4,7 @@ import matter from 'gray-matter';
 const shiki = require('shiki')
 const markdown = require('markdown-it')
 const postsDirectory = path.join(process.cwd(),'articles');
+const playgroundDirectory = path.join(process.cwd(),'playgrounds');
   
 export function getSortedBlogsData(){
   // Get file name under /posts
@@ -72,4 +73,8 @@ export async function getBlogData(id){
     preparedHtml,
     ...matterResult.data
   }
+}
+
+export async function getPlaygroundData(id){
+  const fullPath = path.join(playgroundDirectory,`${id}.jsx`);
 }

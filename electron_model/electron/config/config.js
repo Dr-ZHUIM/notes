@@ -1,23 +1,26 @@
 const {
   Menu
 } = require("electron");
-const createMenu = (win) => {
+const createMenu = (mainWindow) => {
   const menu = [{
-    label: '菜单',
-    submenu: [{
+      label: '菜单',
+      submenu: [{
         label: '添加',
         click: () => {
-          console.log(win.webContents)
+          mainWindow.webContents.send('test', 123, "asd")
         }
-      },
-      {
-        label: '减少',
+      }]
+    },
+    {
+      label: '功能',
+      submenu: [{
+        label: "打开开发者工具",
         click: () => {
-          console.log('decrement!')
+          mainWindow.webContents.openDevTools({})
         }
-      }
-    ]
-  }];
+      }]
+    }
+  ];
   Menu.setApplicationMenu(Menu.buildFromTemplate(menu));
 }
 

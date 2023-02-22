@@ -4,13 +4,9 @@ import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
-  // useEffect(() => {
-  //   let time: NodeJS.Timer;
-  //   time = setInterval(() => {
-  //     window.electron.ipcRenderer.send('saveFile', "yes")
-  //   }, 1000);
-  //   return () => { clearInterval(time) }
-  // }, [])
+  useEffect(() => {
+
+  }, [])
   return (
     <div className="App">
       <div>

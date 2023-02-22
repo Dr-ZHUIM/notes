@@ -29,7 +29,6 @@ app.whenReady().then(() => {
   // and load the index.html of the app.
   if (mode === 'dev' || submode === 'dev') {
     mainWindow.loadURL("http://localhost:8080/");
-    // mainWindow.webContents.openDevTools({});
   } else {
     mainWindow.loadFile(productURL)
   }
@@ -44,7 +43,7 @@ app.whenReady().then(() => {
   ipcMain.on('saveFile', () => {
     console.log("saveFile");
   })
-  createMenu();
+  createMenu(mainWindow);
 })
 
 // Quit when all windows are closed, except on macOS. There, it's common

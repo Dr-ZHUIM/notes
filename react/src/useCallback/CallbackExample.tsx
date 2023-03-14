@@ -84,7 +84,6 @@ function DownnerComponent({ onClick, text }: Downner) {
       }, 500);
     }
   });
-
   /**
    * Preventing an Effect from firing too often
    */

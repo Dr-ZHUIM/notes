@@ -14,5 +14,9 @@ export const navRouters = [
   {
     id: "playground",
     href: "/playground",
+  },
+  {
+    id: "range",
+    href: "/range"
   }
 ]

@@ -1,7 +1,6 @@
 import Head from "next/head";
-export default function Prizewheel(){
-        return(
-                <div>
-                </div>
-        )
+export default function PlayGroundElement() {
+  return <div></div>;
 }
+
+export function getStaticPath() {}

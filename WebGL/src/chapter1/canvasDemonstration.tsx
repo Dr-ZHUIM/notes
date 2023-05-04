@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { getWebGLContext } from "../utils/webgl-utils";
+import { getWebGLContext, initShaders } from "../utils/webgl-utils";
 import Canvas from "../components/Canvas/Canvas";
 
 export default function CanvasDemonstration() {
@@ -23,12 +23,19 @@ export default function CanvasDemonstration() {
 
   const helloWebGL = (gl: WebGLRenderingContext) => {
     gl.clearColor(0.0, 0.0, 0.0, 1.0);
+    // clear what you have paint with bgColor which you point to in `clearColor`
     gl.clear(gl.COLOR_BUFFER_BIT);
   };
 
-  const drawPoint = (gl: WebGLRenderingContext) => {
-    const VSHARDER_SOURCE = "void main() {\n" + "gl_Position = vec4(0.0, 0.0, 0.0, 1.0);\n" + "gl_PointSize = 10.0;\n" + "}\n";
-    const FSHARDER_SOURCE = "void main() {\n" + "gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);\n" + "}\n";
+  const drawPoint = () => {
+    const VSHADER_SOURCE =
+      "void main() {\n" +
+      "gl_Position = vec4(0.2, 0.4, 0.0, 1.0);\n" +
+      "gl_PointSize = 10.0;\n" +
+      "}\n";
+    const FSHADER_SOURCE =
+      "void main() {\n" + "gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);\n" + "}\n";
+    return [VSHADER_SOURCE, FSHADER_SOURCE];
   };
 
   useEffect(() => {
@@ -39,7 +46,9 @@ export default function CanvasDemonstration() {
     }
     const gl = getWebGLContext(canvasElement);
     if (gl) {
+      const [vShader, fShader] = drawPoint();
       helloWebGL(gl);
+      if (initShaders(gl, vShader, fShader)) gl.drawArrays(gl.POINTS, 0, 1);
     }
   }, []);
 
@@ -49,4 +58,3 @@ export default function CanvasDemonstration() {
     </div>
   );
 }
-

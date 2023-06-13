@@ -1,5 +1,5 @@
-import React from 'react';
-import {throttle} from '../utils/utils';
+import React from "react";
+import { throttle } from "../../utils/utils";
 
 const getList = () => {
   const arr = [];
@@ -16,7 +16,7 @@ function List() {
 
   React.useEffect(() => {
     window.addEventListener(
-      'scroll',
+      "scroll",
       throttle(() => {
         if (
           window.scrollY + window.innerHeight + 200 >=

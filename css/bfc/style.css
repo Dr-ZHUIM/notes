@@ -1,0 +1,43 @@
+.float{
+  float: left;
+  width: 200px;
+  height: 100px;
+  background-color: rgba(0,0,0,.5);
+  border: 1px solid aliceblue;
+  padding: 10px;
+}
+
+section{
+  height: 150px;
+}
+
+.box{
+  background-color: rgb(225,206,247);
+  border: 5px solid rebeccapurple;
+}
+
+.box[style]{
+  background-color: aliceblue;
+  border: 5px solid steelblue;
+}
+
+.flex{
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  background-color: rebeccapurple;
+}
+
+.box-in-flex{
+  height: 100px;
+}
+
+.box-in-flex:nth-child(2n){
+  background-color: rgb(87, 104, 119);
+  margin-top: 20px
+}
+
+.box-in-flex:nth-child(2n-1){
+  background-color: aquamarine;
+  margin-bottom: 20px
+}

@@ -1,11 +1,11 @@
 {
   "homepage": ".",
   "scripts": {
-    "dev" : "webpack-dev-server --mode=development",
-    "build" : "webpack --mode=production"
+    "dev": "webpack-dev-server --mode=development",
+    "build": "webpack --mode=production"
   },
   "dependencies": {
-    "typescript": "^4.7.4"
+    "typescript": "^4.9.5"
   },
   "devDependencies": {
     "ts-loader": "^9.3.1",

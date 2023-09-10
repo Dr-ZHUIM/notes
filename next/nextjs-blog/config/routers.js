@@ -5,7 +5,7 @@ export const navRouters = [
   },
   { 
     id: "Blog",
-    href: "/blog",
+    to: "http://www.zhuim.fun/blog/",
   },
   {
     id: "Project",

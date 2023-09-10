@@ -18,7 +18,7 @@ export default function Layout({ children }) {
   };
 
   return (
-    <div className={styles.container}  color-mode={colorMode}>
+    <div className={styles.container} color-mode={colorMode}>
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <meta
@@ -43,11 +43,17 @@ export default function Layout({ children }) {
           </a>
         </Link>
         <div className="flex-all flex-a-c flex-j-e flex-row">
-          {navRouters.map((router) => (
-            <Link key={router.id} href={router.href}>
-              <a className={styles.navItems}>{router.id}</a>
-            </Link>
-          ))}
+          {navRouters.map((router) =>
+            router.to ? (
+              <a target="_blank" href={router.to} className={styles.navItems}>
+                {router.id}
+              </a>
+            ) : (
+              <Link key={router.id} href={router.href}>
+                <a className={styles.navItems}>{router.id}</a>
+              </Link>
+            )
+          )}
           {/* github */}
           <a
             className={`${styles.navItems} flex-row flex-a-c`}
@@ -85,7 +91,12 @@ export default function Layout({ children }) {
             className={styles.href}
           >
             <div className="flex-row flex-a-c flex-j-c">
-              <Image className={styles.image} src="/images/loyalty.png" width={24} height={24}></Image>
+              <Image
+                className={styles.image}
+                src="/images/loyalty.png"
+                width={24}
+                height={24}
+              ></Image>
               <p className={styles.text}>苏公网安备 32020602001386号</p>
             </div>
           </Link>

@@ -21,14 +21,14 @@ export default function Home({ allPostsData }) {
           ></Image>
           <div className={styles.avatar_intro}>
             <h1 className={styles.avatar_text}>Dr.Zhuim</h1>
-            <p>Front-End Engineer / Troncell Enterprise</p>
+            <p>China / Front-End Engineer / Aurora Enterprise</p>
           </div>
         </div>
       </section>
       {/* index-content */}
       <section className={styles.contents}>
         <p>
-          Hi! My name is Dr.Zhuim <span>(if you want, you can also call me François, that's my French name)</span>, a front-end engineer in Wuxi, majoring in Français, working in Troncell.
+          Hi! My name is Dr.Zhuim <span>(if you want, you can also call me François, that's my French name)</span>, a front-end engineer in SuZhou, majoring in Français, working in Aurora.
         </p>
         <p>
           My dream is making my every engrossing idea come true. I focus on developing application based on React or React-Native. At my next goal, I will figure out the Vite and create some 
@@ -39,7 +39,7 @@ export default function Home({ allPostsData }) {
         </p>
         <hr/>
         <p>
-          Find me on <a href="https://github.com/Dr-ZHUIM" target="_blank">Github</a> or my Email 372919916@qq.com.
+          Find me on <a href="https://github.com/Dr-ZHUIM" target="_blank">Github</a> or my Email a372919916@gmail.com.
         </p>
       </section>
     </>

@@ -83,23 +83,28 @@ export default function Layout({ children }) {
       </section>
       {/* content-slot */}
       <main className={`${styles.mainBox} flex-col`}>{children}</main>
-      <footer className={`pos-ab flex-row flex-a-c flex-j-c ${styles.footer}`}>
-        <div className={`${styles.loyalty} cursor-pointer`}>
-          <Link
-            target="_blank"
-            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=32020602001386"
-            className={styles.href}
-          >
-            <div className="flex-row flex-a-c flex-j-c">
-              <Image
-                className={styles.image}
-                src="/images/loyalty.png"
-                width={24}
-                height={24}
-              ></Image>
-              <p className={styles.text}>苏公网安备 32020602001386号</p>
-            </div>
-          </Link>
+      <footer className={`pos-ab flex-col flex-a-c flex-j-c ${styles.footer}`}>
+        <Link target="_blank" href="/info.pdf">
+          Dr.Zhuim博客平台自律公约
+        </Link>
+        <div className="flex-row">
+          <div className={`${styles.loyalty} cursor-pointer`}>
+            <Link
+              target="_blank"
+              href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=32020602001386"
+              className={styles.href}
+            >
+              <div className="flex-row flex-a-c flex-j-c">
+                <Image
+                  className={styles.image}
+                  src="/images/loyalty.png"
+                  width={24}
+                  height={24}
+                ></Image>
+                <p className={styles.text}>苏公网安备 32020602001386号</p>
+              </div>
+            </Link>
+          </div>
         </div>
       </footer>
     </div>
